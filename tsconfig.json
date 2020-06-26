@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "target": "esnext",
+    "moduleResolution": "node",
+    "module": "ESNext",
+    "allowJs": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "strictNullChecks": false,
+    "strictPropertyInitialization": false
+  },
+  "exclude": [
+    "node_modules",
+    "web_modules"
+  ],
+  "include": [
+    "src"
+  ],
+  "typeRoots": [
+    "./node_modules/@webgpu/types/"
+  ]
+}

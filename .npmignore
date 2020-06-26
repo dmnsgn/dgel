@@ -1,0 +1,7 @@
+web_modules
+index.html
+examples
+assets
+src/*
+!src/types.d.ts
+docs
