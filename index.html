@@ -17,22 +17,22 @@
         color: #ffffff;
       }
       ul,
-			h1,
+      h1,
       h2 {
         margin: 0;
         padding: 0;
       }
       h1 {
-				font-size: 30px;
+        font-size: 30px;
         margin-bottom: 20px;
       }
       h1 a {
         color: #ffffff;
       }
       h2 {
-				font-size: 20px;
+        font-size: 20px;
         margin-bottom: 5px;
-				color: #ffffffdd;
+        color: #ffffffdd;
       }
       a {
         color: #ff8080;
@@ -49,6 +49,7 @@
         transform: translate3d(90%, 0, 0);
         transition: all 0.2s ease-in;
       }
+      aside.active,
       aside:hover {
         transform: translate3d(0, 0, 0);
         transition: all 0.2s ease-out;
@@ -58,7 +59,7 @@
         flex-direction: column;
         font-size: 14px;
         list-style: none;
-				margin-bottom: 15px;
+        margin-bottom: 15px;
       }
       ul li {
         position: relative;
@@ -80,7 +81,9 @@
       </ul>
       <h2>Sources</h2>
       <ul>
-        <li><a href="https://github.com/dmnsgn/dgel" target="_blank">GitHub</a></li>
+        <li>
+          <a href="https://github.com/dmnsgn/dgel" target="_blank">GitHub</a>
+        </li>
         <li><a href="https://medium.com/@dmnsgn" target="_blank">Medium</a></li>
       </ul>
     </aside>
@@ -94,7 +97,11 @@
         const params = new URLSearchParams(window.location.search);
         const id = params.get("id");
 
-        if (id) await import(`./examples/${id}.js`);
+        if (id) {
+          await import(`./examples/${id}.js`);
+        } else {
+          document.querySelector('aside').classList.add('active')
+        }
       })();
     </script>
   </body>
