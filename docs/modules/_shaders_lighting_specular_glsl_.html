@@ -90,7 +90,7 @@
 					<div class="tsd-signature tsd-kind-icon">BECKMANN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x60;#define SPECULAR_BECKMANN${BECKMANN_DISTRIBUTION}float Specular(vec3 lightDirection, vec3 viewDirection, vec3 surfaceNormal, Material material) {return beckmannDistribution(dot(surfaceNormal, normalize(lightDirection + viewDirection)), material.roughness);}&#x60;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/e5ff029/src/shaders/lighting/specular.glsl.ts#L42">src/shaders/lighting/specular.glsl.ts:42</a></li>
+							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/2eeb88b/src/shaders/lighting/specular.glsl.ts#L42">src/shaders/lighting/specular.glsl.ts:42</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -100,7 +100,7 @@
 					<div class="tsd-signature tsd-kind-icon">BECKMANN_<wbr>DISTRIBUTION<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"float beckmannDistribution(float x, float roughness) {float NdotH &#x3D; max(x, EPSILON);float cos2Alpha &#x3D; NdotH * NdotH;float tan2Alpha &#x3D; (cos2Alpha - 1.0) / cos2Alpha;float roughness2 &#x3D; roughness * roughness;float denom &#x3D; PI * roughness2 * cos2Alpha * cos2Alpha;return exp(tan2Alpha / roughness2) / denom;}"</span><span class="tsd-signature-symbol"> = &#x60;float beckmannDistribution(float x, float roughness) {float NdotH &#x3D; max(x, EPSILON);float cos2Alpha &#x3D; NdotH * NdotH;float tan2Alpha &#x3D; (cos2Alpha - 1.0) / cos2Alpha;float roughness2 &#x3D; roughness * roughness;float denom &#x3D; PI * roughness2 * cos2Alpha * cos2Alpha;return exp(tan2Alpha / roughness2) / denom;}&#x60;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/e5ff029/src/shaders/lighting/specular.glsl.ts#L30">src/shaders/lighting/specular.glsl.ts:30</a></li>
+							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/2eeb88b/src/shaders/lighting/specular.glsl.ts#L30">src/shaders/lighting/specular.glsl.ts:30</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -110,7 +110,7 @@
 					<div class="tsd-signature tsd-kind-icon">BLINNPHONG<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"#define SPECULAR_BLINNPHONGfloat Specular(vec3 lightDirection, vec3 viewDirection, vec3 surfaceNormal, Material material) {vec3 halfwayVector &#x3D; normalize(viewDirection + lightDirection);return pow(max(0.0, dot(surfaceNormal, halfwayVector)), material.shininess);}"</span><span class="tsd-signature-symbol"> = &#x60;#define SPECULAR_BLINNPHONGfloat Specular(vec3 lightDirection, vec3 viewDirection, vec3 surfaceNormal, Material material) {vec3 halfwayVector &#x3D; normalize(viewDirection + lightDirection);return pow(max(0.0, dot(surfaceNormal, halfwayVector)), material.shininess);}&#x60;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/e5ff029/src/shaders/lighting/specular.glsl.ts#L1">src/shaders/lighting/specular.glsl.ts:1</a></li>
+							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/2eeb88b/src/shaders/lighting/specular.glsl.ts#L1">src/shaders/lighting/specular.glsl.ts:1</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -120,7 +120,7 @@
 					<div class="tsd-signature tsd-kind-icon">COOK_<wbr>TORRANCE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &#x60;#define SPECULAR_COOK_TORRANCE${BECKMANN_DISTRIBUTION}float Specular(vec3 lightDirection, vec3 viewDirection, vec3 surfaceNormal, Material material) {float VdotN &#x3D; max(dot(viewDirection, surfaceNormal), 0.0);float LdotN &#x3D; max(dot(lightDirection, surfaceNormal), 0.0);// Half angle vectorvec3 H &#x3D; normalize(lightDirection + viewDirection);// Geometric termfloat NdotH &#x3D; max(dot(surfaceNormal, H), 0.0);float VdotH &#x3D; max(dot(viewDirection, H), EPSILON);float x &#x3D; 2.0 * NdotH / VdotH;float G &#x3D; min(1.0, min(x * VdotN, x * LdotN));// Distribution termfloat D &#x3D; beckmannDistribution(NdotH, material.roughness);// Fresnel termfloat F &#x3D; pow(1.0 - VdotN, material.fresnel);return G * F * D / max(PI * VdotN * LdotN, EPSILON);}&#x60;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/e5ff029/src/shaders/lighting/specular.glsl.ts#L50">src/shaders/lighting/specular.glsl.ts:50</a></li>
+							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/2eeb88b/src/shaders/lighting/specular.glsl.ts#L50">src/shaders/lighting/specular.glsl.ts:50</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -130,7 +130,7 @@
 					<div class="tsd-signature tsd-kind-icon">GAUSSIAN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"#define SPECULAR_GAUSSIANfloat Specular(vec3 lightDirection, vec3 viewDirection, vec3 surfaceNormal, Material material) {vec3 H &#x3D; normalize(lightDirection + viewDirection);float theta &#x3D; acos(dot(H, surfaceNormal));float w &#x3D; theta / material.shininess;return exp(-w * w);}"</span><span class="tsd-signature-symbol"> = &#x60;#define SPECULAR_GAUSSIANfloat Specular(vec3 lightDirection, vec3 viewDirection, vec3 surfaceNormal, Material material) {vec3 H &#x3D; normalize(lightDirection + viewDirection);float theta &#x3D; acos(dot(H, surfaceNormal));float w &#x3D; theta / material.shininess;return exp(-w * w);}&#x60;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/e5ff029/src/shaders/lighting/specular.glsl.ts#L19">src/shaders/lighting/specular.glsl.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/2eeb88b/src/shaders/lighting/specular.glsl.ts#L19">src/shaders/lighting/specular.glsl.ts:19</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -140,7 +140,7 @@
 					<div class="tsd-signature tsd-kind-icon">PHONG<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"#define SPECULAR_PHONGfloat Specular(vec3 lightDirection, vec3 viewDirection, vec3 surfaceNormal, Material material) {vec3 reflectDirection &#x3D; -reflect(lightDirection, surfaceNormal);return pow(max(0.0, dot(viewDirection, reflectDirection)), material.shininess);}"</span><span class="tsd-signature-symbol"> = &#x60;#define SPECULAR_PHONGfloat Specular(vec3 lightDirection, vec3 viewDirection, vec3 surfaceNormal, Material material) {vec3 reflectDirection &#x3D; -reflect(lightDirection, surfaceNormal);return pow(max(0.0, dot(viewDirection, reflectDirection)), material.shininess);}&#x60;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/e5ff029/src/shaders/lighting/specular.glsl.ts#L10">src/shaders/lighting/specular.glsl.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/2eeb88b/src/shaders/lighting/specular.glsl.ts#L10">src/shaders/lighting/specular.glsl.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>

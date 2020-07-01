@@ -86,7 +86,7 @@
 					<div class="tsd-signature tsd-kind-icon">LAMBERT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"#define DIFFUSE_LAMBERTfloat Diffuse(vec3 lightDirection,vec3 surfaceNormal) {return max(0.0, dot(surfaceNormal, lightDirection));}"</span><span class="tsd-signature-symbol"> = &#x60;#define DIFFUSE_LAMBERTfloat Diffuse(vec3 lightDirection,vec3 surfaceNormal) {return max(0.0, dot(surfaceNormal, lightDirection));}&#x60;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/e5ff029/src/shaders/lighting/diffuse.glsl.ts#L24">src/shaders/lighting/diffuse.glsl.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/2eeb88b/src/shaders/lighting/diffuse.glsl.ts#L24">src/shaders/lighting/diffuse.glsl.ts:24</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -96,7 +96,7 @@
 					<div class="tsd-signature tsd-kind-icon">OREN_<wbr>NAYAR<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"#define DIFFUSE_OREN_NAYARfloat Diffuse(vec3 lightDirection,vec3 viewDirection,vec3 surfaceNormal,Material material) {float LdotV &#x3D; dot(lightDirection, viewDirection);float NdotL &#x3D; dot(lightDirection, surfaceNormal);float NdotV &#x3D; dot(surfaceNormal, viewDirection);float s &#x3D; LdotV - NdotL * NdotV;float t &#x3D; mix(1.0, max(NdotL, NdotV), step(0.0, s));float sigma2 &#x3D; material.roughness * material.roughness;float A &#x3D; 1.0 + sigma2 * (material.albedo / (sigma2 + 0.13) + 0.5 / (sigma2 + 0.33));float B &#x3D; 0.45 * sigma2 / (sigma2 + 0.09);return material.albedo * max(0.0, NdotL) * (A + B * s / t) / PI;}"</span><span class="tsd-signature-symbol"> = &#x60;#define DIFFUSE_OREN_NAYARfloat Diffuse(vec3 lightDirection,vec3 viewDirection,vec3 surfaceNormal,Material material) {float LdotV &#x3D; dot(lightDirection, viewDirection);float NdotL &#x3D; dot(lightDirection, surfaceNormal);float NdotV &#x3D; dot(surfaceNormal, viewDirection);float s &#x3D; LdotV - NdotL * NdotV;float t &#x3D; mix(1.0, max(NdotL, NdotV), step(0.0, s));float sigma2 &#x3D; material.roughness * material.roughness;float A &#x3D; 1.0 + sigma2 * (material.albedo / (sigma2 + 0.13) + 0.5 / (sigma2 + 0.33));float B &#x3D; 0.45 * sigma2 / (sigma2 + 0.09);return material.albedo * max(0.0, NdotL) * (A + B * s / t) / PI;}&#x60;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/e5ff029/src/shaders/lighting/diffuse.glsl.ts#L1">src/shaders/lighting/diffuse.glsl.ts:1</a></li>
+							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/2eeb88b/src/shaders/lighting/diffuse.glsl.ts#L1">src/shaders/lighting/diffuse.glsl.ts:1</a></li>
 						</ul>
 					</aside>
 				</section>
