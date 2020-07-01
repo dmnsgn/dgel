@@ -10,10 +10,14 @@
     "prepare": "snowpack install",
     "dev": "snowpack dev",
     "build": "babel src --out-dir lib --extensions .js,.ts --ignore '**/*.d.js'",
-    "docs": "typedoc --out docs --mode modules --excludeExternals --includeDeclarations --module commonjs --theme default src && touch docs/.nojekyll",
     "lint": "eslint '{src,examples}/**/*.{js,ts}'",
     "format": "prettier '{src,examples}/**/*.{js,ts}' --write",
-    "format:check": "prettier '{src,examples}/**/*.{js,ts}' --check"
+    "format:check": "prettier '{src,examples}/**/*.{js,ts}' --check",
+    "docs": "typedoc --out docs --mode modules --excludeExternals --includeDeclarations --module commonjs --theme default src && touch docs/.nojekyll",
+    "clean": "rm -rf lib && rm -rf docs",
+    "preversion": "npm run clean",
+    "version": "npm run build && git add -A",
+    "postversion": "git push origin master && git push --tags && npm publish"
   },
   "keywords": [
     "webgpu",
