@@ -51,7 +51,10 @@ class Context {
       });
 
       State.glslang = await (
-        await import(glslangPath || "@webgpu/glslang/dist/web-devel/glslang.js")
+        await import(
+          /* webpackIgnore: true */ glslangPath ||
+            "@webgpu/glslang/dist/web-devel/glslang.js"
+        )
       ).default();
     } catch (error) {
       console.error(error);
