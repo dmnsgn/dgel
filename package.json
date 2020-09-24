@@ -51,7 +51,7 @@
     "@typescript-eslint/eslint-plugin": "^3.0.2",
     "@typescript-eslint/parser": "^3.0.2",
     "@webgpu/glslang": "0.0.15",
-    "@webgpu/types": "0.0.24",
+    "@webgpu/types": "0.0.31",
     "cameras": "^2.0.0",
     "concat-typed-array": "^1.0.2",
     "es-module-shims": "^0.4.6",

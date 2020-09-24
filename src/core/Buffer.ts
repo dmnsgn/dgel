@@ -38,10 +38,13 @@ class Buffer {
   public setSubData(offset: number, data: ArrayBufferView): void {
     const srcArrayBuffer = data.buffer;
     const byteCount = srcArrayBuffer.byteLength;
-    const [srcBuffer, arrayBuffer] = State.device.createBufferMapped({
+    const srcBuffer = State.device.createBuffer({
+      mappedAtCreation: true,
       size: byteCount,
       usage: GPUBufferUsage.COPY_SRC,
     });
+    const arrayBuffer = srcBuffer.getMappedRange();
+
     new Uint8Array(arrayBuffer).set(new Uint8Array(srcArrayBuffer)); // memcpy
     srcBuffer.unmap();
 
