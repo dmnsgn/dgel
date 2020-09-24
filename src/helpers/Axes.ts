@@ -5,7 +5,7 @@ import Attribute from "../core/Attribute.js";
 import BindGroupLayout from "../core/BindGroupLayout.js";
 import BindGroup from "../core/BindGroup.js";
 
-import { GPUPrimitiveTopology } from "../constants.js";
+import { GPUIndexFormat, GPUPrimitiveTopology } from "../constants.js";
 
 // prettier-ignore
 const data = new Float32Array([
@@ -50,7 +50,6 @@ class Axes {
       descriptor: {
         primitiveTopology: GPUPrimitiveTopology.LineList,
       },
-      indexFormat: "uint16",
     });
 
     this.buffer = new Buffer().vertexBuffer(data);
@@ -60,6 +59,7 @@ class Axes {
       bindGroups: [systemUniformBindGroup],
       vertexBuffers: [this.buffer],
       indexBuffer: new Buffer().indexBuffer(indices),
+      indexFormat: GPUIndexFormat.Uint16,
       count: indices.length,
     });
   }

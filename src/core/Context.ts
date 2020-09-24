@@ -129,7 +129,8 @@ class Context {
 
     if (command.indexBuffer) {
       (this.passEncoder as GPURenderPassEncoder).setIndexBuffer(
-        command.indexBuffer.gpuBuffer
+        command.indexBuffer.gpuBuffer,
+        command.indexFormat
       );
     }
 

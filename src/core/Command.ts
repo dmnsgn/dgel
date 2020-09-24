@@ -3,12 +3,15 @@ import Pipeline from "./Pipeline.js";
 import Buffer from "./Buffer.js";
 import BindGroup from "./BindGroup.js";
 
+import { GPUIndexFormat } from "../constants.js";
+
 class Command {
   public pass?: Pass;
   public pipeline?: Pipeline;
 
   public vertexBuffers?: Buffer[];
   public indexBuffer?: Buffer;
+  public indexFormat?: GPUIndexFormat = GPUIndexFormat.Uint32;
   public bindGroups?: BindGroup[];
 
   public count?: number;
