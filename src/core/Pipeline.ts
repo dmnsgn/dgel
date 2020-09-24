@@ -5,7 +5,6 @@ import Program from "./Program.js";
 
 import Shader from "./Shader.js";
 import Struct from "./Struct.js";
-import { GPUIndexFormat } from "../constants.js";
 import { GLSLShaderType, GLSLShaderTypeObjectKeys } from "../types.js";
 
 const mapAttributes = (
@@ -43,7 +42,6 @@ interface PipelineOptions extends GLSLShaderTypeObjectKeys {
   fragmentOuts?: Attribute[];
   descriptor?: Partial<GPURenderPipelineDescriptor>;
   stepMode?: GPUInputStepMode;
-  indexFormat?: GPUIndexFormat;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -54,7 +52,6 @@ const DEFAULT_FRAGMENT_OUT_COLOR = [new Attribute("outColor", "vec4")];
 class Pipeline {
   public gpuPipeline: GPUPipelineBase;
   public program: Program;
-  public indexFormat: GPUIndexFormat = GPUIndexFormat.Uint32;
 
   constructor(options: PipelineOptions) {
     Object.assign(this, options);
@@ -156,7 +153,6 @@ class Pipeline {
           entryPoint: "main",
         },
         vertexState: {
-          indexFormat: this.indexFormat,
           vertexBuffers,
         },
         colorStates: [
