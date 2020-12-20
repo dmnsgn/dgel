@@ -5,11 +5,12 @@
   "type": "module",
   "main": "lib/index.js",
   "module": "lib/index.js",
-  "types": "src/types.d.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
     "prepare": "snowpack install",
     "dev": "snowpack dev",
-    "build": "babel src --out-dir lib --extensions .js,.ts --ignore '**/*.d.js'",
+    "declaration": "tsc --emitDeclarationOnly --declaration --declarationDir lib",
+    "build": "babel src --out-dir lib --extensions .js,.ts --ignore '**/*.d.js' && npm run declaration",
     "lint": "eslint '{src,examples}/**/*.{js,ts}'",
     "format": "prettier '{src,examples}/**/*.{js,ts}' --write",
     "format:check": "prettier '{src,examples}/**/*.{js,ts}' --check",
@@ -76,6 +77,7 @@
       "mount:src": "mount ./src --to /lib",
       "run:babel": "babel src --out-dir lib --extensions .js,.ts --ignore '**/*.d.js'",
       "run:babel::watch": "$1 --watch --verbose --source-maps inline",
+      "run:declaration": "tsc --emitDeclarationOnly --declaration --declarationDir lib",
       "run:tsc": "tsc --noEmit",
       "run:tsc::watch": "$1 --watch"
     },
