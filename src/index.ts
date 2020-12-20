@@ -1,5 +1,8 @@
 /// <reference types="@webgpu/types" />
 
+import * as Types from "./types.js";
+export { Types };
+
 export * from "./constants.js";
 
 // Core

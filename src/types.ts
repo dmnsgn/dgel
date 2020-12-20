@@ -57,3 +57,5 @@ export type PassType = "render" | "compute";
 //   value?: FormatValue;
 //   normalized?: boolean;
 // }
+
+export default null;
