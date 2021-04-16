@@ -3,7 +3,7 @@ import BindGroupLayout from "./BindGroupLayout.js";
 import Uniform from "./Uniform.js";
 import { GLSLShaderType, BindGroupLayoutEntry } from "../types.js";
 import { formatLowerFirst } from "../utils.js";
-import { GPUShaderStage } from "../constants.js";
+import { BindingType, GPUShaderStage } from "../constants.js";
 
 const isBindingVisible = (
   uniformOrBinding: Uniform | BindGroupLayoutEntry,
@@ -29,10 +29,7 @@ class Program {
     }
   }
 
-  // TODO:
-  // "storage-buffer",
-  // "readonly-storage-buffer",
-  // "storage-texture"
+  public getGLSLDimension() {}
 
   public getGLSLHeaders(
     set: number,
@@ -49,37 +46,42 @@ class Program {
         ? `${binding.qualifiers.layout || ""}, `
         : "";
 
-      // uniform-buffer
-      if (binding.type === "uniform-buffer") {
-        let vertexUniforms;
-        let fragmentUniforms;
+      // GPUBufferBinding
+      if (binding.buffer) {
+        // uniform-buffer
         if (
-          isBindingVisible(
-            binding,
-            GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT
-          )
+          !binding.buffer.type ||
+          binding.buffer.type === BindingType.Uniform
         ) {
-          vertexUniforms = binding.uniforms;
-          fragmentUniforms = binding.uniforms;
-        } else {
-          vertexUniforms = binding.uniforms.filter(() =>
-            isBindingVisible(binding, GPUShaderStage.VERTEX)
-          );
-          fragmentUniforms = binding.uniforms.filter(() =>
-            isBindingVisible(binding, GPUShaderStage.FRAGMENT)
-          );
-        }
+          let vertexUniforms;
+          let fragmentUniforms;
+          if (
+            isBindingVisible(
+              binding,
+              GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT
+            )
+          ) {
+            vertexUniforms = binding.uniforms;
+            fragmentUniforms = binding.uniforms;
+          } else {
+            vertexUniforms = binding.uniforms.filter(() =>
+              isBindingVisible(binding, GPUShaderStage.VERTEX)
+            );
+            fragmentUniforms = binding.uniforms.filter(() =>
+              isBindingVisible(binding, GPUShaderStage.FRAGMENT)
+            );
+          }
 
-        const computeUniforms = binding.uniforms.filter(() =>
-          isBindingVisible(binding, GPUShaderStage.COMPUTE)
-        );
+          const computeUniforms = binding.uniforms.filter(() =>
+            isBindingVisible(binding, GPUShaderStage.COMPUTE)
+          );
 
-        // TODO: refactor
-        // Vertex
-        if (vertexUniforms.length) {
-          vertex += `layout(${layoutQualifierString}set = ${set}, binding = ${i}) uniform ${
-            binding.name
-          }Uniforms {
+          // TODO: refactor
+          // Vertex
+          if (vertexUniforms.length) {
+            vertex += `layout(${layoutQualifierString}set = ${set}, binding = ${i}) uniform ${
+              binding.name
+            }Uniforms {
   ${vertexUniforms
     .map(
       (uniform) =>
@@ -89,13 +91,13 @@ class Program {
     )
     .join("\n  ")}
 } ${formatLowerFirst(binding.name)};\n\n`;
-        }
+          }
 
-        // Fragment
-        if (fragmentUniforms.length) {
-          fragment += `layout(${layoutQualifierString}set = ${set}, binding = ${i}) uniform ${
-            binding.name
-          } {
+          // Fragment
+          if (fragmentUniforms.length) {
+            fragment += `layout(${layoutQualifierString}set = ${set}, binding = ${i}) uniform ${
+              binding.name
+            } {
   ${fragmentUniforms
     .map(
       (uniform) =>
@@ -105,12 +107,12 @@ class Program {
     )
     .join("\n  ")}
 } ${formatLowerFirst(binding.name)};\n\n`;
-        }
+          }
 
-        if (computeUniforms.length) {
-          compute += `layout(${layoutQualifierString}set = ${set}, binding = ${i}) uniform ${
-            binding.name
-          }Uniforms {
+          if (computeUniforms.length) {
+            compute += `layout(${layoutQualifierString}set = ${set}, binding = ${i}) uniform ${
+              binding.name
+            }Uniforms {
   ${computeUniforms
     .map(
       (uniform) =>
@@ -120,18 +122,15 @@ class Program {
     )
     .join("\n  ")}
 } ${formatLowerFirst(binding.name)};\n\n`;
-        }
-      }
+          }
+        } else if (binding.buffer.type === BindingType.Storage) {
+          const computeVariable = binding.members.filter(() =>
+            isBindingVisible(binding, GPUShaderStage.COMPUTE)
+          );
 
-      // storage-buffer
-      if (binding.type === "storage-buffer") {
-        const computeVariable = binding.members.filter(() =>
-          isBindingVisible(binding, GPUShaderStage.COMPUTE)
-        );
-
-        compute += `layout(${layoutQualifierString}set = ${set}, binding = ${i}) buffer ${
-          binding.name
-        }Buffer {
+          compute += `layout(${layoutQualifierString}set = ${set}, binding = ${i}) buffer ${
+            binding.name
+          }Buffer {
 ${computeVariable
   .map(
     (variable) =>
@@ -141,11 +140,11 @@ ${computeVariable
   )
   .join("\n  ")}
 } ${formatLowerFirst(binding.name)};\n\n`;
-      }
-
-      // sampler
-      if (binding.type === "sampler") {
-        const samplerLayout = `layout(set = ${set}, binding = ${i}) uniform ${binding.type} ${binding.name};`;
+        }
+      } else if (binding.sampler) {
+        const samplerLayout = `layout(set = ${set}, binding = ${i}) uniform sampler${
+          binding.samplerType || ""
+        } ${binding.name};`;
 
         if (isBindingVisible(binding, GPUShaderStage.VERTEX)) {
           vertex += `${samplerLayout}\n`;
@@ -153,20 +152,19 @@ ${computeVariable
         if (isBindingVisible(binding, GPUShaderStage.FRAGMENT)) {
           fragment += `${samplerLayout}\n`;
         }
-      }
-
-      // sampled-texture
-      if (binding.type === "sampled-texture") {
-        const sampledTextureLayout = `layout(set = ${set}, binding = ${i}) uniform texture${binding.dimension.toUpperCase()} ${
+      } else if (binding.texture) {
+        const textureLayout = `layout(set = ${set}, binding = ${i}) uniform texture${binding.dimension.toUpperCase()} ${
           binding.name
         };`;
 
         if (isBindingVisible(binding, GPUShaderStage.VERTEX)) {
-          vertex += `${sampledTextureLayout}\n`;
+          vertex += `${textureLayout}\n`;
         }
         if (isBindingVisible(binding, GPUShaderStage.FRAGMENT)) {
-          fragment += `${sampledTextureLayout}\n`;
+          fragment += `${textureLayout}\n`;
         }
+      } else if (binding.storageTexture) {
+        // TODO:
       }
     }
 

@@ -28,7 +28,6 @@ class Texture {
       size: {
         width: image?.width || (descriptor.size as GPUExtent3DDict)?.width,
         height: image?.height || (descriptor.size as GPUExtent3DDict)?.height,
-        depth: 1,
       },
       usage: GPUTextureUsage.COPY_DST | GPUTextureUsage.SAMPLED,
       ...(descriptor || {}),
@@ -102,7 +101,6 @@ class Texture {
       {
         width,
         height,
-        depth: 1,
       }
     );
     textureDataBuffer.destroy();

@@ -1,5 +1,4 @@
 node_modules
-web_modules
-sources
+.DS_Store
+types
 lib
-docs

@@ -12,6 +12,7 @@ import {
   Pass,
   Pipeline,
   Shaders,
+  State,
   Uniform,
 } from "../lib/index.js";
 
@@ -53,7 +54,7 @@ import Geometries from "primitive-geometry";
   // Layouts
   const systemBindGroupLayout = new BindGroupLayout([
     {
-      type: "uniform-buffer",
+      buffer: {},
       visibility: GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT,
       name: "System",
       uniforms: [
@@ -68,7 +69,7 @@ import Geometries from "primitive-geometry";
 
   const meshBindGroupLayout = new BindGroupLayout([
     {
-      type: "uniform-buffer",
+      buffer: {},
       visibility: GPUShaderStage.VERTEX,
       name: "Mesh",
       uniforms: [
@@ -297,6 +298,8 @@ void main() {
 
   // Frame
   requestAnimationFrame(function frame() {
+    if (State.error) return;
+
     clock.getDelta();
 
     controls.update();

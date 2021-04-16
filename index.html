@@ -88,20 +88,18 @@
         <li><a href="https://medium.com/@dmnsgn" target="_blank">Medium</a></li>
       </ul>
     </aside>
-    <script
-      defer
-      src="web_modules/es-module-shims/dist/es-module-shims.js"
-    ></script>
+    <script async src="web_modules/es-module-shims.js"></script>
     <script src="web_modules/import-map.json" type="importmap-shim"></script>
     <script type="module-shim">
       (async () => {
         const params = new URLSearchParams(window.location.search);
         const id = params.get("id");
 
+
         if (id) {
-          await import(`./examples/${id}.js`);
+					await importShim(`./examples/${id}.js`);
         } else {
-          document.querySelector('aside').classList.add('active')
+          document.querySelector("aside").classList.add("active");
         }
       })();
     </script>

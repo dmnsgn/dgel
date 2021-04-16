@@ -6,11 +6,12 @@ import Program from "./Program.js";
 import Shader from "./Shader.js";
 import Struct from "./Struct.js";
 import { GLSLShaderType, GLSLShaderTypeObjectKeys } from "../types.js";
+import { GPUPrimitiveTopology } from "../constants.js";
 
 const mapAttributes = (
   attributes: Attribute[],
   locationOffset = 0
-): GPUVertexBufferLayoutDescriptor[] => {
+): GPUVertexBufferLayout[] => {
   let prevAttributeSize: number;
 
   return attributes.reduce((currentAttributes, attribute, index) => {
@@ -120,7 +121,7 @@ class Pipeline {
                 .reduce((a, b) => a + b, 0),
               attributes: mapAttributes(this.ins as Attribute[]),
             },
-          ] as GPUVertexBufferLayoutDescriptor[])
+          ] as GPUVertexBufferLayout[])
         : ((this.ins as PipelineVertexBufferIns[]).map(
             ({ stepMode, attributes }, index) => ({
               stepMode,
@@ -133,7 +134,7 @@ class Pipeline {
                   .length || 0
               ),
             })
-          ) as GPUVertexBufferLayoutDescriptor[]);
+          ) as GPUVertexBufferLayout[]);
 
       this.program = new Program(this.bindGroupLayouts, shaders);
       this.program.init();
@@ -144,29 +145,35 @@ class Pipeline {
             (bindGroupLayout) => bindGroupLayout.gpuBindGroupLayout
           ),
         }),
-        vertexStage: {
+        vertex: {
+          buffers: vertexBuffers,
           module: this.program.shaders.vertex.shaderModule,
           entryPoint: "main",
         },
-        fragmentStage: {
+        fragment: {
           module: this.program.shaders.fragment.shaderModule,
           entryPoint: "main",
-        },
-        vertexState: {
-          vertexBuffers,
-        },
-        colorStates: [
-          {
-            format: "bgra8unorm",
-            alphaBlend: {
-              srcFactor: "src-alpha",
-              dstFactor: "one-minus-src-alpha",
-              operation: "add",
+          // TODO: parameter
+          targets: [
+            {
+              format: "bgra8unorm",
+              blend: {
+                color: {
+                  srcFactor: "src-alpha",
+                  dstFactor: "one-minus-src-alpha",
+                  operation: "add",
+                },
+                alpha: {
+                  srcFactor: "src-alpha",
+                  dstFactor: "one-minus-src-alpha",
+                  operation: "add",
+                },
+              },
             },
-          },
-        ],
-        primitiveTopology: "triangle-list",
-        depthStencilState: {
+          ],
+        },
+        primitive: { topology: GPUPrimitiveTopology.TriangleList },
+        depthStencil: {
           depthWriteEnabled: true,
           depthCompare: "less",
           format: "depth24plus-stencil8",

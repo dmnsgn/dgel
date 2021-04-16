@@ -1,0 +1,12 @@
+{
+  "imports": {
+    "@webgpu/glslang/dist/web-devel/glslang.js": "./@webgpu/glslang/dist/web-devel/glslang.js",
+    "@webgpu/glslang/dist/web-devel/glslang.wasm": "./@webgpu/glslang/dist/web-devel/glslang.wasm",
+    "cameras": "./cameras.js",
+    "concat-typed-array": "./concat-typed-array.js",
+    "es-module-shims": "./es-module-shims.js",
+    "gl-matrix": "./gl-matrix.js",
+    "primitive-geometry": "./primitive-geometry.js",
+    "seedrandom": "./seedrandom.js"
+  }
+}

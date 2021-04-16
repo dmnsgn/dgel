@@ -15,7 +15,12 @@ class Struct {
   public getGLSLString(): string {
     return /* glsl */ `struct ${this.type} {
 ${this.members
-  .map((variable) => `  ${variable.type} ${variable.name};`)
+  .map(
+    (variable) =>
+      `  ${variable.type} ${variable.name}${
+        variable.arrayCount ? `[${variable.arrayCount}]` : ""
+      };`
+  )
   .join("\n")}
 };
 `;
