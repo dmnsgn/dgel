@@ -1,4 +1,4 @@
-# dgel [![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
+# dgel
 
 [![npm version](https://img.shields.io/npm/v/dgel)](https://www.npmjs.com/package/dgel)
 [![stability-experimental](https://img.shields.io/badge/stability-experimental-orange.svg)](https://www.npmjs.com/package/dgel)
