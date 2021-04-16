@@ -1,20 +1,7 @@
 {
   "name": "dgel",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A WebGPU engine.",
-  "type": "module",
-  "main": "lib/index.js",
-  "module": "lib/index.js",
-  "types": "types/index.d.ts",
-  "engines": {
-    "node": ">=15.0.0",
-    "npm": ">=7.0.0"
-  },
-  "scripts": {
-    "dev": "npx snowdev dev",
-    "build": "npx snowdev build",
-    "clean": "rm -rf lib && rm -rf docs"
-  },
   "keywords": [
     "webgpu",
     "engine",
@@ -35,8 +22,35 @@
       "url": "https://commerce.coinbase.com/checkout/56cbdf28-e323-48d8-9c98-7019e72c97f3"
     }
   ],
-  "author": "Damien Seguin (https://github.com/dmnsgn)",
   "license": "MIT",
+  "author": "Damien Seguin (https://github.com/dmnsgn)",
+  "type": "module",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "types": "types/index.d.ts",
+  "scripts": {
+    "dev": "npx snowdev dev",
+    "build": "npx snowdev build",
+    "clean": "rm -rf lib && rm -rf docs"
+  },
+  "babel": {
+    "plugins": [
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-proposal-object-rest-spread",
+      "@babel/plugin-proposal-optional-chaining"
+    ],
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "modules": false,
+          "useBuiltIns": false,
+          "targets": "last 1 Chrome version"
+        }
+      ],
+      "@babel/preset-typescript"
+    ]
+  },
   "dependencies": {
     "gl-matrix": "^3.3.0"
   },
@@ -61,6 +75,10 @@
     "typedoc": "^0.20.35",
     "typescript": "^4.2.4"
   },
+  "engines": {
+    "node": ">=15.0.0",
+    "npm": ">=7.0.0"
+  },
   "snowdev": {
     "dependencies": [
       "@webgpu/glslang/dist/web-devel/glslang.js",
@@ -71,24 +89,6 @@
       "gl-matrix",
       "primitive-geometry",
       "seedrandom"
-    ]
-  },
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "modules": false,
-          "useBuiltIns": false,
-          "targets": "last 1 Chrome version"
-        }
-      ],
-      "@babel/preset-typescript"
-    ],
-    "plugins": [
-      "@babel/plugin-proposal-class-properties",
-      "@babel/plugin-proposal-object-rest-spread",
-      "@babel/plugin-proposal-optional-chaining"
     ]
   }
 }
