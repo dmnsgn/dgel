@@ -7,6 +7,26 @@ export type GLSLShaderType = "vertex" | "fragment" | "compute";
 export type GLSLShaderTypeObjectKeys = { [key in GLSLShaderType]?: string };
 
 export type GLSLLayoutQualifier = "std140" | "std430";
+export type GLSLSamplerType =
+  | "1D"
+  | "2D"
+  | "3D"
+  | "Cube"
+  | "2DRect"
+  | "1DArray"
+  | "2DArray"
+  | "CubeArray"
+  | "Buffer"
+  | "2DMS"
+  | "2DMSArray";
+export type GLSLShadowSamplerType =
+  | "1DShadow"
+  | "2DShadow"
+  | "CubeShadow"
+  | "2DRectShadow"
+  | "1DArrayShadow"
+  | "2DArrayShadow"
+  | "CubeArrayShadow";
 export type GLSLStorageQualifier = "shared";
 export interface GLSLTypeQualifiers {
   layout?: GLSLLayoutQualifier;
@@ -19,6 +39,7 @@ export interface ContextState {
     compileGLSL: (source: string, type: string) => string;
   };
   debug: boolean;
+  error: boolean;
 }
 
 export interface ContextOptions {
@@ -32,6 +53,7 @@ export interface BindGroupLayoutEntry extends GPUBindGroupLayoutEntry {
   members?: (Variable | Struct)[];
   dimension?: GPUTextureDimension;
   qualifiers?: GLSLTypeQualifiers;
+  samplerType?: GLSLSamplerType | GLSLShadowSamplerType;
 }
 
 export interface BindGroupOptions extends GPUBindGroupDescriptor {

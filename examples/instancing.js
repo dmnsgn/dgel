@@ -12,6 +12,7 @@ import {
   GPUShaderStage,
   Uniform,
   Shaders,
+  State,
 } from "../lib/index.js";
 
 import { mat4 } from "gl-matrix";
@@ -59,7 +60,7 @@ const INSTANCES_COUNT = GRID_SIZE * GRID_SIZE;
   // Layouts
   const systemBindGroupLayout = new BindGroupLayout([
     {
-      type: "uniform-buffer",
+      buffer: {},
       visibility: GPUShaderStage.VERTEX,
       name: "System",
       uniforms: [
@@ -71,13 +72,13 @@ const INSTANCES_COUNT = GRID_SIZE * GRID_SIZE;
 
   const instancesBindGroupLayout = new BindGroupLayout([
     {
-      type: "uniform-buffer",
+      buffer: {},
       visibility: GPUShaderStage.VERTEX,
       name: "Mesh",
       uniforms: [new Uniform("modelMatrix", "mat4", null, INSTANCES_COUNT)],
     },
     {
-      type: "uniform-buffer",
+      buffer: {},
       visibility: GPUShaderStage.VERTEX,
       name: "Custom",
       uniforms: [
@@ -222,6 +223,8 @@ void main() {
 
   // Frame
   requestAnimationFrame(function frame() {
+    if (State.error) return;
+
     clock.getDelta();
 
     systemUniformsBuffer.setSubData(

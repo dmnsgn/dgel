@@ -1,5 +1,8 @@
 import { GLSLLayoutQualifier } from "../types.js";
 
+// TODO: parameter
+const dataType = "32";
+
 class Variable {
   constructor(
     public name: string,
@@ -11,31 +14,31 @@ class Variable {
   public get format(): string {
     // Scalars
     if (this.type === "float") {
-      return "float";
+      return `float${dataType}`;
     } else if (this.type === "double") {
       return "double";
     } else if (this.type === "int") {
-      return "int";
+      return `sint${dataType}`;
     } else if (this.type === "uint") {
-      return "uint";
+      return `uint${dataType}`;
     } else if (this.type === "bool") {
       return ""; // TODO: ??
     }
     // Vectors
     else if (this.type.startsWith("vec")) {
-      return `float${this.type.substring(3)}`;
+      return `float${dataType}x${this.type.substring(3)}`;
     } else if (this.type.startsWith("dvec")) {
       return `double${this.type.substring(4)}`;
     } else if (this.type.startsWith("ivec")) {
-      return `int${this.type.substring(4)}`;
+      return `sint${dataType}x${this.type.substring(4)}`;
     } else if (this.type.startsWith("uvec")) {
-      return `uint${this.type.substring(4)}`;
+      return `uint${dataType}x${this.type.substring(4)}`;
     } else if (this.type.startsWith("bvec")) {
       return ""; // TODO: ??
     }
     // Matrices
     else if (this.type.startsWith("mat")) {
-      return "float";
+      return `float${dataType}`;
     } else if (this.type.startsWith("dmat")) {
       return "double";
     }

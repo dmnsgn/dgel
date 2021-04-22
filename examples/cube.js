@@ -12,6 +12,7 @@ import {
   Pass,
   Pipeline,
   Sampler,
+  State,
   Texture,
   Uniform,
 } from "../lib/index.js";
@@ -54,7 +55,7 @@ import Geometries from "primitive-geometry";
   // Layouts
   const systemBindGroupLayout = new BindGroupLayout([
     {
-      type: "uniform-buffer",
+      buffer: {},
       visibility: GPUShaderStage.VERTEX,
       name: "System",
       uniforms: [
@@ -66,18 +67,18 @@ import Geometries from "primitive-geometry";
 
   const meshBindGroupLayout = new BindGroupLayout([
     {
-      type: "uniform-buffer",
+      buffer: {},
       visibility: GPUShaderStage.VERTEX,
       name: "Mesh",
       uniforms: [new Uniform("modelMatrix", "mat4")],
     },
     {
-      type: "sampler",
+      sampler: {},
       visibility: GPUShaderStage.FRAGMENT,
       name: "uSampler",
     },
     {
-      type: "sampled-texture",
+      texture: {},
       visibility: GPUShaderStage.FRAGMENT,
       name: "uTexture",
       dimension: "2d",
@@ -190,6 +191,8 @@ void main() {
 
   // Frame
   requestAnimationFrame(function frame() {
+    if (State.error) return;
+
     clock.getDelta();
 
     controls.update();

@@ -48,7 +48,7 @@ class Axes {
     outColor = vColor;
   }`,
       descriptor: {
-        primitiveTopology: GPUPrimitiveTopology.LineList,
+        primitive: { topology: GPUPrimitiveTopology.LineList },
       },
     });
 

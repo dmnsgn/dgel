@@ -66,13 +66,13 @@ class Buffer {
       offset,
       byteCount
     );
-    State.device.defaultQueue.submit([commandEncoder.finish()]);
+    State.device.queue.submit([commandEncoder.finish()]);
   }
 
   public copyToTexture(
     bytesPerRow: number,
     rowsPerImage: number,
-    destination: GPUTextureCopyView,
+    destination: GPUImageCopyTexture,
     extent: GPUExtent3D
   ): void {
     const commandEncoder = State.device.createCommandEncoder();
@@ -85,7 +85,7 @@ class Buffer {
       destination,
       extent
     );
-    State.device.defaultQueue.submit([commandEncoder.finish()]);
+    State.device.queue.submit([commandEncoder.finish()]);
   }
 
   public destroy(): void {

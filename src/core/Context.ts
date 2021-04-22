@@ -39,9 +39,10 @@ class Context {
 
       this.adapter = await navigator.gpu.requestAdapter(requestAdapter);
       State.device = await this.adapter.requestDevice(deviceDescriptor);
-      State.device.addEventListener("uncapturederror", (error) =>
-        console.log(error)
-      );
+      State.device.addEventListener("uncapturederror", (error) => {
+        console.log(error);
+        State.error = true;
+      });
 
       this.swapChain = this.context.configureSwapChain({
         device: State.device,
@@ -69,7 +70,10 @@ class Context {
     this.canvas.height = height;
 
     const depthStencilTexture = State.device.createTexture({
-      size: { width, height, depth: 1 },
+      size: {
+        width,
+        height,
+      },
       mipLevelCount: 1,
       sampleCount: 1,
       dimension: "2d",
@@ -92,18 +96,16 @@ class Context {
         const descriptor = { ...command.pass.descriptor };
         const currentView = swapChainTexture.createView();
         if (descriptor.colorAttachments) {
-          const attachments = descriptor.colorAttachments as Array<
-            GPURenderPassColorAttachmentDescriptor
-          >;
+          const attachments = descriptor.colorAttachments as Array<GPURenderPassColorAttachmentOld>;
           for (let i = 0; i < attachments.length; i++) {
             attachments[i].attachment =
               attachments[i].attachment || currentView;
           }
         }
         if (descriptor.depthStencilAttachment) {
-          descriptor.depthStencilAttachment.attachment =
-            descriptor.depthStencilAttachment.attachment ||
-            this.defaultDepthStencilAttachment;
+          (descriptor.depthStencilAttachment as GPURenderPassDepthStencilAttachmentOld).attachment =
+            (descriptor.depthStencilAttachment as GPURenderPassDepthStencilAttachmentOld)
+              .attachment || this.defaultDepthStencilAttachment;
         }
 
         this.passEncoder = this.commandEncoder.beginRenderPass(descriptor);
@@ -175,7 +177,7 @@ class Context {
     this.commandEncoder = State.device.createCommandEncoder();
     // Submit commands
     cb();
-    State.device.defaultQueue.submit([this.commandEncoder.finish()]);
+    State.device.queue.submit([this.commandEncoder.finish()]);
     this.commandEncoder = null;
   }
 }

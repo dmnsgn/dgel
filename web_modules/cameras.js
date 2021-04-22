@@ -1,8 +1,10 @@
-import { f as fromValues, c as create, a as create$1, l as lookAt, b as copy, i as invert, d as frustum, p as perspective, o as ortho, e as create$2, z as zero, s as subtract, g as distance, h as set, j as copy$1, k as create$3, m as copy$2, n as subtract$1, q as length, r as sub, t as add, u as scale, v as transformQuat, w as rotationTo, x as invert$1, y as glMatrix } from './common/vec2-479d70bc.js';
+import { f as fromValues, c as create, a as create$1, l as lookAt, b as copy, i as invert, d as frustum, p as perspective, o as ortho, e as create$2, z as zero, s as subtract, g as distance, h as set, j as copy$1, k as create$3, m as copy$2, n as subtract$1, q as length, r as sub, t as add, u as scale, v as transformQuat, w as rotationTo, x as invert$1, y as glMatrix } from './common/vec2-5054ab4c.js';
+import './common/es.string.replace-3e1f8f8c.js';
+import './common/es.typed-array.float32-array-cc49d38f.js';
+import './common/typed-array-constructor-6a40afc1.js';
 
-// General
 // Camera
-let CameraType;
+var CameraType;
 
 (function (CameraType) {
   CameraType[CameraType["Camera"] = 0] = "Camera";
@@ -10,7 +12,7 @@ let CameraType;
   CameraType[CameraType["Orthographic"] = 2] = "Orthographic";
 })(CameraType || (CameraType = {}));
 
-let ControlsActions; // PointerManager
+var ControlsActions;
 
 (function (ControlsActions) {
   ControlsActions["Rotate"] = "Rotate";
@@ -20,7 +22,7 @@ let ControlsActions; // PointerManager
   ControlsActions["Zoom"] = "Zoom";
 })(ControlsActions || (ControlsActions = {}));
 
-let PointerManagerState;
+var PointerManagerState;
 
 (function (PointerManagerState) {
   PointerManagerState["Idle"] = "Idle";
@@ -33,29 +35,17 @@ let PointerManagerState;
   PointerManagerState["TouchThree"] = "TouchThree";
 })(PointerManagerState || (PointerManagerState = {}));
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 class Camera {
   constructor(options) {
-    _defineProperty(this, "type", CameraType.Camera);
-
-    _defineProperty(this, "near", 0.1);
-
-    _defineProperty(this, "far", 100);
-
-    _defineProperty(this, "up", fromValues(0, 1, 0));
-
-    _defineProperty(this, "position", fromValues(0, 0, 1));
-
-    _defineProperty(this, "target", create());
-
-    _defineProperty(this, "projectionMatrix", create$1());
-
-    _defineProperty(this, "viewMatrix", create$1());
-
-    _defineProperty(this, "inverseViewMatrix", create$1());
-
-    _defineProperty(this, "view", void 0);
-
+    this.type = CameraType.Camera;
+    this.near = 0.1;
+    this.far = 100;
+    this.up = fromValues(0, 1, 0);
+    this.position = fromValues(0, 0, 1);
+    this.target = create();
+    this.projectionMatrix = create$1();
+    this.viewMatrix = create$1();
+    this.inverseViewMatrix = create$1();
     Object.assign(this, options);
   }
 
@@ -67,17 +57,12 @@ class Camera {
 
 }
 
-function _defineProperty$1(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 class PerspectiveCamera extends Camera {
   constructor(options) {
     super(options);
-
-    _defineProperty$1(this, "type", CameraType.Perspective);
-
-    _defineProperty$1(this, "fov", Math.PI / 4);
-
-    _defineProperty$1(this, "aspect", 1);
-
+    this.type = CameraType.Perspective;
+    this.fov = Math.PI / 4;
+    this.aspect = 1;
     Object.assign(this, options);
     this.updateProjectionMatrix();
   }
@@ -105,23 +90,15 @@ class PerspectiveCamera extends Camera {
 
 }
 
-function _defineProperty$2(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 class OrthographicCamera extends Camera {
   constructor(options) {
     super(options);
-
-    _defineProperty$2(this, "type", CameraType.Orthographic);
-
-    _defineProperty$2(this, "left", -1);
-
-    _defineProperty$2(this, "right", 1);
-
-    _defineProperty$2(this, "top", 1);
-
-    _defineProperty$2(this, "bottom", -1);
-
-    _defineProperty$2(this, "zoom", 1);
-
+    this.type = CameraType.Orthographic;
+    this.left = -1;
+    this.right = 1;
+    this.top = 1;
+    this.bottom = -1;
+    this.zoom = 1;
     Object.assign(this, options);
     this.updateProjectionMatrix();
   }
@@ -155,9 +132,7 @@ class OrthographicCamera extends Camera {
 var clamp_1 = clamp;
 
 function clamp(value, min, max) {
-  return min < max
-    ? (value < min ? min : value > max ? max : value)
-    : (value < max ? max : value > min ? min : value)
+  return min < max ? value < min ? min : value > max ? max : value : value < max ? max : value > min ? min : value;
 }
 
 /**
@@ -205,22 +180,20 @@ function clamp(value, min, max) {
  *  another copy of "event || window.event".
  *
  */
+var _populated = false; // Browsers
 
-var _populated = false;
+var _ie, _firefox, _opera, _webkit, _chrome; // Actual IE browser for compatibility mode
 
-// Browsers
-var _ie, _firefox, _opera, _webkit, _chrome;
 
-// Actual IE browser for compatibility mode
-var _ie_real_version;
+var _ie_real_version; // Platforms
 
-// Platforms
-var _osx, _windows, _linux, _android;
 
-// Architectures
-var _win64;
+var _osx, _windows, _linux, _android; // Architectures
 
-// Devices
+
+var _win64; // Devices
+
+
 var _iphone, _ipad, _native;
 
 var _mobile;
@@ -230,44 +203,41 @@ function _populate() {
     return;
   }
 
-  _populated = true;
-
-  // To work around buggy JS libraries that can't handle multi-digit
+  _populated = true; // To work around buggy JS libraries that can't handle multi-digit
   // version numbers, Opera 10's user agent string claims it's Opera
   // 9, then later includes a Version/X.Y field:
   //
   // Opera/9.80 (foo) Presto/2.2.15 Version/10.10
+
   var uas = navigator.userAgent;
   var agent = /(?:MSIE.(\d+\.\d+))|(?:(?:Firefox|GranParadiso|Iceweasel).(\d+\.\d+))|(?:Opera(?:.+Version.|.)(\d+\.\d+))|(?:AppleWebKit.(\d+(?:\.\d+)?))|(?:Trident\/\d+\.\d+.*rv:(\d+\.\d+))/.exec(uas);
-  var os    = /(Mac OS X)|(Windows)|(Linux)/.exec(uas);
-
+  var os = /(Mac OS X)|(Windows)|(Linux)/.exec(uas);
   _iphone = /\b(iPhone|iP[ao]d)/.exec(uas);
   _ipad = /\b(iP[ao]d)/.exec(uas);
   _android = /Android/i.exec(uas);
   _native = /FBAN\/\w+;/i.exec(uas);
-  _mobile = /Mobile/i.exec(uas);
-
-  // Note that the IE team blog would have you believe you should be checking
+  _mobile = /Mobile/i.exec(uas); // Note that the IE team blog would have you believe you should be checking
   // for 'Win64; x64'.  But MSDN then reveals that you can actually be coming
   // from either x64 or ia64;  so ultimately, you should just check for Win64
   // as in indicator of whether you're in 64-bit IE.  32-bit IE on 64-bit
   // Windows will send 'WOW64' instead.
-  _win64 = !!(/Win64/.exec(uas));
+
+  _win64 = !!/Win64/.exec(uas);
 
   if (agent) {
-    _ie = agent[1] ? parseFloat(agent[1]) : (
-          agent[5] ? parseFloat(agent[5]) : NaN);
-    // IE compatibility mode
+    _ie = agent[1] ? parseFloat(agent[1]) : agent[5] ? parseFloat(agent[5]) : NaN; // IE compatibility mode
+
     if (_ie && document && document.documentMode) {
       _ie = document.documentMode;
-    }
-    // grab the "true" ie version from the trident token if available
+    } // grab the "true" ie version from the trident token if available
+
+
     var trident = /(?:Trident\/(\d+.\d+))/.exec(uas);
     _ie_real_version = trident ? parseFloat(trident[1]) + 4 : _ie;
-
     _firefox = agent[2] ? parseFloat(agent[2]) : NaN;
-    _opera   = agent[3] ? parseFloat(agent[3]) : NaN;
-    _webkit  = agent[4] ? parseFloat(agent[4]) : NaN;
+    _opera = agent[3] ? parseFloat(agent[3]) : NaN;
+    _webkit = agent[4] ? parseFloat(agent[4]) : NaN;
+
     if (_webkit) {
       // We do not add the regexp to the above test, because it will always
       // match 'safari' only since 'AppleWebKit' appears before 'Chrome' in
@@ -289,27 +259,26 @@ function _populate() {
       // digits.  If only one set of digits is found, returns just the major
       // version number.
       var ver = /(?:Mac OS X (\d+(?:[._]\d+)?))/.exec(uas);
-
       _osx = ver ? parseFloat(ver[1].replace('_', '.')) : true;
     } else {
       _osx = false;
     }
+
     _windows = !!os[2];
-    _linux   = !!os[3];
+    _linux = !!os[3];
   } else {
     _osx = _windows = _linux = false;
   }
 }
 
 var UserAgent_DEPRECATED = {
-
   /**
    *  Check if the UA is Internet Explorer.
    *
    *
    *  @return float|NaN Version number (if match) or NaN.
    */
-  ie: function() {
+  ie: function () {
     return _populate() || _ie;
   },
 
@@ -319,17 +288,16 @@ var UserAgent_DEPRECATED = {
    * @return bool true if in compatibility mode, false if
    * not compatibility mode or not ie
    */
-  ieCompatibilityMode: function() {
-    return _populate() || (_ie_real_version > _ie);
+  ieCompatibilityMode: function () {
+    return _populate() || _ie_real_version > _ie;
   },
-
 
   /**
    * Whether the browser is 64-bit IE.  Really, this is kind of weak sauce;  we
    * only need this because Skype can't handle 64-bit IE yet.  We need to remove
    * this when we don't need it -- tracked by #601957.
    */
-  ie64: function() {
+  ie64: function () {
     return UserAgent_DEPRECATED.ie() && _win64;
   },
 
@@ -339,10 +307,9 @@ var UserAgent_DEPRECATED = {
    *
    *  @return float|NaN Version number (if match) or NaN.
    */
-  firefox: function() {
+  firefox: function () {
     return _populate() || _firefox;
   },
-
 
   /**
    *  Check if the UA is Opera.
@@ -350,10 +317,9 @@ var UserAgent_DEPRECATED = {
    *
    *  @return float|NaN Version number (if match) or NaN.
    */
-  opera: function() {
+  opera: function () {
     return _populate() || _opera;
   },
-
 
   /**
    *  Check if the UA is WebKit.
@@ -361,7 +327,7 @@ var UserAgent_DEPRECATED = {
    *
    *  @return float|NaN Version number (if match) or NaN.
    */
-  webkit: function() {
+  webkit: function () {
     return _populate() || _webkit;
   },
 
@@ -369,7 +335,7 @@ var UserAgent_DEPRECATED = {
    *  For Push
    *  WILL BE REMOVED VERY SOON. Use UserAgent_DEPRECATED.webkit
    */
-  safari: function() {
+  safari: function () {
     return UserAgent_DEPRECATED.webkit();
   },
 
@@ -379,20 +345,18 @@ var UserAgent_DEPRECATED = {
    *
    *  @return float|NaN Version number (if match) or NaN.
    */
-  chrome : function() {
+  chrome: function () {
     return _populate() || _chrome;
   },
-
 
   /**
    *  Check if the user is running Windows.
    *
    *  @return bool `true' if the user's OS is Windows.
    */
-  windows: function() {
+  windows: function () {
     return _populate() || _windows;
   },
-
 
   /**
    *  Check if the user is running Mac OS X.
@@ -400,7 +364,7 @@ var UserAgent_DEPRECATED = {
    *  @return float|bool   Returns a float if a version number is detected,
    *                       otherwise true/false.
    */
-  osx: function() {
+  osx: function () {
     return _populate() || _osx;
   },
 
@@ -409,7 +373,7 @@ var UserAgent_DEPRECATED = {
    *
    * @return bool `true' if the user's OS is some flavor of Linux.
    */
-  linux: function() {
+  linux: function () {
     return _populate() || _linux;
   },
 
@@ -419,28 +383,23 @@ var UserAgent_DEPRECATED = {
    * @return bool `true' if the user is running some flavor of the
    *    iPhone OS.
    */
-  iphone: function() {
+  iphone: function () {
     return _populate() || _iphone;
   },
-
-  mobile: function() {
-    return _populate() || (_iphone || _ipad || _android || _mobile);
+  mobile: function () {
+    return _populate() || _iphone || _ipad || _android || _mobile;
   },
-
-  nativeApp: function() {
+  nativeApp: function () {
     // webviews inside of the native apps
     return _populate() || _native;
   },
-
-  android: function() {
+  android: function () {
     return _populate() || _android;
   },
-
-  ipad: function() {
+  ipad: function () {
     return _populate() || _ipad;
   }
 };
-
 var UserAgent_DEPRECATED_1 = UserAgent_DEPRECATED;
 
 /**
@@ -454,45 +413,31 @@ var UserAgent_DEPRECATED_1 = UserAgent_DEPRECATED;
  * @providesModule ExecutionEnvironment
  */
 
-var canUseDOM = !!(
-  typeof window !== 'undefined' &&
-  window.document &&
-  window.document.createElement
-);
-
+var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 /**
  * Simple, lightweight module assisting with the detection and context of
  * Worker. Helps avoid circular dependencies and allows code to reason about
  * whether or not they are in a Worker, even if they never include the main
  * `ReactWorker` dependency.
  */
+
 var ExecutionEnvironment = {
-
   canUseDOM: canUseDOM,
-
   canUseWorkers: typeof Worker !== 'undefined',
-
-  canUseEventListeners:
-    canUseDOM && !!(window.addEventListener || window.attachEvent),
-
+  canUseEventListeners: canUseDOM && !!(window.addEventListener || window.attachEvent),
   canUseViewport: canUseDOM && !!window.screen,
-
   isInWorker: !canUseDOM // For now, this is true - might change in the future.
 
 };
-
 var ExecutionEnvironment_1 = ExecutionEnvironment;
 
 var useHasFeature;
-if (ExecutionEnvironment_1.canUseDOM) {
-  useHasFeature =
-    document.implementation &&
-    document.implementation.hasFeature &&
-    // always returns true in newer browsers as per the standard.
-    // @see http://dom.spec.whatwg.org/#dom-domimplementation-hasfeature
-    document.implementation.hasFeature('', '') !== true;
-}
 
+if (ExecutionEnvironment_1.canUseDOM) {
+  useHasFeature = document.implementation && document.implementation.hasFeature && // always returns true in newer browsers as per the standard.
+  // @see http://dom.spec.whatwg.org/#dom-domimplementation-hasfeature
+  document.implementation.hasFeature('', '') !== true;
+}
 /**
  * Checks if an event is supported in the current execution environment.
  *
@@ -507,14 +452,15 @@ if (ExecutionEnvironment_1.canUseDOM) {
  * @internal
  * @license Modernizr 3.0.0pre (Custom Build) | MIT
  */
+
+
 function isEventSupported(eventNameSuffix, capture) {
-  if (!ExecutionEnvironment_1.canUseDOM ||
-      capture && !('addEventListener' in document)) {
+  if (!ExecutionEnvironment_1.canUseDOM || capture && !('addEventListener' in document)) {
     return false;
   }
 
   var eventName = 'on' + eventNameSuffix;
-  var isSupported = eventName in document;
+  var isSupported = (eventName in document);
 
   if (!isSupported) {
     var element = document.createElement('div');
@@ -532,11 +478,9 @@ function isEventSupported(eventNameSuffix, capture) {
 
 var isEventSupported_1 = isEventSupported;
 
-// Reasonable defaults
-var PIXEL_STEP  = 10;
+var PIXEL_STEP = 10;
 var LINE_HEIGHT = 40;
 var PAGE_HEIGHT = 800;
-
 /**
  * Mouse wheel (and 2-finger trackpad) support on the web sucks.  It is
  * complicated, thus this doc is long and (hopefully) detailed enough to answer
@@ -637,18 +581,37 @@ var PAGE_HEIGHT = 800;
  *         Firefox v4/Win7  |     undefined    |       3
  *
  */
-function normalizeWheel(/*object*/ event) /*object*/ {
-  var sX = 0, sY = 0,       // spinX, spinY
-      pX = 0, pY = 0;       // pixelX, pixelY
 
+function normalizeWheel(
+/*object*/
+event)
+/*object*/
+{
+  var sX = 0,
+      sY = 0,
+      // spinX, spinY
+  pX = 0,
+      pY = 0; // pixelX, pixelY
   // Legacy
-  if ('detail'      in event) { sY = event.detail; }
-  if ('wheelDelta'  in event) { sY = -event.wheelDelta / 120; }
-  if ('wheelDeltaY' in event) { sY = -event.wheelDeltaY / 120; }
-  if ('wheelDeltaX' in event) { sX = -event.wheelDeltaX / 120; }
 
-  // side scrolling on FF with DOMMouseScroll
-  if ( 'axis' in event && event.axis === event.HORIZONTAL_AXIS ) {
+  if ('detail' in event) {
+    sY = event.detail;
+  }
+
+  if ('wheelDelta' in event) {
+    sY = -event.wheelDelta / 120;
+  }
+
+  if ('wheelDeltaY' in event) {
+    sY = -event.wheelDeltaY / 120;
+  }
+
+  if ('wheelDeltaX' in event) {
+    sX = -event.wheelDeltaX / 120;
+  } // side scrolling on FF with DOMMouseScroll
+
+
+  if ('axis' in event && event.axis === event.HORIZONTAL_AXIS) {
     sX = sY;
     sY = 0;
   }
@@ -656,48 +619,59 @@ function normalizeWheel(/*object*/ event) /*object*/ {
   pX = sX * PIXEL_STEP;
   pY = sY * PIXEL_STEP;
 
-  if ('deltaY' in event) { pY = event.deltaY; }
-  if ('deltaX' in event) { pX = event.deltaX; }
+  if ('deltaY' in event) {
+    pY = event.deltaY;
+  }
+
+  if ('deltaX' in event) {
+    pX = event.deltaX;
+  }
 
   if ((pX || pY) && event.deltaMode) {
-    if (event.deltaMode == 1) {          // delta in LINE units
+    if (event.deltaMode == 1) {
+      // delta in LINE units
       pX *= LINE_HEIGHT;
       pY *= LINE_HEIGHT;
-    } else {                             // delta in PAGE units
+    } else {
+      // delta in PAGE units
       pX *= PAGE_HEIGHT;
       pY *= PAGE_HEIGHT;
     }
+  } // Fall-back if spin cannot be determined
+
+
+  if (pX && !sX) {
+    sX = pX < 1 ? -1 : 1;
   }
 
-  // Fall-back if spin cannot be determined
-  if (pX && !sX) { sX = (pX < 1) ? -1 : 1; }
-  if (pY && !sY) { sY = (pY < 1) ? -1 : 1; }
+  if (pY && !sY) {
+    sY = pY < 1 ? -1 : 1;
+  }
 
-  return { spinX  : sX,
-           spinY  : sY,
-           pixelX : pX,
-           pixelY : pY };
+  return {
+    spinX: sX,
+    spinY: sY,
+    pixelX: pX,
+    pixelY: pY
+  };
 }
-
-
 /**
  * The best combination if you prefer spinX + spinY normalization.  It favors
  * the older DOMMouseScroll for Firefox, as FF does not include wheelDelta with
  * 'wheel' event, making spin speed determination impossible.
  */
-normalizeWheel.getEventType = function() /*string*/ {
-  return (UserAgent_DEPRECATED_1.firefox())
-           ? 'DOMMouseScroll'
-           : (isEventSupported_1('wheel'))
-               ? 'wheel'
-               : 'mousewheel';
+
+
+normalizeWheel.getEventType = function ()
+/*string*/
+{
+  return UserAgent_DEPRECATED_1.firefox() ? 'DOMMouseScroll' : isEventSupported_1('wheel') ? 'wheel' : 'mousewheel';
 };
 
 var normalizeWheel_1 = normalizeWheel;
 
 var normalizeWheel$1 = normalizeWheel_1;
 
-function _defineProperty$3(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 const HAS_TOUCH_EVENTS = ("TouchEvent" in window);
 const EVENT_LISTENER_OPTIONS = {
   passive: false
@@ -706,37 +680,22 @@ const VEC2_IDENTITY = create$2();
 const tempElement = create$2();
 const tempPointer = create$2();
 class PointerManager {
-  static isTouchEvent(event) {
-    return HAS_TOUCH_EVENTS && event instanceof TouchEvent;
-  }
-
   constructor(options) {
-    _defineProperty$3(this, "element", void 0);
-
-    _defineProperty$3(this, "config", void 0);
-
-    _defineProperty$3(this, "onPointerUpdate", void 0);
-
-    _defineProperty$3(this, "state", void 0);
-
-    _defineProperty$3(this, "initialTouchDistance", 0);
-
-    _defineProperty$3(this, "initialPosition", create$2());
-
-    _defineProperty$3(this, "lastPosition", create$2());
-
-    _defineProperty$3(this, "movePosition", create$2());
-
-    _defineProperty$3(this, "clientSize", create$2());
-
-    _defineProperty$3(this, "isElementRoot", void 0);
-
+    this.initialTouchDistance = 0;
+    this.initialPosition = create$2();
+    this.lastPosition = create$2();
+    this.movePosition = create$2();
+    this.clientSize = create$2();
     Object.assign(this, options);
     this.onMouseWheel = this.onMouseWheel.bind(this);
     this.onMouseDown = this.onMouseDown.bind(this);
     this.onTouchStart = this.onTouchStart.bind(this);
     this.handleDragging = this.handleDragging.bind(this);
     this.onPointerUp = this.onPointerUp.bind(this);
+  }
+
+  static isTouchEvent(event) {
+    return HAS_TOUCH_EVENTS && event instanceof TouchEvent;
   }
 
   enable() {
@@ -887,28 +846,17 @@ class PointerManager {
   }
 
 }
+PointerManager.BUTTONS = [PointerManagerState.MouseLeft, PointerManagerState.MouseMiddle, PointerManagerState.MouseRight];
+PointerManager.TOUCHES = [PointerManagerState.Idle, PointerManagerState.TouchOne, PointerManagerState.TouchTwo, PointerManagerState.TouchThree];
 
-_defineProperty$3(PointerManager, "BUTTONS", [PointerManagerState.MouseLeft, PointerManagerState.MouseMiddle, PointerManagerState.MouseRight]);
-
-_defineProperty$3(PointerManager, "TOUCHES", [PointerManagerState.Idle, PointerManagerState.TouchOne, PointerManagerState.TouchTwo, PointerManagerState.TouchThree]);
-
-function _defineProperty$4(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 const {
   EPSILON
 } = glMatrix;
 const PI2 = Math.PI * 2;
 const TEMP = create();
 class Controls {
-  static isNegligeable(number) {
-    return Math.abs(number) < EPSILON;
-  }
-
   constructor(options) {
-    _defineProperty$4(this, "element", void 0);
-
-    _defineProperty$4(this, "camera", void 0);
-
-    _defineProperty$4(this, "config", {
+    this.config = {
       [PointerManagerState.MouseLeft]: ControlsActions.Rotate,
       [PointerManagerState.MouseMiddle]: ControlsActions.Dolly,
       [PointerManagerState.MouseRight]: ControlsActions.RotatePolar,
@@ -916,50 +864,26 @@ class Controls {
       [PointerManagerState.TouchOne]: ControlsActions.Rotate,
       [PointerManagerState.TouchTwo]: ControlsActions.Dolly,
       [PointerManagerState.TouchThree]: ControlsActions.RotatePolar
-    });
-
-    _defineProperty$4(this, "position", fromValues(0, 0, 1));
-
-    _defineProperty$4(this, "target", create());
-
-    _defineProperty$4(this, "phi", Math.PI / 2);
-
-    _defineProperty$4(this, "theta", 0);
-
-    _defineProperty$4(this, "distance", void 0);
-
-    _defineProperty$4(this, "damping", 0.9);
-
-    _defineProperty$4(this, "dolly", true);
-
-    _defineProperty$4(this, "dollySpeed", 1);
-
-    _defineProperty$4(this, "dollyMaxDelta", Infinity);
-
-    _defineProperty$4(this, "rotate", true);
-
-    _defineProperty$4(this, "rotateSpeed", 1);
-
-    _defineProperty$4(this, "rotateMaxThetaDelta", Infinity);
-
-    _defineProperty$4(this, "rotateMaxPhiDelta", Infinity);
-
-    _defineProperty$4(this, "distanceBounds", [EPSILON, Infinity]);
-
-    _defineProperty$4(this, "phiBounds", [0, Math.PI]);
-
-    _defineProperty$4(this, "thetaBounds", [-Infinity, Infinity]);
-
-    _defineProperty$4(this, "pointerManager", void 0);
-
-    _defineProperty$4(this, "sphericalTarget", create());
-
-    _defineProperty$4(this, "targetTarget", create());
-
-    _defineProperty$4(this, "upQuat", create$3());
-
-    _defineProperty$4(this, "upQuatInverse", create$3());
-
+    };
+    this.position = fromValues(0, 0, 1);
+    this.target = create();
+    this.phi = Math.PI / 2;
+    this.theta = 0;
+    this.damping = 0.9;
+    this.dolly = true;
+    this.dollySpeed = 1;
+    this.dollyMaxDelta = Infinity;
+    this.rotate = true;
+    this.rotateSpeed = 1;
+    this.rotateMaxThetaDelta = Infinity;
+    this.rotateMaxPhiDelta = Infinity;
+    this.distanceBounds = [EPSILON, Infinity];
+    this.phiBounds = [0, Math.PI];
+    this.thetaBounds = [-Infinity, Infinity];
+    this.sphericalTarget = create();
+    this.targetTarget = create();
+    this.upQuat = create$3();
+    this.upQuatInverse = create$3();
     Object.assign(this, options); // Set by spherical angle and optional distance
 
     if (options.theta || options.phi) {
@@ -989,10 +913,15 @@ class Controls {
       onPointerUpdate: this.onPointerUpdate
     });
     this.pointerManager.enable();
+  }
+
+  static isNegligeable(number) {
+    return Math.abs(number) < EPSILON;
   } // Actions
 
 
   handleDolly(event) {
+    if (!this.dolly) return;
     let delta = event.dy;
 
     switch (event.state) {
@@ -1023,6 +952,7 @@ class Controls {
   }
 
   handleRotate(event) {
+    if (!this.rotate) return;
     this.handleRotateAzimuth(event);
     this.handleRotatePolar(event);
   } // Pointer Event handlers
@@ -1074,7 +1004,6 @@ class Controls {
   }
 
 }
-
-_defineProperty$4(Controls, "Y_UP", fromValues(0, 1, 0));
+Controls.Y_UP = fromValues(0, 1, 0);
 
 export { Camera, Controls, OrthographicCamera, PerspectiveCamera, PointerManager };

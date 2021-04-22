@@ -19,7 +19,7 @@ class Pass {
                 loadValue: colorAttachment.value,
                 ...((colorAttachment.op && { storeOp: colorAttachment.op }) ||
                   {}),
-              } as GPURenderPassColorAttachmentDescriptor)
+              } as GPURenderPassColorAttachment)
           ),
         }),
         ...((this.depthAttachment || this.stencilAttachment) && {
@@ -28,7 +28,7 @@ class Pass {
             depthStoreOp: this.depthAttachment.op || "store",
             stencilLoadValue: this.depthAttachment.value || 0.0,
             stencilStoreOp: this.depthAttachment.op || "store",
-          } as GPURenderPassDepthStencilAttachmentDescriptor,
+          } as GPURenderPassDepthStencilAttachment,
         }),
       };
     }

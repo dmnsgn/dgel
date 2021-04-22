@@ -1,3 +1,5 @@
+import './es.typed-array.float32-array-cc49d38f.js';
+
 /**
  * Common utilities
  * @module glMatrix

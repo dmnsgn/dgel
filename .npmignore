@@ -1,7 +1,13 @@
 web_modules
-index.html
 examples
+docs
+coverage
+test
+.github
+screenshot.*
+index.html
+tsconfig.json
+.editorconfig
+
 assets
 src/*
-!src/types.d.ts
-docs

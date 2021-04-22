@@ -7,11 +7,19 @@ class BindGroupLayout {
 
   constructor(public entries: BindGroupLayoutEntry[] = []) {
     this.gpuBindGroupLayout = State.device.createBindGroupLayout({
-      entries: entries.map((option, binding) => ({
-        binding,
-        visibility: option.visibility,
-        type: option.type,
-      })),
+      entries: entries.map(
+        (
+          { visibility, buffer, sampler, texture, storageTexture },
+          binding
+        ) => ({
+          binding,
+          visibility,
+          buffer,
+          sampler,
+          texture,
+          storageTexture,
+        })
+      ),
     });
   }
 
@@ -21,7 +29,7 @@ class BindGroupLayout {
     for (let i = 0; i < this.entries.length; i++) {
       const entry = this.entries[i];
 
-      if (entry.type === "uniform-buffer") {
+      if (entry.buffer) {
         size += this.getBindingSize(entry);
       }
     }
@@ -32,7 +40,7 @@ class BindGroupLayout {
   public getBindingSize(entry: BindGroupLayoutEntry): number {
     let size = 0;
 
-    if (entry.type === "uniform-buffer") {
+    if (entry.buffer) {
       size += entry.uniforms
         .map((uniform) =>
           uniform.arrayCount

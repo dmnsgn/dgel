@@ -1,2 +1,3 @@
 node_modules
-sources
+.DS_Store
+types
