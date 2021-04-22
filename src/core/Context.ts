@@ -96,16 +96,15 @@ class Context {
         const descriptor = { ...command.pass.descriptor };
         const currentView = swapChainTexture.createView();
         if (descriptor.colorAttachments) {
-          const attachments = descriptor.colorAttachments as Array<GPURenderPassColorAttachmentOld>;
-          for (let i = 0; i < attachments.length; i++) {
-            attachments[i].attachment =
-              attachments[i].attachment || currentView;
+          const views = descriptor.colorAttachments as Array<GPURenderPassColorAttachmentNew>;
+          for (let i = 0; i < views.length; i++) {
+            views[i].view = views[i].view || currentView;
           }
         }
         if (descriptor.depthStencilAttachment) {
-          (descriptor.depthStencilAttachment as GPURenderPassDepthStencilAttachmentOld).attachment =
-            (descriptor.depthStencilAttachment as GPURenderPassDepthStencilAttachmentOld)
-              .attachment || this.defaultDepthStencilAttachment;
+          (descriptor.depthStencilAttachment as GPURenderPassDepthStencilAttachmentNew).view =
+            (descriptor.depthStencilAttachment as GPURenderPassDepthStencilAttachmentNew)
+              .view || this.defaultDepthStencilAttachment;
         }
 
         this.passEncoder = this.commandEncoder.beginRenderPass(descriptor);
