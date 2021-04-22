@@ -29,8 +29,6 @@ class Program {
     }
   }
 
-  public getGLSLDimension() {}
-
   public getGLSLHeaders(
     set: number,
     entries: BindGroupLayoutEntry[]
