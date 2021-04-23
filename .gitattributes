@@ -1,1 +1,1 @@
-web_modules linguist-generated
+web_modules/**/* linguist-generated=true
