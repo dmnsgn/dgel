@@ -8,6 +8,7 @@ import {
   Clock,
   Command,
   Context,
+  GPUIndexFormat,
   GPUShaderStage,
   Pass,
   Pipeline,
@@ -18,9 +19,10 @@ import {
 } from "../lib/index.js";
 
 import { mat4 } from "gl-matrix";
+import interleaveTypedArray from "interleave-typed-array";
 import concatTypedArray from "concat-typed-array";
 import { PerspectiveCamera, Controls } from "cameras";
-import Geometries from "primitive-geometry";
+import { cube } from "primitive-geometry";
 
 (async () => {
   const context = new Context();
@@ -128,24 +130,20 @@ import Geometries from "primitive-geometry";
   // Geometry
   const modelMatrix = mat4.create();
 
-  const geometry = Geometries.cube();
+  const geometry = cube();
   const geometryVertexBuffer = new Buffer();
   const geometryIndicesBuffer = new Buffer();
 
   geometryVertexBuffer.vertexBuffer(
-    new Float32Array(
-      geometry.positions
-        .map((_, index) => [
-          geometry.positions[index],
-          geometry.normals[index],
-          geometry.uvs[index],
-        ])
-        .flat()
-        .flat()
+    interleaveTypedArray(
+      Float32Array,
+      [3, 3, 2],
+      geometry.positions,
+      geometry.normals,
+      geometry.uvs
     )
   );
-  const indices = new Uint32Array(geometry.cells.flat());
-  geometryIndicesBuffer.indexBuffer(indices);
+  geometryIndicesBuffer.indexBuffer(new Uint16Array(geometry.cells));
 
   // Pipeline
   const pipeline = new Pipeline({
@@ -183,7 +181,8 @@ void main() {
     bindGroups: [systemUniformBindGroup, meshUniformBindGroup],
     vertexBuffers: [geometryVertexBuffer],
     indexBuffer: geometryIndicesBuffer,
-    count: indices.length,
+    indexFormat: GPUIndexFormat.Uint16,
+    count: geometry.cells.length,
   });
 
   // Helpers

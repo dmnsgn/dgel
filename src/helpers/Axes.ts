@@ -38,15 +38,15 @@ class Axes {
       ins: [new Attribute("position", "vec3"), new Attribute("color", "vec4")],
       outs: [new Attribute("vColor", "vec4")],
       vertex: /* glsl */ `
-  void main() {
-    vColor = color;
+void main() {
+  vColor = color;
 
-    gl_Position = system.projectionMatrix * system.viewMatrix * vec4(position, 1.0);
-  }`,
+  gl_Position = system.projectionMatrix * system.viewMatrix * vec4(position, 1.0);
+}`,
       fragment: /* glsl */ `
-  void main() {
-    outColor = vColor;
-  }`,
+void main() {
+  outColor = vColor;
+}`,
       descriptor: {
         primitive: { topology: GPUPrimitiveTopology.LineList },
       },

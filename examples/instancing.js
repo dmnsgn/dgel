@@ -13,12 +13,14 @@ import {
   Uniform,
   Shaders,
   State,
+  GPUIndexFormat,
 } from "../lib/index.js";
 
 import { mat4 } from "gl-matrix";
+import interleaveTypedArray from "interleave-typed-array";
 import concatTypedArray from "concat-typed-array";
 import { OrthographicCamera } from "cameras";
-import Geometries from "primitive-geometry";
+import { cube } from "primitive-geometry";
 
 const GRID_SIZE = 16;
 const INSTANCES_COUNT = GRID_SIZE * GRID_SIZE;
@@ -150,25 +152,20 @@ const INSTANCES_COUNT = GRID_SIZE * GRID_SIZE;
   });
 
   // Geometry
-  const geometry = Geometries.cube();
+  const geometry = cube();
   const geometryVertexBuffer = new Buffer();
   const geometryIndicesBuffer = new Buffer();
 
   geometryVertexBuffer.vertexBuffer(
-    new Float32Array(
-      geometry.positions
-        .map((_, index) => [
-          geometry.positions[index],
-          geometry.normals[index],
-          geometry.uvs[index],
-          [1, 1, 0, 1],
-        ])
-        .flat()
-        .flat()
+    interleaveTypedArray(
+      Float32Array,
+      [3, 3, 2],
+      geometry.positions,
+      geometry.normals,
+      geometry.uvs
     )
   );
-  const indices = new Uint32Array(geometry.cells.flat());
-  geometryIndicesBuffer.indexBuffer(indices);
+  geometryIndicesBuffer.indexBuffer(new Uint16Array(geometry.cells));
 
   // Pipeline
   const pipeline = new Pipeline({
@@ -177,7 +174,6 @@ const INSTANCES_COUNT = GRID_SIZE * GRID_SIZE;
       new Attribute("position", "vec3"),
       new Attribute("normal", "vec3"),
       new Attribute("uv", "vec2"),
-      new Attribute("color", "vec4"),
     ],
     outs: [
       new Attribute("vNormal", "vec3"),
@@ -190,7 +186,6 @@ const INSTANCES_COUNT = GRID_SIZE * GRID_SIZE;
 void main() {
   vNormal = normal;
   vUv = uv;
-  vColor = color;
 
   mat4 modelMatrix = mesh.modelMatrix[gl_InstanceIndex];
   vec4 worldPosition = modelMatrix * vec4(position, 1.0);
@@ -217,7 +212,8 @@ void main() {
     bindGroups: [systemUniformBindGroup, meshUniformBindGroup],
     vertexBuffers: [geometryVertexBuffer],
     indexBuffer: geometryIndicesBuffer,
-    count: indices.length,
+    indexFormat: GPUIndexFormat.Uint16,
+    count: geometry.cells.length,
     instances: INSTANCES_COUNT,
   });
 
