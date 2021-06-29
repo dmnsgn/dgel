@@ -88,7 +88,7 @@ class Pipeline {
             (bindGroupLayout) => bindGroupLayout.gpuBindGroupLayout
           ),
         }),
-        computeStage: {
+        compute: {
           module: this.program.shaders.compute.shaderModule,
           entryPoint: "main",
         },

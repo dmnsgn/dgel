@@ -6,10 +6,9 @@ import { GPUTextureUsage } from "../constants.js";
 
 class Context {
   public canvas: HTMLCanvasElement;
-  public context: GPUCanvasContext;
+  public context: GPUPresentationContext;
 
   private adapter: GPUAdapter;
-  private swapChain: GPUSwapChain;
 
   private commandEncoder: GPUCommandEncoder | null;
   private passEncoder: GPURenderPassEncoder | GPUComputePassEncoder | null;
@@ -20,13 +19,13 @@ class Context {
     this.canvas = canvas || document.createElement("canvas");
     this.context =
       context ||
-      ((this.canvas.getContext("gpupresent") as unknown) as GPUCanvasContext);
+      (this.canvas.getContext("gpupresent") as GPUPresentationContext);
   }
 
   public async init(
     requestAdapter = {},
     deviceDescriptor = {},
-    swapChainDescriptor = {},
+    presentationContextDescriptor = {},
     glslangPath: string
   ): Promise<boolean> {
     try {
@@ -44,11 +43,11 @@ class Context {
         State.error = true;
       });
 
-      this.swapChain = this.context.configureSwapChain({
+      this.context.configure({
         device: State.device,
-        format: "bgra8unorm",
-        usage: GPUTextureUsage.OUTPUT_ATTACHMENT,
-        ...swapChainDescriptor,
+        format: this.context.getPreferredFormat(this.adapter),
+        usage: GPUTextureUsage.RENDER_ATTACHMENT,
+        ...presentationContextDescriptor,
       });
 
       State.glslang = await (
@@ -65,22 +64,36 @@ class Context {
     return true;
   }
 
-  public resize(width: number, height: number): void {
+  public resize(
+    width: number,
+    height: number,
+    presentationContextDescriptor = {}
+  ): void {
     this.canvas.width = width;
     this.canvas.height = height;
 
-    const depthStencilTexture = State.device.createTexture({
-      size: {
-        width,
-        height,
-      },
-      mipLevelCount: 1,
-      sampleCount: 1,
-      dimension: "2d",
-      format: "depth24plus-stencil8",
-      usage: GPUTextureUsage.OUTPUT_ATTACHMENT | GPUTextureUsage.COPY_SRC,
+    this.context.configure({
+      device: State.device,
+      format: this.context.getPreferredFormat(this.adapter),
+      usage: GPUTextureUsage.RENDER_ATTACHMENT,
+      size: { width, height },
+      ...presentationContextDescriptor,
     });
-    this.defaultDepthStencilAttachment = depthStencilTexture.createView();
+
+    this.defaultDepthStencilAttachment = State.device
+      .createTexture({
+        size: {
+          width,
+          height,
+          depthOrArrayLayers: 1,
+        },
+        mipLevelCount: 1,
+        sampleCount: 1,
+        dimension: "2d",
+        format: "depth24plus-stencil8",
+        usage: GPUTextureUsage.RENDER_ATTACHMENT | GPUTextureUsage.COPY_SRC,
+      })
+      .createView();
   }
 
   public submit(command: Command, subcommand?: () => unknown): void {
@@ -89,22 +102,24 @@ class Context {
       return;
     }
 
-    const swapChainTexture = this.swapChain.getCurrentTexture();
+    const currentTexture = this.context.getCurrentTexture();
 
     if (command.pass) {
       if (command.pass.type === "render") {
         const descriptor = { ...command.pass.descriptor };
-        const currentView = swapChainTexture.createView();
+
         if (descriptor.colorAttachments) {
-          const views = descriptor.colorAttachments as Array<GPURenderPassColorAttachmentNew>;
+          const currentView = currentTexture.createView();
+          const views =
+            descriptor.colorAttachments as Array<GPURenderPassColorAttachment>;
           for (let i = 0; i < views.length; i++) {
-            views[i].view = views[i].view || currentView;
+            views[i].view ||= currentView;
           }
         }
         if (descriptor.depthStencilAttachment) {
-          (descriptor.depthStencilAttachment as GPURenderPassDepthStencilAttachmentNew).view =
-            (descriptor.depthStencilAttachment as GPURenderPassDepthStencilAttachmentNew)
-              .view || this.defaultDepthStencilAttachment;
+          (
+            descriptor.depthStencilAttachment as GPURenderPassDepthStencilAttachment
+          ).view ||= this.defaultDepthStencilAttachment;
         }
 
         this.passEncoder = this.commandEncoder.beginRenderPass(descriptor);
