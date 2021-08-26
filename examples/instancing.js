@@ -175,17 +175,12 @@ const INSTANCES_COUNT = GRID_SIZE * GRID_SIZE;
       new Attribute("normal", "vec3"),
       new Attribute("uv", "vec2"),
     ],
-    outs: [
-      new Attribute("vNormal", "vec3"),
-      new Attribute("vUv", "vec2"),
-      new Attribute("vColor", "vec4"),
-    ],
+    outs: [new Attribute("vNormal", "vec3")],
     vertex: /* glsl */ `
     ${Shaders.CLASSIC_NOISE.CNOISE3D}
 
 void main() {
   vNormal = normal;
-  vUv = uv;
 
   mat4 modelMatrix = mesh.modelMatrix[gl_InstanceIndex];
   vec4 worldPosition = modelMatrix * vec4(position, 1.0);

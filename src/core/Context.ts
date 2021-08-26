@@ -6,7 +6,7 @@ import { GPUTextureUsage } from "../constants.js";
 
 class Context {
   public canvas: HTMLCanvasElement;
-  public context: GPUPresentationContext;
+  public context: GPUCanvasContext;
 
   private adapter: GPUAdapter;
 
@@ -18,8 +18,7 @@ class Context {
   constructor({ canvas, context }: ContextOptions = {}) {
     this.canvas = canvas || document.createElement("canvas");
     this.context =
-      context ||
-      (this.canvas.getContext("gpupresent") as GPUPresentationContext);
+      context || (this.canvas.getContext("webgpu") as GPUCanvasContext);
   }
 
   public async init(
@@ -30,7 +29,7 @@ class Context {
   ): Promise<boolean> {
     try {
       if (!this.context) {
-        throw new Error(`Failed to instantiate "gpupresent" context.`);
+        throw new Error(`Failed to instantiate "webgpu" context.`);
       }
       if (!navigator.gpu) {
         throw new Error(`Missing "navigator.gpu".`);
