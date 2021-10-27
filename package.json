@@ -35,22 +35,23 @@
     "clean": "rm -rf lib && rm -rf docs"
   },
   "dependencies": {
-    "gl-matrix": "^3.3.0",
+    "gl-matrix": "^3.4.3",
     "tslib": "^2.3.1"
   },
   "devDependencies": {
     "@types/gl-matrix": "^2.4.5",
     "@webgpu/glslang": "0.0.15",
-    "@webgpu/types": "0.1.6",
-    "cameras": "^3.0.3",
-    "concat-typed-array": "^2.0.0",
-    "core-js": "^3.16.3",
-    "es-module-shims": "^0.12.8",
-    "interleave-typed-array": "^1.0.0",
-    "prettier": "^2.3.2",
-    "primitive-geometry": "^2.1.0",
+    "@webgpu/types": "0.1.7",
+    "cameras": "^3.1.0",
+    "concat-typed-array": "^2.1.0",
+    "core-js": "^3.19.0",
+    "es-module-shims": "^1.3.0",
+    "interleave-typed-array": "^1.1.0",
+    "prettier": "^2.4.1",
+    "primitive-geometry": "^2.2.0",
     "seedrandom": "^3.0.5",
-    "typescript": "^4.3.5"
+    "tweakpane": "^3.0.5",
+    "typescript": "^4.4.4"
   },
   "engines": {
     "node": ">=15.0.0",
@@ -66,7 +67,8 @@
       "gl-matrix",
       "interleave-typed-array",
       "primitive-geometry",
-      "seedrandom"
+      "seedrandom",
+      "tweakpane"
     ]
   }
 }

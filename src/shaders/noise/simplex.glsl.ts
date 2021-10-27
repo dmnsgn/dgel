@@ -1,6 +1,7 @@
-import { FUNCTIONS } from "./index.glsl.js";
+import { FUNCTIONS } from "./utils.glsl.js";
 
 const SNOISE2D = /* glsl */ `
+// https://github.com/ashima/webgl-noise
 vec3 mod289(vec3 x) {
   return x - floor(x * (1.0 / 289.0)) * 289.0;
 }
@@ -64,6 +65,7 @@ float snoise2d(vec2 v)
 `;
 
 const SNOISE3D = /* glsl */ `
+// https://github.com/ashima/webgl-noise
 vec3 mod289(vec3 x)
 {
   return x - floor(x * (1.0 / 289.0)) * 289.0;
@@ -148,6 +150,7 @@ float snoise3d(vec3 v)
 `;
 
 const SNOISE4D = /* glsl */ `
+// https://github.com/ashima/webgl-noise
 ${FUNCTIONS}
 
 float mod289(float x) {

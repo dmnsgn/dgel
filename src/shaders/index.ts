@@ -1,25 +1,12 @@
-import { default as CONSTANTS } from "./constants.glsl.js";
-import { default as UTILS } from "./utils.glsl.js";
+export { default as CONSTANTS } from "./constants.wgsl.js";
+export { default as UTILS } from "./utils.wgsl.js";
 
-import { default as LINEAR } from "./lighting/linear.glsl.js";
-import { default as GAMMA } from "./lighting/gamma.glsl.js";
-import { default as DIFFUSE } from "./lighting/diffuse.glsl.js";
-import { default as SPECULAR } from "./lighting/specular.glsl.js";
-import { default as DIRECT } from "./lighting/direct.glsl.js";
+export { default as LINEAR } from "./lighting/linear.wgsl.js";
+export { default as GAMMA } from "./lighting/gamma.wgsl.js";
+export { default as DIFFUSE } from "./lighting/diffuse.wgsl.js";
+export { default as SPECULAR } from "./lighting/specular.wgsl.js";
+export { default as DIRECT } from "./lighting/direct.wgsl.js";
 
-import { default as CLASSIC_NOISE } from "./noise/classic.glsl.js";
-import { default as PERIODIC_NOISE } from "./noise/periodic.glsl.js";
-import { default as SIMPLEX_NOISE } from "./noise/simplex.glsl.js";
+export * as NOISE from "./noise/index.wgsl.js";
 
-export {
-  CONSTANTS,
-  UTILS,
-  LINEAR,
-  GAMMA,
-  DIFFUSE,
-  SPECULAR,
-  DIRECT,
-  CLASSIC_NOISE,
-  PERIODIC_NOISE,
-  SIMPLEX_NOISE,
-};
+export * as GLSL from "./index.glsl.js";

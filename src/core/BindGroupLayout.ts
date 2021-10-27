@@ -1,5 +1,6 @@
 import State from "./State.js";
 
+import { BindingType } from "../constants.js";
 import { BindGroupLayoutEntry } from "../types.js";
 
 class BindGroupLayout {
@@ -29,7 +30,10 @@ class BindGroupLayout {
     for (let i = 0; i < this.entries.length; i++) {
       const entry = this.entries[i];
 
-      if (entry.buffer) {
+      if (
+        entry.buffer &&
+        (!entry.buffer.type || entry.buffer.type === BindingType.Uniform)
+      ) {
         size += this.getBindingSize(entry);
       }
     }
@@ -40,12 +44,15 @@ class BindGroupLayout {
   public getBindingSize(entry: BindGroupLayoutEntry): number {
     let size = 0;
 
-    if (entry.buffer) {
+    if (
+      entry.buffer &&
+      (!entry.buffer.type || entry.buffer.type === BindingType.Uniform)
+    ) {
       size += entry.uniforms
-        .map((uniform) =>
-          uniform.arrayCount
-            ? uniform.getSize(entry.qualifiers?.layout) * uniform.arrayCount
-            : uniform.getSize(entry.qualifiers?.layout)
+        .map(
+          (uniform) =>
+            uniform.getSize(entry.qualifiers?.layout) *
+            (uniform.arrayCount || 1)
         )
         .reduce((a, b) => a + b, 0);
     }
