@@ -1,5 +1,10 @@
+const TAB = `  `;
+
 const formatLowerFirst = (string: string): string =>
   `${string[0].toLowerCase()}${string.slice(1)}`;
+
+const formatUpperFirst = (string: string): string =>
+  `${string[0].toUpperCase()}${string.slice(1)}`;
 
 const getIntegerDigitCount = (integer: number): number => {
   return integer.toString().length;
@@ -17,4 +22,10 @@ const addLineNumbers = (shaderSource: string): string => {
     .join("\n");
 };
 
-export { formatLowerFirst, getIntegerDigitCount, addLineNumbers };
+export {
+  TAB,
+  formatLowerFirst,
+  formatUpperFirst,
+  getIntegerDigitCount,
+  addLineNumbers,
+};

@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.7.0](https://github.com/dmnsgn/dgel/compare/v0.6.0...v0.7.0) (2021-10-27)
+
+
+### Features
+
+* add wgsl support ([b54a301](https://github.com/dmnsgn/dgel/commit/b54a301fea213db503646bb5f40636f38de2b603))
+
+
+
+# [0.6.0](https://github.com/dmnsgn/dgel/compare/v0.5.0...v0.6.0) (2021-10-02)
+
+
+### Features
+
+* add exports field to package.json ([3519074](https://github.com/dmnsgn/dgel/commit/35190747281d82a43b555a2b484898da94e7ee6b))
+
+
+
 # [0.5.0](https://github.com/dmnsgn/dgel/compare/v0.4.1...v0.5.0) (2021-08-26)
 
 

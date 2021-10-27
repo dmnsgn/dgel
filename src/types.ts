@@ -1,10 +1,26 @@
-import Uniform from "./core/Uniform.js";
 import Variable from "./core/Variable.js";
+import Uniform from "./core/Uniform.js";
+import Attribute from "./core/Attribute.js";
 import Struct from "./core/Struct.js";
+import BindGroupLayout from "./core/BindGroupLayout.js";
 
-export type GLSLShaderType = "vertex" | "fragment" | "compute";
-
-export type GLSLShaderTypeObjectKeys = { [key in GLSLShaderType]?: string };
+// GLSL
+export type GLSLStorageQualifier =
+  | "const"
+  | "in"
+  | "out"
+  | "inout"
+  | "centroid"
+  | "patch"
+  | "sample"
+  | "uniform"
+  | "buffer"
+  | "shared"
+  | "coherent"
+  | "volatile"
+  | "restrict"
+  | "readonly"
+  | "writeonly";
 
 export type GLSLLayoutQualifier = "std140" | "std430";
 export type GLSLSamplerType =
@@ -27,11 +43,13 @@ export type GLSLShadowSamplerType =
   | "1DArrayShadow"
   | "2DArrayShadow"
   | "CubeArrayShadow";
-export type GLSLStorageQualifier = "shared";
 export interface GLSLTypeQualifiers {
   layout?: GLSLLayoutQualifier;
   storage?: GLSLStorageQualifier;
 }
+
+// DGEL
+export type Language = "glsl" | "wgsl";
 
 export interface ContextState {
   device: GPUDevice;
@@ -44,7 +62,7 @@ export interface ContextState {
 
 export interface ContextOptions {
   canvas?: HTMLCanvasElement;
-  context?: GPUPresentationContext;
+  context?: GPUCanvasContext;
 }
 
 export interface BindGroupLayoutEntry extends GPUBindGroupLayoutEntry {
@@ -60,7 +78,52 @@ export interface BindGroupOptions extends GPUBindGroupDescriptor {
   resources: GPUBindingResource[];
 }
 
+export type ShaderStageName = "vertex" | "fragment" | "compute";
+
+export type ShaderStageNameObjectKeys = {
+  [key in ShaderStageName]?: string;
+};
+export type ShaderStageBodyName = "vertexBody" | "fragmentBody" | "computeBody";
+export type ShaderStageBodyNameObjectKeys = {
+  [key in ShaderStageBodyName]?: string;
+};
+
+export type PipelineVertexBufferIns = {
+  stepMode: GPUVertexStepMode;
+  attributes: Attribute[];
+};
+
+export interface PipelineOptions
+  extends ShaderStageNameObjectKeys,
+    ShaderStageBodyNameObjectKeys {
+  bindGroupLayouts?: BindGroupLayout[];
+  ins?: Attribute[] | PipelineVertexBufferIns[];
+  outs?: Attribute[];
+  structs?: Struct[];
+  fragmentOuts?: Attribute[];
+  fragmentTargets?: GPUColorTargetState[];
+  descriptor?: Partial<GPURenderPipelineDescriptor>;
+  stepMode?: GPUVertexStepMode;
+  language?: Language;
+}
+
+export interface ShaderOptions {
+  type: GPUShaderStageFlags;
+  main: string;
+  body?: string;
+  ins?: Attribute[];
+  outs?: Attribute[];
+  structs?: Struct[];
+  language?: Language;
+}
+
 export type PassType = "render" | "compute";
+
+export type GPUBindingType =
+  | GPUBufferBindingType
+  | GPUSamplerBindingType
+  | GPUTextureSampleType
+  | GPUStorageTextureAccess;
 
 // type FormatType =
 //   | "uchar" // unsigned 8-bit value

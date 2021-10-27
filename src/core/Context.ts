@@ -1,8 +1,8 @@
 import State from "./State.js";
 import Command from "./Command.js";
 
-import { ContextOptions } from "../types.js";
 import { GPUTextureUsage } from "../constants.js";
+import { ContextOptions } from "../types.js";
 
 class Context {
   public canvas: HTMLCanvasElement;

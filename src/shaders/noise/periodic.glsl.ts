@@ -1,6 +1,7 @@
-import { FUNCTIONS, FADE2, FADE3, FADE4 } from "./index.glsl.js";
+import { FUNCTIONS, FADE2, FADE3, FADE4 } from "./utils.glsl.js";
 
 const PNOISE2D = /* glsl */ `
+// https://github.com/ashima/webgl-noise
 ${FUNCTIONS}
 ${FADE2}
 
@@ -47,6 +48,7 @@ float pnoise2d(vec2 P, vec2 rep)
 `;
 
 const PNOISE3D = /* glsl */ `
+// https://github.com/ashima/webgl-noise
 vec3 mod289(vec3 x)
 {
   return x - floor(x * (1.0 / 289.0)) * 289.0;
@@ -127,6 +129,7 @@ float pnoise3d(vec3 P, vec3 rep)
 `;
 
 const PNOISE4D = /* glsl */ `
+// https://github.com/ashima/webgl-noise
 ${FUNCTIONS}
 ${FADE4}
 

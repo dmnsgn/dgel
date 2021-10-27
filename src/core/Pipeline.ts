@@ -1,12 +1,14 @@
 import State from "./State.js";
-import BindGroupLayout from "./BindGroupLayout.js";
 import Attribute from "./Attribute.js";
 import Program from "./Program.js";
-
 import Shader from "./Shader.js";
-import Struct from "./Struct.js";
-import { GLSLShaderType, GLSLShaderTypeObjectKeys } from "../types.js";
+
 import { GPUPrimitiveTopology } from "../constants.js";
+import {
+  Language,
+  PipelineOptions,
+  PipelineVertexBufferIns,
+} from "../types.js";
 
 const mapAttributes = (
   attributes: Attribute[],
@@ -30,39 +32,48 @@ const mapAttributes = (
   }, []);
 };
 
-type PipelineVertexBufferIns = {
-  stepMode: GPUInputStepMode;
-  attributes: Attribute[];
-};
-
-interface PipelineOptions extends GLSLShaderTypeObjectKeys {
-  bindGroupLayouts?: BindGroupLayout[];
-  ins?: Attribute[] | PipelineVertexBufferIns[];
-  outs?: Attribute[];
-  structs?: Struct[];
-  fragmentOuts?: Attribute[];
-  descriptor?: Partial<GPURenderPipelineDescriptor>;
-  stepMode?: GPUInputStepMode;
-}
-
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Pipeline extends PipelineOptions {}
 
-const DEFAULT_FRAGMENT_OUT_COLOR = [new Attribute("outColor", "vec4")];
+const DEFAULT_GLSL_FRAGMENT_OUT_COLOR: Attribute[] = [
+  new Attribute("outColor", "vec4"),
+];
 
 class Pipeline {
   public gpuPipeline: GPUPipelineBase;
   public program: Program;
+  public language: Language = "wgsl";
+  public fragmentTargets: GPUColorTargetState[] = [
+    {
+      format: "bgra8unorm",
+      blend: {
+        color: {
+          srcFactor: "src-alpha",
+          dstFactor: "one-minus-src-alpha",
+          operation: "add",
+        },
+        alpha: {
+          srcFactor: "src-alpha",
+          dstFactor: "one-minus-src-alpha",
+          operation: "add",
+        },
+      },
+    },
+  ];
 
   constructor(options: PipelineOptions) {
     Object.assign(this, options);
 
-    const shaders: { [key in GLSLShaderType]?: Shader } = {};
+    this.init();
+  }
 
+  public init(): void {
     let insAttributes: Attribute[];
     let hasArrayOfAttributes = false;
     if (this.ins?.length > 0) {
-      hasArrayOfAttributes = this.ins[0] instanceof Attribute;
+      hasArrayOfAttributes = this.ins.some(
+        (variable) => variable instanceof Attribute
+      );
       insAttributes = hasArrayOfAttributes
         ? (this.ins as Attribute[])
         : (this.ins as PipelineVertexBufferIns[])
@@ -71,20 +82,26 @@ class Pipeline {
     }
 
     if (this.compute) {
-      shaders.compute = new Shader(
-        "compute",
-        this.compute,
-        insAttributes,
-        this.outs,
-        this.structs
+      this.program = new Program(
+        this.bindGroupLayouts,
+        {
+          compute: new Shader({
+            type: GPUShaderStage.COMPUTE,
+            main: this.compute,
+            body: this.computeBody,
+            ins: insAttributes,
+            outs: this.outs,
+            structs: this.structs,
+            language: this.language,
+          }),
+        },
+        this.language
       );
-
-      this.program = new Program(this.bindGroupLayouts, shaders);
       this.program.init();
 
       this.gpuPipeline = State.device.createComputePipeline({
         layout: State.device.createPipelineLayout({
-          bindGroupLayouts: this.bindGroupLayouts.map(
+          bindGroupLayouts: this.bindGroupLayouts?.map(
             (bindGroupLayout) => bindGroupLayout.gpuBindGroupLayout
           ),
         }),
@@ -93,36 +110,24 @@ class Pipeline {
           entryPoint: "main",
         },
       });
-      return;
     } else {
-      if (this.vertex) {
-        shaders.vertex = new Shader(
-          "vertex",
-          this.vertex,
-          insAttributes,
-          this.outs
-        );
-      }
-      if (this.fragment) {
-        shaders.fragment = new Shader(
-          "fragment",
-          this.fragment,
-          this.outs,
-          this.fragmentOuts || DEFAULT_FRAGMENT_OUT_COLOR
-        );
-      }
-
       const vertexBuffers = hasArrayOfAttributes
         ? ([
             {
               stepMode: this.stepMode || "vertex",
               arrayStride: (this.ins as Attribute[])
+                .filter((variable) => variable instanceof Attribute)
                 .map((attribute) => attribute.getSize())
                 .reduce((a, b) => a + b, 0),
-              attributes: mapAttributes(this.ins as Attribute[]),
+              attributes: mapAttributes(
+                (this.ins as Attribute[]).filter(
+                  (variable) => variable instanceof Attribute
+                )
+              ),
             },
           ] as GPUVertexBufferLayout[])
-        : ((this.ins as PipelineVertexBufferIns[]).map(
+        : // When stepMode needs to be specified
+          ((this.ins as PipelineVertexBufferIns[]).map(
             ({ stepMode, attributes }, index) => ({
               stepMode,
               arrayStride: attributes
@@ -136,15 +141,45 @@ class Pipeline {
             })
           ) as GPUVertexBufferLayout[]);
 
-      this.program = new Program(this.bindGroupLayouts, shaders);
+      this.program = new Program(
+        this.bindGroupLayouts,
+        {
+          vertex: new Shader({
+            type: GPUShaderStage.VERTEX,
+            main: this.vertex,
+            body: this.vertexBody,
+            ins: insAttributes,
+            outs: this.outs,
+            structs: this.structs,
+            language: this.language,
+          }),
+          fragment: new Shader({
+            type: GPUShaderStage.FRAGMENT,
+            main: this.fragment,
+            body: this.fragmentBody,
+            ins: this.outs,
+            outs:
+              this.fragmentOuts ||
+              (this.language === "glsl" ? DEFAULT_GLSL_FRAGMENT_OUT_COLOR : []),
+            structs: this.structs,
+            language: this.language,
+          }),
+        },
+        this.language
+      );
       this.program.init();
 
       this.gpuPipeline = State.device.createRenderPipeline({
-        layout: State.device.createPipelineLayout({
-          bindGroupLayouts: this.bindGroupLayouts.map(
-            (bindGroupLayout) => bindGroupLayout.gpuBindGroupLayout
-          ),
-        }),
+        ...(this.bindGroupLayouts
+          ? {
+              layout: State.device.createPipelineLayout({
+                bindGroupLayouts:
+                  this.bindGroupLayouts.map(
+                    (bindGroupLayout) => bindGroupLayout.gpuBindGroupLayout
+                  ) || [],
+              }),
+            }
+          : {}),
         vertex: {
           buffers: vertexBuffers,
           module: this.program.shaders.vertex.shaderModule,
@@ -153,24 +188,7 @@ class Pipeline {
         fragment: {
           module: this.program.shaders.fragment.shaderModule,
           entryPoint: "main",
-          // TODO: parameter
-          targets: [
-            {
-              format: "bgra8unorm",
-              blend: {
-                color: {
-                  srcFactor: "src-alpha",
-                  dstFactor: "one-minus-src-alpha",
-                  operation: "add",
-                },
-                alpha: {
-                  srcFactor: "src-alpha",
-                  dstFactor: "one-minus-src-alpha",
-                  operation: "add",
-                },
-              },
-            },
-          ],
+          targets: this.fragmentTargets,
         },
         primitive: { topology: GPUPrimitiveTopology.TriangleList },
         depthStencil: {
