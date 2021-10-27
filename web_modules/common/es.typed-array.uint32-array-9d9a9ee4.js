@@ -1,4 +1,4 @@
-import { t as typedArrayConstructor } from './typed-array-constructor-b01e3ece.js';
+import { t as typedArrayConstructor } from './es.typed-array.sort-b0d7095a.js';
 
 // `Int8Array` constructor
 // https://tc39.es/ecma262/#sec-typedarray-objects

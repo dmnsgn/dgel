@@ -55,10 +55,10 @@
 					<a href="../modules.html">dgel</a>
 				</li>
 				<li>
-					<a href="../modules/core_variable.html">core/Variable</a>
+					<a href="../modules/core_Variable.html">core/Variable</a>
 				</li>
 				<li>
-					<a href="core_variable.default.html">default</a>
+					<a href="core_Variable.default.html">default</a>
 				</li>
 			</ul>
 			<h1>Class default</h1>
@@ -75,10 +75,16 @@
 						<span class="target">default</span>
 						<ul class="tsd-hierarchy">
 							<li>
-								<a href="core_attribute.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a>
+								<a href="core_Attribute.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a>
 							</li>
 							<li>
-								<a href="core_uniform.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a>
+								<a href="core_BuiltIn.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a>
+							</li>
+							<li>
+								<a href="core_Struct.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a>
+							</li>
+							<li>
+								<a href="core_Uniform.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a>
 							</li>
 						</ul>
 					</li>
@@ -91,29 +97,34 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="core_variable.default.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="core_Variable.default.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_variable.default.html#arraycount" class="tsd-kind-icon">array<wbr>Count</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_variable.default.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_variable.default.html#type" class="tsd-kind-icon">type</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_variable.default.html#visibility" class="tsd-kind-icon">visibility</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_Variable.default.html#arrayCount" class="tsd-kind-icon">array<wbr>Count</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_Variable.default.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_Variable.default.html#type" class="tsd-kind-icon">type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="core_Variable.default.html#visibility" class="tsd-kind-icon">visibility</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="core_variable.default.html#format" class="tsd-kind-icon">format</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="core_Variable.default.html#format" class="tsd-kind-icon">format</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="core_Variable.default.html#glslType" class="tsd-kind-icon">glsl<wbr>Type</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="core_Variable.default.html#wgslType" class="tsd-kind-icon">wgsl<wbr>Type</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_variable.default.html#getsize" class="tsd-kind-icon">get<wbr>Size</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="core_variable.default.html#getalignement" class="tsd-kind-icon">get<wbr>Alignement</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_Variable.default.html#getGLSLString" class="tsd-kind-icon">getGLSLString</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_Variable.default.html#getSize" class="tsd-kind-icon">get<wbr>Size</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="core_Variable.default.html#getWGSLString" class="tsd-kind-icon">getWGSLString</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="core_Variable.default.html#getAlignement" class="tsd-kind-icon">get<wbr>Alignement</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="core_Variable.default.html#isWgsl" class="tsd-kind-icon">is<wbr>Wgsl</a></li>
 							</ul>
 						</section>
 					</div>
@@ -125,13 +136,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new default<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, visibility<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, arrayCount<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="core_variable.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a></li>
+						<li class="tsd-signature tsd-kind-icon">new default<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, type<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, visibility<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, arrayCount<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="core_Variable.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/5541a1f/src/core/Variable.ts#L6">src/core/Variable.ts:6</a></li>
+									<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/43c7387/src/core/Variable.ts#L21">core/Variable.ts:21</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -140,7 +151,7 @@
 									<h5>name: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
-									<h5>type: <span class="tsd-signature-type">string</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> type: <span class="tsd-signature-type">string</span></h5>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> visibility: <span class="tsd-signature-type">number</span></h5>
@@ -149,7 +160,7 @@
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> arrayCount: <span class="tsd-signature-type">number</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="core_variable.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="core_Variable.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -157,7 +168,7 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="arraycount" class="tsd-anchor"></a>
+					<a name="arrayCount" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> array<wbr>Count</h3>
 					<div class="tsd-signature tsd-kind-icon">array<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
@@ -172,7 +183,7 @@
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="type" class="tsd-anchor"></a>
-					<h3>type</h3>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> type</h3>
 					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 					</aside>
@@ -197,7 +208,41 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/5541a1f/src/core/Variable.ts#L14">src/core/Variable.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/43c7387/src/core/Variable.ts#L99">core/Variable.ts:99</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="glslType" class="tsd-anchor"></a>
+					<h3>glsl<wbr>Type</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> glslType<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/43c7387/src/core/Variable.ts#L66">core/Variable.ts:66</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="wgslType" class="tsd-anchor"></a>
+					<h3>wgsl<wbr>Type</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> wgslType<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/43c7387/src/core/Variable.ts#L30">core/Variable.ts:30</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -208,39 +253,79 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="getsize" class="tsd-anchor"></a>
-					<h3>get<wbr>Size</h3>
+					<a name="getGLSLString" class="tsd-anchor"></a>
+					<h3>getGLSLString</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Size<span class="tsd-signature-symbol">(</span>qualifier<span class="tsd-signature-symbol">?: </span><a href="../modules/types.html#glsllayoutqualifier" class="tsd-signature-type" data-tsd-kind="Type alias">GLSLLayoutQualifier</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon">getGLSLString<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/5541a1f/src/core/Variable.ts#L79">src/core/Variable.ts:79</a></li>
+									<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/43c7387/src/core/Variable.ts#L238">core/Variable.ts:238</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getSize" class="tsd-anchor"></a>
+					<h3>get<wbr>Size</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Size<span class="tsd-signature-symbol">(</span>qualifier<span class="tsd-signature-symbol">?: </span><a href="../modules/types.html#GLSLLayoutQualifier" class="tsd-signature-type" data-tsd-kind="Type alias">GLSLLayoutQualifier</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/43c7387/src/core/Variable.ts#L168">core/Variable.ts:168</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> qualifier: <a href="../modules/types.html#glsllayoutqualifier" class="tsd-signature-type" data-tsd-kind="Type alias">GLSLLayoutQualifier</a></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> qualifier: <a href="../modules/types.html#GLSLLayoutQualifier" class="tsd-signature-type" data-tsd-kind="Type alias">GLSLLayoutQualifier</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="getalignement" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Alignement</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Alignement<span class="tsd-signature-symbol">(</span>size<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, qualifier<span class="tsd-signature-symbol">?: </span><a href="../modules/types.html#glsllayoutqualifier" class="tsd-signature-type" data-tsd-kind="Type alias">GLSLLayoutQualifier</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getWGSLString" class="tsd-anchor"></a>
+					<h3>getWGSLString</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">getWGSLString<span class="tsd-signature-symbol">(</span>_index<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/5541a1f/src/core/Variable.ts#L52">src/core/Variable.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/43c7387/src/core/Variable.ts#L232">core/Variable.ts:232</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> _index: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="getAlignement" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Alignement</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Alignement<span class="tsd-signature-symbol">(</span>size<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, qualifier<span class="tsd-signature-symbol">?: </span><a href="../modules/types.html#GLSLLayoutQualifier" class="tsd-signature-type" data-tsd-kind="Type alias">GLSLLayoutQualifier</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/43c7387/src/core/Variable.ts#L141">core/Variable.ts:141</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -249,10 +334,33 @@
 									<h5>size: <span class="tsd-signature-type">number</span></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> qualifier: <a href="../modules/types.html#glsllayoutqualifier" class="tsd-signature-type" data-tsd-kind="Type alias">GLSLLayoutQualifier</a></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> qualifier: <a href="../modules/types.html#GLSLLayoutQualifier" class="tsd-signature-type" data-tsd-kind="Type alias">GLSLLayoutQualifier</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="isWgsl" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> is<wbr>Wgsl</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Wgsl<span class="tsd-signature-symbol">(</span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/43c7387/src/core/Variable.ts#L14">core/Variable.ts:14</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>type: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -265,7 +373,7 @@
 						<a href="../modules.html">Modules</a>
 					</li>
 					<li class="current tsd-kind-module">
-						<a href="../modules/core_variable.html">core/<wbr>Variable</a>
+						<a href="../modules/core_Variable.html">core/<wbr>Variable</a>
 					</li>
 				</ul>
 			</nav>
@@ -274,31 +382,46 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-module">
-						<a href="core_variable.default.html" class="tsd-kind-icon">default</a>
+						<a href="core_Variable.default.html" class="tsd-kind-icon">default</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="core_variable.default.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="core_Variable.default.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="core_variable.default.html#arraycount" class="tsd-kind-icon">array<wbr>Count</a>
+								<a href="core_Variable.default.html#arrayCount" class="tsd-kind-icon">array<wbr>Count</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="core_variable.default.html#name" class="tsd-kind-icon">name</a>
+								<a href="core_Variable.default.html#name" class="tsd-kind-icon">name</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="core_variable.default.html#type" class="tsd-kind-icon">type</a>
+								<a href="core_Variable.default.html#type" class="tsd-kind-icon">type</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="core_variable.default.html#visibility" class="tsd-kind-icon">visibility</a>
+								<a href="core_Variable.default.html#visibility" class="tsd-kind-icon">visibility</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
-								<a href="core_variable.default.html#format" class="tsd-kind-icon">format</a>
+								<a href="core_Variable.default.html#format" class="tsd-kind-icon">format</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="core_Variable.default.html#glslType" class="tsd-kind-icon">glsl<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="core_Variable.default.html#wgslType" class="tsd-kind-icon">wgsl<wbr>Type</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="core_variable.default.html#getsize" class="tsd-kind-icon">get<wbr>Size</a>
+								<a href="core_Variable.default.html#getGLSLString" class="tsd-kind-icon">getGLSLString</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="core_Variable.default.html#getSize" class="tsd-kind-icon">get<wbr>Size</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="core_Variable.default.html#getWGSLString" class="tsd-kind-icon">getWGSLString</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="core_variable.default.html#getalignement" class="tsd-kind-icon">get<wbr>Alignement</a>
+								<a href="core_Variable.default.html#getAlignement" class="tsd-kind-icon">get<wbr>Alignement</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="core_Variable.default.html#isWgsl" class="tsd-kind-icon">is<wbr>Wgsl</a>
 							</li>
 						</ul>
 					</li>

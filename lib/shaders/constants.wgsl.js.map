@@ -1,0 +1,1 @@
+{"version":3,"file":"constants.wgsl.js","sourceRoot":"","sources":["../../src/shaders/constants.wgsl.ts"],"names":[],"mappings":"AAAA,MAAM,EAAE,GAAG,UAAU,CAAC,8BAA8B,CAAC;AACrD,MAAM,OAAO,GAAG,UAAU,CAAC,mCAAmC,CAAC;AAC/D,MAAM,KAAK,GAAG,UAAU,CAAC,uBAAuB,CAAC;AAEjD,eAAe,EAAE,EAAE,EAAE,OAAO,EAAE,KAAK,EAAE,CAAC"}

@@ -1,8 +1,7 @@
-import { i as isSymbol, a as anObject, g as global_1, f as fails, s as shared, b as internalState, _ as _export, w as wellKnownSymbol, r as redefine, c as createNonEnumerableProperty, d as requireObjectCoercible, t as toInteger, e as toObject, h as classofRaw, j as toLength } from './a-function-0ad19c84.js';
-import { o as objectCreate } from './typed-array-constructor-cb17899c.js';
+import { c as classof, a as anObject, g as global_1, f as fails, P as shared, H as objectCreate, v as internalState, _ as _export, w as wellKnownSymbol, r as redefine, b as createNonEnumerableProperty, Q as requireObjectCoercible, k as toIntegerOrInfinity, t as toObject, i as isCallable, C as classofRaw, R as getMethod, l as toLength } from './function-bind-context-dcf83647.js';
 
 var toString_1 = function (argument) {
-  if (isSymbol(argument)) throw TypeError('Cannot convert a Symbol value to a string');
+  if (classof(argument) === 'Symbol') throw TypeError('Cannot convert a Symbol value to a string');
   return String(argument);
 };
 
@@ -249,11 +248,10 @@ var fixRegexpWellKnownSymbolLogic = function (KEY, exec, FORCED, SHAM) {
   if (SHAM) createNonEnumerableProperty(RegExpPrototype[SYMBOL], 'sham', true);
 };
 
-// `String.prototype.codePointAt` methods implementation
 var createMethod = function (CONVERT_TO_STRING) {
   return function ($this, pos) {
     var S = toString_1(requireObjectCoercible($this));
-    var position = toInteger(pos);
+    var position = toIntegerOrInfinity(pos);
     var size = S.length;
     var first, second;
     if (position < 0 || position >= size) return CONVERT_TO_STRING ? '' : undefined;
@@ -326,19 +324,13 @@ var getSubstitution = function (matched, str, position, captures, namedCaptures,
 // https://tc39.es/ecma262/#sec-regexpexec
 var regexpExecAbstract = function (R, S) {
   var exec = R.exec;
-  if (typeof exec === 'function') {
+  if (isCallable(exec)) {
     var result = exec.call(R, S);
-    if (typeof result !== 'object') {
-      throw TypeError('RegExp exec method returned something other than an Object or null');
-    }
+    if (result !== null) anObject(result);
     return result;
   }
-
-  if (classofRaw(R) !== 'RegExp') {
-    throw TypeError('RegExp#exec called on incompatible receiver');
-  }
-
-  return regexpExec.call(R, S);
+  if (classofRaw(R) === 'RegExp') return regexpExec.call(R, S);
+  throw TypeError('RegExp#exec called on incompatible receiver');
 };
 
 var REPLACE = wellKnownSymbol('replace');
@@ -384,8 +376,8 @@ fixRegexpWellKnownSymbolLogic('replace', function (_, nativeReplace, maybeCallNa
     // https://tc39.es/ecma262/#sec-string.prototype.replace
     function replace(searchValue, replaceValue) {
       var O = requireObjectCoercible(this);
-      var replacer = searchValue == undefined ? undefined : searchValue[REPLACE];
-      return replacer !== undefined
+      var replacer = searchValue == undefined ? undefined : getMethod(searchValue, REPLACE);
+      return replacer
         ? replacer.call(searchValue, O, replaceValue)
         : nativeReplace.call(toString_1(O), searchValue, replaceValue);
     },
@@ -404,7 +396,7 @@ fixRegexpWellKnownSymbolLogic('replace', function (_, nativeReplace, maybeCallNa
         if (res.done) return res.value;
       }
 
-      var functionalReplace = typeof replaceValue === 'function';
+      var functionalReplace = isCallable(replaceValue);
       if (!functionalReplace) replaceValue = toString_1(replaceValue);
 
       var global = rx.global;
@@ -430,7 +422,7 @@ fixRegexpWellKnownSymbolLogic('replace', function (_, nativeReplace, maybeCallNa
         result = results[i];
 
         var matched = toString_1(result[0]);
-        var position = max(min(toInteger(result.index), S.length), 0);
+        var position = max(min(toIntegerOrInfinity(result.index), S.length), 0);
         var captures = [];
         // NOTE: This is equivalent to
         //   captures = result.slice(1).map(maybeToString)

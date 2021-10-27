@@ -70,58 +70,32 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Variables</h3>
+							<h3>References</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="shaders_noise_index_glsl.html#fade2" class="tsd-kind-icon">FADE2</a></li>
-								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="shaders_noise_index_glsl.html#fade3" class="tsd-kind-icon">FADE3</a></li>
-								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="shaders_noise_index_glsl.html#fade4" class="tsd-kind-icon">FADE4</a></li>
-								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="shaders_noise_index_glsl.html#functions" class="tsd-kind-icon">FUNCTIONS</a></li>
+								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="shaders_noise_index_glsl.html#CLASSIC" class="tsd-kind-icon">CLASSIC</a></li>
+								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="shaders_noise_index_glsl.html#PERIODIC" class="tsd-kind-icon">PERIODIC</a></li>
+								<li class="tsd-kind-reference tsd-parent-kind-module"><a href="shaders_noise_index_glsl.html#SIMPLEX" class="tsd-kind-icon">SIMPLEX</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Variables</h2>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
-					<a name="fade2" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> FADE2</h3>
-					<div class="tsd-signature tsd-kind-icon">FADE2<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;\nvec2 fade(vec2 t) {\n  return t*t*t*(t*(t*6.0-15.0)+10.0);\n}\n&quot;</span><span class="tsd-signature-symbol"> = ...</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/5541a1f/src/shaders/noise/index.glsl.ts#L20">src/shaders/noise/index.glsl.ts:20</a></li>
-						</ul>
-					</aside>
+				<h2>References</h2>
+				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
+					<a name="CLASSIC" class="tsd-anchor"></a>
+					<h3>CLASSIC</h3>
+					Renames and exports <a href="shaders_noise_classic_glsl.html#default">default</a>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
-					<a name="fade3" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> FADE3</h3>
-					<div class="tsd-signature tsd-kind-icon">FADE3<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;\nvec3 fade(vec3 t) {\n  return t*t*t*(t*(t*6.0-15.0)+10.0);\n}\n&quot;</span><span class="tsd-signature-symbol"> = ...</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/5541a1f/src/shaders/noise/index.glsl.ts#L26">src/shaders/noise/index.glsl.ts:26</a></li>
-						</ul>
-					</aside>
+				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
+					<a name="PERIODIC" class="tsd-anchor"></a>
+					<h3>PERIODIC</h3>
+					Renames and exports <a href="shaders_noise_periodic_glsl.html#default">default</a>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
-					<a name="fade4" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> FADE4</h3>
-					<div class="tsd-signature tsd-kind-icon">FADE4<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;\nvec4 fade(vec4 t) {\n  return t*t*t*(t*(t*6.0-15.0)+10.0);\n}\n&quot;</span><span class="tsd-signature-symbol"> = ...</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/5541a1f/src/shaders/noise/index.glsl.ts#L32">src/shaders/noise/index.glsl.ts:32</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
-					<a name="functions" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> FUNCTIONS</h3>
-					<div class="tsd-signature tsd-kind-icon">FUNCTIONS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;\nvec4 mod289(vec4 x)\n{\n  return x - floor(x * (1.0 / 289.0)) * 289.0;\n}\n\nvec4 permute(vec4 x)\n{\n  return mod289(((x*34.0)+1.0)*x);\n}\n\nvec4 taylorInvSqrt(vec4 r)\n{\n  return 1.79284291400159 - 0.85373472095314 * r;\n}\n&quot;</span><span class="tsd-signature-symbol"> = ...</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/5541a1f/src/shaders/noise/index.glsl.ts#L3">src/shaders/noise/index.glsl.ts:3</a></li>
-						</ul>
-					</aside>
+				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
+					<a name="SIMPLEX" class="tsd-anchor"></a>
+					<h3>SIMPLEX</h3>
+					Renames and exports <a href="shaders_noise_simplex_glsl.html#default">default</a>
 				</section>
 			</section>
 		</div>
@@ -138,17 +112,14 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="shaders_noise_index_glsl.html#fade2" class="tsd-kind-icon">FADE2</a>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="shaders_noise_index_glsl.html#CLASSIC" class="tsd-kind-icon">CLASSIC</a>
 					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="shaders_noise_index_glsl.html#fade3" class="tsd-kind-icon">FADE3</a>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="shaders_noise_index_glsl.html#PERIODIC" class="tsd-kind-icon">PERIODIC</a>
 					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="shaders_noise_index_glsl.html#fade4" class="tsd-kind-icon">FADE4</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="shaders_noise_index_glsl.html#functions" class="tsd-kind-icon">FUNCTIONS</a>
+					<li class=" tsd-kind-reference tsd-parent-kind-module">
+						<a href="shaders_noise_index_glsl.html#SIMPLEX" class="tsd-kind-icon">SIMPLEX</a>
 					</li>
 				</ul>
 			</nav>

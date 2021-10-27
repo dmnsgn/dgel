@@ -1,8 +1,8 @@
-import { f as fromValues, c as create, a as create$1, l as lookAt, b as copy, i as invert, d as frustum, p as perspective, o as ortho, e as create$2, z as zero, s as subtract, g as distance, h as set, j as copy$1, k as create$3, m as copy$2, n as subtract$1, q as length, r as sub, t as add, u as scale, v as transformQuat, w as rotationTo, x as invert$1, y as glMatrix } from './common/vec2-2ac874ec.js';
-import './common/es.string.replace-a496f0ef.js';
-import './common/es.typed-array.float32-array-0e38058f.js';
-import './common/typed-array-constructor-b01e3ece.js';
-import './common/a-function-58034956.js';
+import { f as fromValues, c as create, a as create$1, l as lookAt, b as copy, i as invert, d as frustum, p as perspective, o as ortho, e as create$2, z as zero, s as subtract, g as distance, h as set, j as copy$1, k as create$3, m as copy$2, n as subtract$1, q as length, r as sub, t as add, u as scale, v as transformQuat, w as rotationTo, x as invert$1, y as glMatrix } from './common/vec2-1f2e5e13.js';
+import './common/es.string.replace-65abc735.js';
+import './common/es.typed-array.float32-array-a1e53042.js';
+import './common/es.typed-array.sort-b0d7095a.js';
+import './common/function-bind-context-dcf83647.js';
 
 // Camera
 var CameraType;
@@ -892,12 +892,12 @@ class Controls {
       this.updatePosition();
     } // Set by position and optional target
     else {
-        if (!options.position) copy$2(this.position, options.camera.position);
-        subtract$1(TEMP, this.position, this.target);
-        this.distance = length(TEMP);
-        this.theta = Math.atan2(this.position[0], this.position[2]);
-        this.phi = Math.acos(clamp_1(this.position[1] / this.distance, -1, 1));
-      } // Init private targets
+      if (!options.position) copy$2(this.position, options.camera.position);
+      subtract$1(TEMP, this.position, this.target);
+      this.distance = length(TEMP);
+      this.theta = Math.atan2(this.position[0], this.position[2]);
+      this.phi = Math.acos(clamp_1(this.position[1] / this.distance, -1, 1));
+    } // Init private targets
 
 
     this.sphericalTarget[0] = this.theta;

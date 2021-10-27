@@ -1,0 +1,1 @@
+{"version":3,"file":"diffuse.wgsl.js","sourceRoot":"","sources":["../../../src/shaders/lighting/diffuse.wgsl.ts"],"names":[],"mappings":"AAAA,MAAM,UAAU,GAAG,UAAU,CAAC;;;;;;;;;;;;;;;;;;;;;CAqB7B,CAAC;AAEF,MAAM,OAAO,GAAG,UAAU,CAAC;;;;;;;;CAQ1B,CAAC;AAEF,eAAe;IACb,UAAU;IACV,OAAO;CACR,CAAC"}

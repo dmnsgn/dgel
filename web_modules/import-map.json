@@ -8,6 +8,7 @@
     "gl-matrix": "./gl-matrix.js",
     "interleave-typed-array": "./interleave-typed-array.js",
     "primitive-geometry": "./primitive-geometry.js",
-    "seedrandom": "./seedrandom.js"
+    "seedrandom": "./seedrandom.js",
+    "tweakpane": "./tweakpane.js"
   }
 }

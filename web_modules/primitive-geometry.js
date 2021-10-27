@@ -1,8 +1,8 @@
-import { a as typedArrayConstructorsRequireWrappers, b as arrayBufferViewCore } from './common/typed-array-constructor-b01e3ece.js';
-import './common/es.typed-array.float32-array-0e38058f.js';
-import './common/es.typed-array.uint32-array-1cc93ef8.js';
-import './common/es.typed-array.uint8-array-1a7fc936.js';
-import './common/a-function-58034956.js';
+import { a as typedArrayConstructorsRequireWrappers, b as arrayBufferViewCore } from './common/es.typed-array.sort-b0d7095a.js';
+import './common/es.typed-array.float32-array-a1e53042.js';
+import './common/es.typed-array.uint32-array-9d9a9ee4.js';
+import './common/es.typed-array.uint8-array-b443585b.js';
+import './common/function-bind-context-dcf83647.js';
 
 var aTypedArrayConstructor = arrayBufferViewCore.aTypedArrayConstructor;
 var exportTypedArrayStaticMethod = arrayBufferViewCore.exportTypedArrayStaticMethod;
@@ -40,6 +40,18 @@ function normalize(v) {
   return v;
 }
 /**
+ * Ensure first argument passed to the primitive functions is an object
+ * @param {...*} args
+ */
+
+function checkArguments(args) {
+  const argumentType = typeof args[0];
+
+  if (argumentType !== "object" && argumentType !== "undefined") {
+    console.error("First argument must be an object.");
+  }
+}
+/**
  * @private
  */
 
@@ -66,6 +78,7 @@ var utils = /*#__PURE__*/Object.freeze({
   __proto__: null,
   TAU: TAU,
   normalize: normalize,
+  checkArguments: checkArguments,
   setTypedArrayType: setTypedArrayType,
   getCellsTypedArray: getCellsTypedArray
 });
@@ -81,18 +94,21 @@ var utils = /*#__PURE__*/Object.freeze({
  * @returns {import("../types.js").SimplicialComplex}
  */
 
-const quad = ({
+function quad({
   scale = 0.5
-} = {}) => ({
-  // prettier-ignore
-  positions: Float32Array.of(-scale, -scale, 0, scale, -scale, 0, scale, scale, 0, -scale, scale, 0),
-  // prettier-ignore
-  normals: Int8Array.of(0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1),
-  // prettier-ignore
-  uvs: Uint8Array.of(0, 0, 1, 0, 1, 1, 0, 1),
-  // prettier-ignore
-  cells: getCellsTypedArray(12).of(0, 1, 2, 2, 3, 0)
-});
+} = {}) {
+  checkArguments(arguments);
+  return {
+    // prettier-ignore
+    positions: Float32Array.of(-scale, -scale, 0, scale, -scale, 0, scale, scale, 0, -scale, scale, 0),
+    // prettier-ignore
+    normals: Int8Array.of(0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1),
+    // prettier-ignore
+    uvs: Uint8Array.of(0, 0, 1, 0, 1, 1, 0, 1),
+    // prettier-ignore
+    cells: getCellsTypedArray(12).of(0, 1, 2, 2, 3, 0)
+  };
+}
 
 /**
  * @typedef {Object} PlaneOptions
@@ -114,6 +130,7 @@ function plane({
   nx = 1,
   ny = nx
 } = {}) {
+  checkArguments(arguments);
   const size = (nx + 1) * (ny + 1);
   const positions = new Float32Array(size * 3);
   const normals = new Float32Array(size * 3);
@@ -185,6 +202,7 @@ function cube({
   ny = nx,
   nz = nx
 } = {}) {
+  checkArguments(arguments);
   const size = (nx + 1) * (ny + 1) * 2 + (nx + 1) * (nz + 1) * 2 + (nz + 1) * (ny + 1) * 2;
   const positions = new Float32Array(size * 3);
   const normals = new Float32Array(size * 3);
@@ -275,6 +293,7 @@ function roundedCube({
   nz = nx,
   radius = sx * 0.25
 } = {}) {
+  checkArguments(arguments);
   const geometry = cube({
     sx,
     sy,
@@ -355,6 +374,7 @@ function cylinder({
   capApex = true,
   capBase = true
 } = {}) {
+  checkArguments(arguments);
   let capCount = 0;
   if (capApex) capCount++;
   if (capBase) capCount++;
@@ -497,23 +517,26 @@ function cylinder({
  * @returns {import("../types.js").SimplicialComplex}
  */
 
-const cone = ({
+function cone({
   height,
   radius,
   nx,
   ny,
   capSegments,
   capBase
-} = {}) => cylinder({
-  height,
-  radius,
-  nx,
-  ny,
-  capSegments,
-  capBase,
-  radiusApex: 0,
-  capApex: false
-});
+} = {}) {
+  checkArguments(arguments);
+  return cylinder({
+    height,
+    radius,
+    nx,
+    ny,
+    capSegments,
+    capBase,
+    radiusApex: 0,
+    capApex: false
+  });
+}
 
 /**
  * @typedef {Object} CapsuleOptions
@@ -535,6 +558,7 @@ function capsule({
   nx = 16,
   ny = 32
 } = {}) {
+  checkArguments(arguments);
   const ringsBody = ny + 1;
   const ringsTotal = ny + ringsBody;
   const size = ringsTotal * nx;
@@ -626,6 +650,7 @@ function ellipsoid({
   ry = 0.25,
   rz = ry
 } = {}) {
+  checkArguments(arguments);
   const size = (ny + 1) * (nx + 1);
   const positions = new Float32Array(size * 3);
   const normals = new Float32Array(size * 3);
@@ -701,17 +726,20 @@ function ellipsoid({
  * @returns {import("../types.js").SimplicialComplex}
  */
 
-const sphere = ({
+function sphere({
   radius = 0.5,
   nx = 32,
   ny = 16
-} = {}) => ellipsoid({
-  radius,
-  nx,
-  ny,
-  rx: 1,
-  ry: 1
-});
+} = {}) {
+  checkArguments(arguments);
+  return ellipsoid({
+    radius,
+    nx,
+    ny,
+    rx: 1,
+    ry: 1
+  });
+}
 
 const f = 0.5 + Math.sqrt(5) / 2;
 /**
@@ -730,6 +758,7 @@ function icosphere({
   radius = 0.5,
   subdivisions = 2
 } = {}) {
+  checkArguments(arguments);
   if (subdivisions > 10) throw new Error("Max subdivisions is 10.");
   const T = Math.pow(4, subdivisions);
   const numVertices = 10 * T + 2;
@@ -915,6 +944,7 @@ function torus({
   minorSegments = 32,
   arc = TAU
 } = {}) {
+  checkArguments(arguments);
   const size = (minorSegments + 1) * (segments + 1);
   const positions = new Float32Array(size * 3);
   const normals = new Float32Array(size * 3);
@@ -975,10 +1005,6 @@ function torus({
 }
 
 /**
- * @module box
- */
-
-/**
  * @typedef {Object} BoxOptions
  * @property {number} [sx=1]
  * @property {number} [sy=sx]
@@ -990,11 +1016,13 @@ function torus({
  * @param {BoxOptions} [options={}]
  * @returns {import("../types.js").BasicSimplicialComplex}
  */
+
 function box({
   sx = 1,
   sy = sx,
   sz = sx
 } = {}) {
+  checkArguments(arguments);
   const x = sx / 2;
   const y = sy / 2;
   const z = sz / 2;
@@ -1029,6 +1057,7 @@ function circle({
   radius = 0.5,
   segments = 32
 } = {}) {
+  checkArguments(arguments);
   const positions = new Float32Array(segments * 2);
   const cells = new (getCellsTypedArray(segments))((segments - 1) * 2);
 

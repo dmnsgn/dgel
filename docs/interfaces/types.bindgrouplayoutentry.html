@@ -58,7 +58,7 @@
 					<a href="../modules/types.html">types</a>
 				</li>
 				<li>
-					<a href="types.bindgrouplayoutentry.html">BindGroupLayoutEntry</a>
+					<a href="types.BindGroupLayoutEntry.html">BindGroupLayoutEntry</a>
 				</li>
 			</ul>
 			<h1>Interface BindGroupLayoutEntry</h1>
@@ -88,19 +88,12 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="types.bindgrouplayoutentry.html#binding" class="tsd-kind-icon">binding</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="types.bindgrouplayoutentry.html#buffer" class="tsd-kind-icon">buffer</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="types.bindgrouplayoutentry.html#dimension" class="tsd-kind-icon">dimension</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="types.bindgrouplayoutentry.html#externaltexture" class="tsd-kind-icon">external<wbr>Texture</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="types.bindgrouplayoutentry.html#members" class="tsd-kind-icon">members</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="types.bindgrouplayoutentry.html#name" class="tsd-kind-icon">name</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="types.bindgrouplayoutentry.html#qualifiers" class="tsd-kind-icon">qualifiers</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="types.bindgrouplayoutentry.html#sampler" class="tsd-kind-icon">sampler</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="types.bindgrouplayoutentry.html#samplertype" class="tsd-kind-icon">sampler<wbr>Type</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="types.bindgrouplayoutentry.html#storagetexture" class="tsd-kind-icon">storage<wbr>Texture</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="types.bindgrouplayoutentry.html#texture" class="tsd-kind-icon">texture</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="types.bindgrouplayoutentry.html#uniforms" class="tsd-kind-icon">uniforms</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="types.bindgrouplayoutentry.html#visibility" class="tsd-kind-icon">visibility</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="types.BindGroupLayoutEntry.html#dimension" class="tsd-kind-icon">dimension</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="types.BindGroupLayoutEntry.html#members" class="tsd-kind-icon">members</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="types.BindGroupLayoutEntry.html#name" class="tsd-kind-icon">name</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="types.BindGroupLayoutEntry.html#qualifiers" class="tsd-kind-icon">qualifiers</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="types.BindGroupLayoutEntry.html#samplerType" class="tsd-kind-icon">sampler<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="types.BindGroupLayoutEntry.html#uniforms" class="tsd-kind-icon">uniforms</a></li>
 							</ul>
 						</section>
 					</div>
@@ -108,75 +101,23 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-					<a name="binding" class="tsd-anchor"></a>
-					<h3>binding</h3>
-					<div class="tsd-signature tsd-kind-icon">binding<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from GPUBindGroupLayoutEntry.binding</p>
-						<ul>
-							<li>Defined in node_modules/@webgpu/types/dist/index.d.ts:333</li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>A unique identifier for a resource binding within a
-								{@link GPUBindGroupLayoutEntry}, a corresponding {@link GPUBindGroupEntry},
-							and the {@link GPUShaderModule}s.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-					<a name="buffer" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> buffer</h3>
-					<div class="tsd-signature tsd-kind-icon">buffer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">GPUBufferBindingLayout</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from GPUBindGroupLayoutEntry.buffer</p>
-						<ul>
-							<li>Defined in node_modules/@webgpu/types/dist/index.d.ts:344</li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>When not <code>undefined</code>, indicates the binding resource type for this {@link GPUBindGroupLayoutEntry}
-							is {@link GPUBufferBinding}.</p>
-						</div>
-					</div>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="dimension" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> dimension</h3>
 					<div class="tsd-signature tsd-kind-icon">dimension<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">GPUTextureDimension</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/5541a1f/src/types.ts#L54">src/types.ts:54</a></li>
+							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/43c7387/src/types.ts#L72">types.ts:72</a></li>
 						</ul>
 					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-					<a name="externaltexture" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> external<wbr>Texture</h3>
-					<div class="tsd-signature tsd-kind-icon">external<wbr>Texture<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">GPUExternalTextureBindingLayout</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from GPUBindGroupLayoutEntry.externalTexture</p>
-						<ul>
-							<li>Defined in node_modules/@webgpu/types/dist/index.d.ts:364</li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>When not <code>undefined</code>, indicates the binding resource type for this {@link GPUBindGroupLayoutEntry}
-							is {@link GPUExternalTexture}.</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="members" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> members</h3>
-					<div class="tsd-signature tsd-kind-icon">members<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><a href="../classes/core_variable.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a><span class="tsd-signature-symbol"> | </span><a href="../classes/core_struct.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></div>
+					<div class="tsd-signature tsd-kind-icon">members<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><a href="../classes/core_Variable.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a><span class="tsd-signature-symbol"> | </span><a href="../classes/core_Struct.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/5541a1f/src/types.ts#L53">src/types.ts:53</a></li>
+							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/43c7387/src/types.ts#L71">types.ts:71</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -186,108 +127,39 @@
 					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/5541a1f/src/types.ts#L51">src/types.ts:51</a></li>
+							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/43c7387/src/types.ts#L69">types.ts:69</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="qualifiers" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> qualifiers</h3>
-					<div class="tsd-signature tsd-kind-icon">qualifiers<span class="tsd-signature-symbol">:</span> <a href="types.glsltypequalifiers.html" class="tsd-signature-type" data-tsd-kind="Interface">GLSLTypeQualifiers</a></div>
+					<div class="tsd-signature tsd-kind-icon">qualifiers<span class="tsd-signature-symbol">:</span> <a href="types.GLSLTypeQualifiers.html" class="tsd-signature-type" data-tsd-kind="Interface">GLSLTypeQualifiers</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/5541a1f/src/types.ts#L55">src/types.ts:55</a></li>
+							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/43c7387/src/types.ts#L73">types.ts:73</a></li>
 						</ul>
 					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-					<a name="sampler" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> sampler</h3>
-					<div class="tsd-signature tsd-kind-icon">sampler<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">GPUSamplerBindingLayout</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from GPUBindGroupLayoutEntry.sampler</p>
-						<ul>
-							<li>Defined in node_modules/@webgpu/types/dist/index.d.ts:349</li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>When not <code>undefined</code>, indicates the binding resource type for this {@link GPUBindGroupLayoutEntry}
-							is {@link GPUSampler}.</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="samplertype" class="tsd-anchor"></a>
+					<a name="samplerType" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> sampler<wbr>Type</h3>
-					<div class="tsd-signature tsd-kind-icon">sampler<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../modules/types.html#glslsamplertype" class="tsd-signature-type" data-tsd-kind="Type alias">GLSLSamplerType</a><span class="tsd-signature-symbol"> | </span><a href="../modules/types.html#glslshadowsamplertype" class="tsd-signature-type" data-tsd-kind="Type alias">GLSLShadowSamplerType</a></div>
+					<div class="tsd-signature tsd-kind-icon">sampler<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../modules/types.html#GLSLSamplerType" class="tsd-signature-type" data-tsd-kind="Type alias">GLSLSamplerType</a><span class="tsd-signature-symbol"> | </span><a href="../modules/types.html#GLSLShadowSamplerType" class="tsd-signature-type" data-tsd-kind="Type alias">GLSLShadowSamplerType</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/5541a1f/src/types.ts#L56">src/types.ts:56</a></li>
+							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/43c7387/src/types.ts#L74">types.ts:74</a></li>
 						</ul>
 					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-					<a name="storagetexture" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> storage<wbr>Texture</h3>
-					<div class="tsd-signature tsd-kind-icon">storage<wbr>Texture<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">GPUStorageTextureBindingLayout</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from GPUBindGroupLayoutEntry.storageTexture</p>
-						<ul>
-							<li>Defined in node_modules/@webgpu/types/dist/index.d.ts:359</li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>When not <code>undefined</code>, indicates the binding resource type for this {@link GPUBindGroupLayoutEntry}
-							is {@link GPUTextureView}.</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-					<a name="texture" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> texture</h3>
-					<div class="tsd-signature tsd-kind-icon">texture<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">GPUTextureBindingLayout</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from GPUBindGroupLayoutEntry.texture</p>
-						<ul>
-							<li>Defined in node_modules/@webgpu/types/dist/index.d.ts:354</li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>When not <code>undefined</code>, indicates the binding resource type for this {@link GPUBindGroupLayoutEntry}
-							is {@link GPUTextureView}.</p>
-						</div>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="uniforms" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> uniforms</h3>
-					<div class="tsd-signature tsd-kind-icon">uniforms<span class="tsd-signature-symbol">:</span> <a href="../classes/core_uniform.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a><span class="tsd-signature-symbol">[]</span></div>
+					<div class="tsd-signature tsd-kind-icon">uniforms<span class="tsd-signature-symbol">:</span> <a href="../classes/core_Uniform.default.html" class="tsd-signature-type" data-tsd-kind="Class">default</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/5541a1f/src/types.ts#L52">src/types.ts:52</a></li>
+							<li>Defined in <a href="https://github.com/dmnsgn/dgel/blob/43c7387/src/types.ts#L70">types.ts:70</a></li>
 						</ul>
 					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-					<a name="visibility" class="tsd-anchor"></a>
-					<h3>visibility</h3>
-					<div class="tsd-signature tsd-kind-icon">visibility<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from GPUBindGroupLayoutEntry.visibility</p>
-						<ul>
-							<li>Defined in node_modules/@webgpu/types/dist/index.d.ts:339</li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>A bitset of the members of <a href="../modules/constants.html#gpushaderstage">GPUShaderStage</a>.
-								Each set bit indicates that a {@link GPUBindGroupLayoutEntry}&#39;s resource
-							will be accessible from the associated shader stage.</p>
-						</div>
-					</div>
 				</section>
 			</section>
 		</div>
@@ -307,83 +179,83 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="types.bindgrouplayoutentry.html" class="tsd-kind-icon">Bind<wbr>Group<wbr>Layout<wbr>Entry</a>
+						<a href="types.BindGroupLayoutEntry.html" class="tsd-kind-icon">Bind<wbr>Group<wbr>Layout<wbr>Entry</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="types.bindgrouplayoutentry.html#binding" class="tsd-kind-icon">binding</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="types.bindgrouplayoutentry.html#buffer" class="tsd-kind-icon">buffer</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="types.BindGroupLayoutEntry.html#dimension" class="tsd-kind-icon">dimension</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="types.bindgrouplayoutentry.html#dimension" class="tsd-kind-icon">dimension</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="types.bindgrouplayoutentry.html#externaltexture" class="tsd-kind-icon">external<wbr>Texture</a>
+								<a href="types.BindGroupLayoutEntry.html#members" class="tsd-kind-icon">members</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="types.bindgrouplayoutentry.html#members" class="tsd-kind-icon">members</a>
+								<a href="types.BindGroupLayoutEntry.html#name" class="tsd-kind-icon">name</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="types.bindgrouplayoutentry.html#name" class="tsd-kind-icon">name</a>
+								<a href="types.BindGroupLayoutEntry.html#qualifiers" class="tsd-kind-icon">qualifiers</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="types.bindgrouplayoutentry.html#qualifiers" class="tsd-kind-icon">qualifiers</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="types.bindgrouplayoutentry.html#sampler" class="tsd-kind-icon">sampler</a>
+								<a href="types.BindGroupLayoutEntry.html#samplerType" class="tsd-kind-icon">sampler<wbr>Type</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="types.bindgrouplayoutentry.html#samplertype" class="tsd-kind-icon">sampler<wbr>Type</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="types.bindgrouplayoutentry.html#storagetexture" class="tsd-kind-icon">storage<wbr>Texture</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="types.bindgrouplayoutentry.html#texture" class="tsd-kind-icon">texture</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="types.bindgrouplayoutentry.html#uniforms" class="tsd-kind-icon">uniforms</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
-								<a href="types.bindgrouplayoutentry.html#visibility" class="tsd-kind-icon">visibility</a>
+								<a href="types.BindGroupLayoutEntry.html#uniforms" class="tsd-kind-icon">uniforms</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="types.bindgroupoptions.html" class="tsd-kind-icon">Bind<wbr>Group<wbr>Options</a>
+						<a href="types.BindGroupOptions.html" class="tsd-kind-icon">Bind<wbr>Group<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="types.contextoptions.html" class="tsd-kind-icon">Context<wbr>Options</a>
+						<a href="types.ContextOptions.html" class="tsd-kind-icon">Context<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="types.contextstate.html" class="tsd-kind-icon">Context<wbr>State</a>
+						<a href="types.ContextState.html" class="tsd-kind-icon">Context<wbr>State</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="types.glsltypequalifiers.html" class="tsd-kind-icon">GLSLType<wbr>Qualifiers</a>
+						<a href="types.GLSLTypeQualifiers.html" class="tsd-kind-icon">GLSLType<wbr>Qualifiers</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="types.PipelineOptions.html" class="tsd-kind-icon">Pipeline<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="types.ShaderOptions.html" class="tsd-kind-icon">Shader<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/types.html#glsllayoutqualifier" class="tsd-kind-icon">GLSLLayout<wbr>Qualifier</a>
+						<a href="../modules/types.html#GLSLLayoutQualifier" class="tsd-kind-icon">GLSLLayout<wbr>Qualifier</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/types.html#glslsamplertype" class="tsd-kind-icon">GLSLSampler<wbr>Type</a>
+						<a href="../modules/types.html#GLSLSamplerType" class="tsd-kind-icon">GLSLSampler<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/types.html#glslshadertype" class="tsd-kind-icon">GLSLShader<wbr>Type</a>
+						<a href="../modules/types.html#GLSLShadowSamplerType" class="tsd-kind-icon">GLSLShadow<wbr>Sampler<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/types.html#glslshadertypeobjectkeys" class="tsd-kind-icon">GLSLShader<wbr>Type<wbr>Object<wbr>Keys</a>
+						<a href="../modules/types.html#GLSLStorageQualifier" class="tsd-kind-icon">GLSLStorage<wbr>Qualifier</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/types.html#glslshadowsamplertype" class="tsd-kind-icon">GLSLShadow<wbr>Sampler<wbr>Type</a>
+						<a href="../modules/types.html#GPUBindingType" class="tsd-kind-icon">GPUBinding<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/types.html#glslstoragequalifier" class="tsd-kind-icon">GLSLStorage<wbr>Qualifier</a>
+						<a href="../modules/types.html#Language" class="tsd-kind-icon">Language</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="../modules/types.html#passtype" class="tsd-kind-icon">Pass<wbr>Type</a>
+						<a href="../modules/types.html#PassType" class="tsd-kind-icon">Pass<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/types.html#PipelineVertexBufferIns" class="tsd-kind-icon">Pipeline<wbr>Vertex<wbr>Buffer<wbr>Ins</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/types.html#ShaderStageBodyName" class="tsd-kind-icon">Shader<wbr>Stage<wbr>Body<wbr>Name</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/types.html#ShaderStageBodyNameObjectKeys" class="tsd-kind-icon">Shader<wbr>Stage<wbr>Body<wbr>Name<wbr>Object<wbr>Keys</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/types.html#ShaderStageName" class="tsd-kind-icon">Shader<wbr>Stage<wbr>Name</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+						<a href="../modules/types.html#ShaderStageNameObjectKeys" class="tsd-kind-icon">Shader<wbr>Stage<wbr>Name<wbr>Object<wbr>Keys</a>
 					</li>
 					<li class=" tsd-kind-property tsd-parent-kind-module">
 						<a href="../modules/types.html#default" class="tsd-kind-icon">default</a>
