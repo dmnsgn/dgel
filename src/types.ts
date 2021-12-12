@@ -63,6 +63,7 @@ export interface ContextState {
 export interface ContextOptions {
   canvas?: HTMLCanvasElement;
   context?: GPUCanvasContext;
+  pixelRatio?: number;
 }
 
 export interface BindGroupLayoutEntry extends GPUBindGroupLayoutEntry {

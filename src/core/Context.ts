@@ -7,6 +7,7 @@ import { ContextOptions } from "../types.js";
 class Context {
   public canvas: HTMLCanvasElement;
   public context: GPUCanvasContext;
+  public pixelRatio: number;
 
   private adapter: GPUAdapter;
 
@@ -15,10 +16,11 @@ class Context {
 
   private defaultDepthStencilAttachment: GPUTextureView | null;
 
-  constructor({ canvas, context }: ContextOptions = {}) {
+  constructor({ canvas, context, pixelRatio }: ContextOptions = {}) {
     this.canvas = canvas || document.createElement("canvas");
     this.context =
       context || (this.canvas.getContext("webgpu") as GPUCanvasContext);
+    this.pixelRatio = pixelRatio || window.devicePixelRatio || 1;
   }
 
   public async init(
@@ -68,24 +70,23 @@ class Context {
     height: number,
     presentationContextDescriptor = {}
   ): void {
-    this.canvas.width = width;
-    this.canvas.height = height;
+    const w = width * this.pixelRatio;
+    const h = height * this.pixelRatio;
+    this.canvas.width = w;
+    this.canvas.height = h;
+    Object.assign(this.canvas.style, { width, height });
 
     this.context.configure({
       device: State.device,
       format: this.context.getPreferredFormat(this.adapter),
       usage: GPUTextureUsage.RENDER_ATTACHMENT,
-      size: { width, height },
+      size: { width: w, height: h },
       ...presentationContextDescriptor,
     });
 
     this.defaultDepthStencilAttachment = State.device
       .createTexture({
-        size: {
-          width,
-          height,
-          depthOrArrayLayers: 1,
-        },
+        size: { width: w, height: h, depthOrArrayLayers: 1 },
         mipLevelCount: 1,
         sampleCount: 1,
         dimension: "2d",
