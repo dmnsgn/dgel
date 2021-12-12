@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.8.0](https://github.com/dmnsgn/dgel/compare/v0.7.0...v0.8.0) (2021-12-12)
+
+
+### Features
+
+* add pixelRatio to Context and handle scaled resize ([916c7ab](https://github.com/dmnsgn/dgel/commit/916c7ab2f91d0a44151a11e7c6fbf932b207a620)), closes [#8](https://github.com/dmnsgn/dgel/issues/8)
+
+
+
 # [0.7.0](https://github.com/dmnsgn/dgel/compare/v0.6.0...v0.7.0) (2021-10-27)
 
 
