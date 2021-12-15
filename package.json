@@ -1,6 +1,6 @@
 {
   "name": "dgel",
-  "version": "0.7.0",
+  "version": "0.9.0",
   "description": "A WebGPU engine.",
   "keywords": [
     "webgpu",
@@ -30,9 +30,9 @@
   "module": "lib/index.js",
   "types": "types/index.d.ts",
   "scripts": {
-    "dev": "npx snowdev dev",
     "build": "npx snowdev build",
-    "clean": "rm -rf lib && rm -rf docs"
+    "clean": "rm -rf lib && rm -rf docs",
+    "dev": "npx snowdev dev"
   },
   "dependencies": {
     "gl-matrix": "^3.4.3",

@@ -82,7 +82,7 @@ class Struct extends Variable {
       .filter((member) => member.constructor.name === "Variable")
       .map((variable) => (variable as BuiltIn).getWGSLString() + ";");
 
-    return /* wgsl */ `[[block]] struct ${this.name} {
+    return /* wgsl */ `struct ${this.name} {
 ${TAB}${[...builtIns, ...attributes, ...uniforms, ...structs, ...variables]
       .filter(Boolean)
       .join(`\n${TAB}`)}

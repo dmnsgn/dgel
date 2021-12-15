@@ -63,6 +63,7 @@ export interface ContextState {
 export interface ContextOptions {
   canvas?: HTMLCanvasElement;
   context?: GPUCanvasContext;
+  pixelRatio?: number;
 }
 
 export interface BindGroupLayoutEntry extends GPUBindGroupLayoutEntry {
@@ -115,6 +116,12 @@ export interface ShaderOptions {
   outs?: Attribute[];
   structs?: Struct[];
   language?: Language;
+}
+
+export interface AttachmentOptions {
+  op?: GPUStoreOp;
+  view?: GPUTextureView;
+  resolveTarget?: GPUTextureView;
 }
 
 export type PassType = "render" | "compute";
