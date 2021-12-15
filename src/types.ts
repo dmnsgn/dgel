@@ -118,6 +118,12 @@ export interface ShaderOptions {
   language?: Language;
 }
 
+export interface AttachmentOptions {
+  op?: GPUStoreOp;
+  view?: GPUTextureView;
+  resolveTarget?: GPUTextureView;
+}
+
 export type PassType = "render" | "compute";
 
 export type GPUBindingType =
