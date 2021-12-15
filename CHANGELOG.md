@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.9.0](https://github.com/dmnsgn/dgel/compare/v0.8.0...v0.9.0) (2021-12-15)
+
+
+### Bug Fixes
+
+* add missing view property to Pass descriptor getter + add new Attachment options ([53e1636](https://github.com/dmnsgn/dgel/commit/53e16369690dde403d7c3247b9767b366429635e)), closes [#10](https://github.com/dmnsgn/dgel/issues/10)
+* remove deprecated [[block]] ([24b0e7e](https://github.com/dmnsgn/dgel/commit/24b0e7e74807bc2907faea473d7546c84459319b)), closes [#9](https://github.com/dmnsgn/dgel/issues/9)
+
+
+
 # [0.8.0](https://github.com/dmnsgn/dgel/compare/v0.7.0...v0.8.0) (2021-12-12)
 
 
