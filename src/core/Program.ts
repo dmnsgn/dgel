@@ -9,6 +9,7 @@ import {
   BindingType,
   StorageClass,
   GPUShaderStage,
+  GPUTextureSampleType,
 } from "../constants.js";
 import {
   ShaderStageName,
@@ -164,7 +165,8 @@ class Program {
           fragment += `${samplerLayout}\n`;
         }
       } else if (binding.texture) {
-        const referenceType = binding.texture.sampleType || "f32";
+        const referenceType =
+          GPUTextureSampleType[binding.texture.sampleType] || "f32";
         const textureLayout = /* wgsl*/ `[[group(${set}), binding(${i})]] var ${binding.name}: texture_${binding.dimension}<${referenceType}>;`;
 
         if (isBindingVisible(binding, GPUShaderStage.VERTEX)) {

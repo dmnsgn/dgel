@@ -69,6 +69,12 @@ export const GPUShaderStageName: {
   [GPUShaderStage.FRAGMENT]: "fragment",
   [GPUShaderStage.COMPUTE]: "compute",
 };
+export const GPUTextureSampleType: { [BindingType: string]: string } = {
+  [BindingType.Float]: "f32",
+  [BindingType.UnFilterableFloat]: "f32",
+  [BindingType.Sint]: "i32",
+  [BindingType.Uint]: "u32",
+};
 
 // WGSL
 export const StorageClass: { [key: string]: string } = {
