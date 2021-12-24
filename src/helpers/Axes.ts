@@ -6,6 +6,7 @@ import BindGroupLayout from "../core/BindGroupLayout.js";
 import BindGroup from "../core/BindGroup.js";
 
 import { GPUIndexFormat, GPUPrimitiveTopology } from "../constants.js";
+import { PipelineOptions } from "../types.js";
 
 // prettier-ignore
 const data = new Float32Array([
@@ -30,7 +31,8 @@ class Axes {
 
   constructor(
     systemBindGroupLayout: BindGroupLayout,
-    systemUniformBindGroup: BindGroup
+    systemUniformBindGroup: BindGroup,
+    pipelineOptions: PipelineOptions = {}
   ) {
     // TODO: make generic draw line pipeline
     const pipeline = new Pipeline({
@@ -49,6 +51,7 @@ class Axes {
       descriptor: {
         primitive: { topology: GPUPrimitiveTopology.LineList },
       },
+      ...pipelineOptions,
     });
 
     this.buffer = new Buffer().vertexBuffer(data);
