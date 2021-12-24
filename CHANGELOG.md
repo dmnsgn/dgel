@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.10.0](https://github.com/dmnsgn/dgel/compare/v0.9.0...v0.10.0) (2021-12-24)
+
+
+### Bug Fixes
+
+* texture sample type to binding mapping ([277ecd4](https://github.com/dmnsgn/dgel/commit/277ecd4b210df86250c7e5802cab633321291052))
+
+
+### Features
+
+* add helper pipeline options ([4bef935](https://github.com/dmnsgn/dgel/commit/4bef9357f43b22bcdb499b17b5d10a3307edab3b))
+
+
+
 # [0.9.0](https://github.com/dmnsgn/dgel/compare/v0.8.0...v0.9.0) (2021-12-15)
 
 
