@@ -1,7 +1,8 @@
 import { AttachmentOptions } from "../types.js";
 
 class Attachment {
-  public op: GPUStoreOp = "store";
+  public op: GPULoadOp = "clear";
+  public storeOp: GPUStoreOp = "store";
 
   public view?: GPUTextureView;
   public resolveTarget?: GPUTextureView;

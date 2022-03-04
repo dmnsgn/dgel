@@ -18,18 +18,21 @@ class Pass {
               ({
                 view: colorAttachment.view,
                 resolveTarget: colorAttachment.resolveTarget,
-                loadValue: colorAttachment.value,
-                storeOp: colorAttachment.op,
+                clearValue: colorAttachment.value,
+                loadOp: colorAttachment.op,
+                storeOp: colorAttachment.storeOp,
               } as GPURenderPassColorAttachment)
           ),
         }),
         ...((this.depthAttachment || this.stencilAttachment) && {
           depthStencilAttachment: {
             view: this.depthAttachment.view,
-            depthLoadValue: this.depthAttachment?.value || 0.0,
-            depthStoreOp: this.depthAttachment?.op || "store",
-            stencilLoadValue: this.stencilAttachment?.value || 0.0,
-            stencilStoreOp: this.stencilAttachment?.op || "store",
+            depthLoadOp: this.depthAttachment?.op || "clear",
+            depthClearValue: this.depthAttachment?.value || 0,
+            depthStoreOp: this.depthAttachment?.storeOp || "store",
+            stencilLoadOp: this.stencilAttachment?.op || "clear",
+            stencilClearValue: this.stencilAttachment?.value || 0,
+            stencilStoreOp: this.stencilAttachment?.storeOp || "store",
           } as GPURenderPassDepthStencilAttachment,
         }),
       };

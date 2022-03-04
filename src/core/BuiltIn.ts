@@ -11,7 +11,7 @@ class BuiltIn extends Variable {
   }
 
   public getWGSLString(): string {
-    return /* wgsl */ `[[builtin(${this.name})]] ${this.name}: ${this.wgslType}`;
+    return /* wgsl */ `@builtin(${this.name}) ${this.name}: ${this.wgslType}`;
   }
 }
 
