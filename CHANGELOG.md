@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.11.0](https://github.com/dmnsgn/dgel/compare/v0.10.0...v0.11.0) (2022-03-04)
+
+
+### Features
+
+* update to new API ([2b288f9](https://github.com/dmnsgn/dgel/commit/2b288f9c5375f10925550c8939662b5f71734196))
+
+
+
 # [0.10.0](https://github.com/dmnsgn/dgel/compare/v0.9.0...v0.10.0) (2021-12-24)
 
 
