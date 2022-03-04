@@ -6,7 +6,7 @@ class Attribute extends Variable {
   }
 
   public getWGSLString(index: number): string {
-    return /* wgsl */ `[[location(${index})]] ${this.name}: ${
+    return /* wgsl */ `@location(${index}) ${this.name}: ${
       this.arrayCount ? `array<` : ""
     }${this.wgslType}${this.arrayCount ? `, ${this.arrayCount}>` : ""}`;
   }
