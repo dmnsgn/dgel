@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.12.0](https://github.com/dmnsgn/dgel/compare/v0.11.0...v0.12.0) (2022-04-13)
+
+
+### Bug Fixes
+
+* struct members should be separated with commas ([fed3788](https://github.com/dmnsgn/dgel/commit/fed37884b6334b5ce738542bca5f3f66cb303420))
+
+
+### Features
+
+* add compositingAlphaMode ([4bce529](https://github.com/dmnsgn/dgel/commit/4bce5298c731979b20d05a1fb5c67fc26f7b8a69))
+
+
+
 # [0.11.0](https://github.com/dmnsgn/dgel/compare/v0.10.0...v0.11.0) (2022-03-04)
 
 
