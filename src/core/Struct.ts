@@ -66,21 +66,21 @@ class Struct extends Variable {
 
     const builtIns = this.members
       .filter((member) => member instanceof BuiltIn)
-      .map((variable) => (variable as BuiltIn).getWGSLString() + ";");
+      .map((variable) => (variable as BuiltIn).getWGSLString() + ",");
     const attributes = this.members
       .filter((member) => member instanceof Attribute)
       .map(
-        (variable, index) => (variable as Attribute).getWGSLString(index) + ";"
+        (variable, index) => (variable as Attribute).getWGSLString(index) + ","
       );
     const uniforms = this.members
       .filter((member) => member instanceof Uniform)
-      .map((variable) => (variable as Uniform).getWGSLString() + ";");
+      .map((variable) => (variable as Uniform).getWGSLString() + ",");
     const structs = this.members
       .filter((member) => member instanceof Struct)
-      .map((variable) => (variable as Struct).getWGSLMemberString() + ";");
+      .map((variable) => (variable as Struct).getWGSLMemberString() + ",");
     const variables = this.members
       .filter((member) => member.constructor.name === "Variable")
-      .map((variable) => (variable as BuiltIn).getWGSLString() + ";");
+      .map((variable) => (variable as BuiltIn).getWGSLString() + ",");
 
     return /* wgsl */ `struct ${this.name} {
 ${TAB}${[...builtIns, ...attributes, ...uniforms, ...structs, ...variables]

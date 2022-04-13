@@ -54,6 +54,13 @@ export const GPUIndexFormat: { [key: string]: GPUIndexFormat } = {
   Uint16: "uint16",
   Uint32: "uint32",
 };
+// https://gpuweb.github.io/gpuweb/#canvas-configuration
+export const GPUCanvasCompositingAlphaMode: {
+  [key: string]: GPUCanvasCompositingAlphaMode;
+} = {
+  Opaque: "opaque",
+  Premultiplied: "premultiplied",
+};
 // https://gpuweb.github.io/gpuweb/#primitive-state
 export const GPUPrimitiveTopology: { [key: string]: GPUPrimitiveTopology } = {
   PointList: "point-list",

@@ -1,7 +1,10 @@
 import State from "./State.js";
 import Command from "./Command.js";
 
-import { GPUTextureUsage } from "../constants.js";
+import {
+  GPUCanvasCompositingAlphaMode,
+  GPUTextureUsage,
+} from "../constants.js";
 import { ContextOptions } from "../types.js";
 
 class Context {
@@ -48,6 +51,7 @@ class Context {
         device: State.device,
         format: this.context.getPreferredFormat(this.adapter),
         usage: GPUTextureUsage.RENDER_ATTACHMENT,
+        compositingAlphaMode: GPUCanvasCompositingAlphaMode.Premultiplied,
         ...presentationContextDescriptor,
       });
 
@@ -80,6 +84,7 @@ class Context {
       device: State.device,
       format: this.context.getPreferredFormat(this.adapter),
       usage: GPUTextureUsage.RENDER_ATTACHMENT,
+      compositingAlphaMode: GPUCanvasCompositingAlphaMode.Premultiplied,
       size: { width: w, height: h },
       ...presentationContextDescriptor,
     });
