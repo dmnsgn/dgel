@@ -49,7 +49,7 @@ class Context {
 
       this.context.configure({
         device: State.device,
-        format: this.context.getPreferredFormat(this.adapter),
+        format: navigator.gpu.getPreferredCanvasFormat(),
         usage: GPUTextureUsage.RENDER_ATTACHMENT,
         alphaMode: GPUCanvasCompositingAlphaMode.Premultiplied,
         ...presentationContextDescriptor,
@@ -82,7 +82,7 @@ class Context {
 
     this.context.configure({
       device: State.device,
-      format: this.context.getPreferredFormat(this.adapter),
+      format: navigator.gpu.getPreferredCanvasFormat(),
       usage: GPUTextureUsage.RENDER_ATTACHMENT,
       size: { width: w, height: h },
       alphaMode: GPUCanvasCompositingAlphaMode.Premultiplied,
