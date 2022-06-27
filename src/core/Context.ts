@@ -49,9 +49,9 @@ class Context {
 
       this.context.configure({
         device: State.device,
-        format: this.context.getPreferredFormat(this.adapter),
+        format: navigator.gpu.getPreferredCanvasFormat(),
         usage: GPUTextureUsage.RENDER_ATTACHMENT,
-        compositingAlphaMode: GPUCanvasCompositingAlphaMode.Premultiplied,
+        alphaMode: GPUCanvasCompositingAlphaMode.Premultiplied,
         ...presentationContextDescriptor,
       });
 
@@ -82,10 +82,9 @@ class Context {
 
     this.context.configure({
       device: State.device,
-      format: this.context.getPreferredFormat(this.adapter),
+      format: navigator.gpu.getPreferredCanvasFormat(),
       usage: GPUTextureUsage.RENDER_ATTACHMENT,
-      compositingAlphaMode: GPUCanvasCompositingAlphaMode.Premultiplied,
-      size: { width: w, height: h },
+      alphaMode: GPUCanvasCompositingAlphaMode.Premultiplied,
       ...presentationContextDescriptor,
     });
 

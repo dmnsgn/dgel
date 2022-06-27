@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.13.0](https://github.com/dmnsgn/dgel/compare/v0.12.0...v0.13.0) (2022-06-27)
+
+
+### Bug Fixes
+
+* remove size from configure ([a66b8fd](https://github.com/dmnsgn/dgel/commit/a66b8fd4a1e7eeeb6988b3f95877f35ea2f472e7))
+* use of deprecated language feature: remove stage ([6daa13a](https://github.com/dmnsgn/dgel/commit/6daa13a72215a5cde26aacc3a053727e3c2dcc2a))
+
+
+### Features
+
+* default to layout auto in Pipeline ([8a0c1ed](https://github.com/dmnsgn/dgel/commit/8a0c1edb8d90088a9777fab3628db737e483e9b9))
+* use alphaMode instead of compositingAlphaMode ([2a2853d](https://github.com/dmnsgn/dgel/commit/2a2853d41aa7953a83489d0ba04eea4494400a84))
+* use navigator.gpu.getPreferredCanvasFormat ([4fde41e](https://github.com/dmnsgn/dgel/commit/4fde41e9823bd8bb087b82ac8a2d1b194ded8bf1))
+
+
+
 # [0.12.0](https://github.com/dmnsgn/dgel/compare/v0.11.0...v0.12.0) (2022-04-13)
 
 

@@ -179,7 +179,9 @@ class Pipeline {
                   ) || [],
               }),
             }
-          : {}),
+          : {
+              layout: "auto",
+            }),
         vertex: {
           buffers: vertexBuffers,
           module: this.program.shaders.vertex.shaderModule,

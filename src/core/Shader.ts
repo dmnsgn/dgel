@@ -34,7 +34,7 @@ class Shader {
           .filter(Boolean)
           .join("\n")}
 ${this.body || ""}
-@stage(${stage})
+@${stage}
 fn main(
 ${TAB}${ins}
 ) -> ${outs ? "Output" : "@location(0) vec4<f32>"} {${this.main}}`
