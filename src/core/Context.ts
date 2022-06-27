@@ -84,7 +84,6 @@ class Context {
       device: State.device,
       format: navigator.gpu.getPreferredCanvasFormat(),
       usage: GPUTextureUsage.RENDER_ATTACHMENT,
-      size: { width: w, height: h },
       alphaMode: GPUCanvasCompositingAlphaMode.Premultiplied,
       ...presentationContextDescriptor,
     });
