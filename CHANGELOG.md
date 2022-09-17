@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.14.0](https://github.com/dmnsgn/dgel/compare/v0.13.0...v0.14.0) (2022-09-17)
+
+
+### Bug Fixes
+
+* 'of' is a reserved keyword ([0f31771](https://github.com/dmnsgn/dgel/commit/0f31771ba8a4f9149c5c32f237138ed8e33b098a))
+* module-scope 'let' has been replaced with 'const' ([67d9903](https://github.com/dmnsgn/dgel/commit/67d99032a63fd342c2be940a9a92e56fad49a9c2))
+
+
+### Features
+
+* add willReadFrequently to Texture's canvas 2d ([64e2652](https://github.com/dmnsgn/dgel/commit/64e2652cb8d6cf5c0f703767b9e48cccc52f7699))
+* saturate is now a builtin in wgsl ([7066711](https://github.com/dmnsgn/dgel/commit/70667117c68f48bab9f321e6694fde3d846ab08b))
+
+
+
 # [0.13.0](https://github.com/dmnsgn/dgel/compare/v0.12.0...v0.13.0) (2022-06-27)
 
 
