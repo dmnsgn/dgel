@@ -22,7 +22,7 @@ fn worley2d(P: vec2<f32>) -> vec2<f32> {
   let Pf = fract(P);
 
   var oi = vec3<f32>(-1.0, 0.0, 1.0);
-  var of = vec3<f32>(-0.5, 0.5, 1.5);
+  var of_ = vec3<f32>(-0.5, 0.5, 1.5);
 
   var px = permute_3(Pi.x + oi);
   var p = permute_3(px.x + Pi.y + oi); // p11, p12, p13
@@ -30,20 +30,20 @@ fn worley2d(P: vec2<f32>) -> vec2<f32> {
   var ox = fract(p * K) - Ko;
   var oy = mod7(floor(p * K)) * K - Ko;
   var dx = Pf.x + 0.5 + jitter * ox;
-  var dy = Pf.y - of + jitter * oy;
+  var dy = Pf.y - of_ + jitter * oy;
 
   var d1 = dx * dx + dy * dy; // d11, d12 and d13, squared
   p = permute_3(px.y + Pi.y + oi); // p21, p22, p23
   ox = fract(p * K) - Ko;
   oy = mod7(floor(p * K)) * K - Ko;
   dx = Pf.x - 0.5 + jitter * ox;
-  dy = Pf.y - of + jitter * oy;
+  dy = Pf.y - of_ + jitter * oy;
   var d2 = dx * dx + dy * dy; // d21, d22 and d23, squared
   p = permute_3(px.z + Pi.y + oi); // p31, p32, p33
   ox = fract(p * K) - Ko;
   oy = mod7(floor(p * K)) * K - Ko;
   dx = Pf.x - 1.5 + jitter * ox;
-  dy = Pf.y - of + jitter * oy;
+  dy = Pf.y - of_ + jitter * oy;
   var d3 = dx * dx + dy * dy; // d31, d32 and d33, squared
   // Sort out the two smallest distances (F1, F2)
   var d1a = min(d1, d2);

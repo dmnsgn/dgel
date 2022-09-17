@@ -3,9 +3,9 @@ import Buffer from "./Buffer.js";
 import { GPUTextureUsage, GPUBufferUsage } from "../constants.js";
 
 const imageCanvas = document.createElement("canvas");
-const imageCanvasContext = imageCanvas.getContext(
-  "2d"
-) as CanvasRenderingContext2D;
+const imageCanvasContext = imageCanvas.getContext("2d", {
+  willReadFrequently: true,
+}) as CanvasRenderingContext2D;
 // document.body.appendChild(imageCanvas)
 
 class Texture {

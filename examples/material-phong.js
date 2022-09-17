@@ -198,7 +198,6 @@ const pipeline = new Pipeline({
   return output;
 `,
   fragmentBody: /* wgsl */ `
-${Shaders.UTILS.SATURATE}
 ${Shaders.CONSTANTS.PI}
 ${Shaders.CONSTANTS.EPSILON}
 
