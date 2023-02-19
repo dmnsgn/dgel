@@ -294,9 +294,9 @@ const onResize = () => {
 onResize();
 
 // Helpers
-const axes = new Axes(systemBindGroupLayout, systemUniformBindGroup, {
-  fragmentTargets: [{ format: "rgba32float" }],
-});
+// const axes = new Axes(systemBindGroupLayout, systemUniformBindGroup, {
+//   fragmentTargets: [{ format: "rgba32float" }],
+// });
 
 // Frame
 requestAnimationFrame(function frame() {
@@ -326,7 +326,7 @@ requestAnimationFrame(function frame() {
   context.render(() => {
     if (!CONFIG.debug) {
       context.submit(rttCommand, () => {
-        context.submit(axes.command);
+        // context.submit(axes.command);
         context.submit(drawGeometryToTextureCommand);
       });
       context.submit(clearCommand, () => {

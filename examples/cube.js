@@ -214,7 +214,7 @@ const drawGeometryCommand = new Command({
 });
 
 // Helpers
-const axes = new Axes(systemBindGroupLayout, systemUniformBindGroup);
+// const axes = new Axes(systemBindGroupLayout, systemUniformBindGroup);
 
 // Frame
 requestAnimationFrame(function frame() {
@@ -235,7 +235,7 @@ requestAnimationFrame(function frame() {
 
   context.render(() => {
     context.submit(clearCommand, () => {
-      context.submit(axes.command);
+      // context.submit(axes.command);
       context.submit(drawGeometryCommand);
     });
   });
