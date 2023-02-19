@@ -92,14 +92,14 @@ export const StorageClass: { [key: string]: string } = {
   Storage: "storage",
   Handle: "handle",
 };
-export type StorageClass = typeof StorageClass[keyof typeof StorageClass];
+export type StorageClass = (typeof StorageClass)[keyof typeof StorageClass];
 
 export const AccessMode: { [key: string]: string } = {
   Read: "read",
   Write: "write",
   ReadWrite: "read-write",
 };
-export type AccessMode = typeof AccessMode[keyof typeof AccessMode];
+export type AccessMode = (typeof AccessMode)[keyof typeof AccessMode];
 
 export const GLSL_SCALARS_TO_WGSL: { [key: string]: string } = {
   float: "f32",

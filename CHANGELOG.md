@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.15.0](https://github.com/dmnsgn/dgel/compare/v0.14.0...v0.15.0) (2023-02-19)
+
+
+### Features
+
+* make BindGroupeLayout getBindGroupSize return a multiple of 16 bytes ([d48d614](https://github.com/dmnsgn/dgel/commit/d48d6146193fe26f1fe879dc3e3252ed82571b6e))
+
+
+
 # [0.14.0](https://github.com/dmnsgn/dgel/compare/v0.13.0...v0.14.0) (2022-09-17)
 
 
