@@ -38,7 +38,7 @@ class BindGroupLayout {
       }
     }
 
-    return size;
+    return size + (size % 16);
   }
 
   public getBindingSize(entry: BindGroupLayoutEntry): number {
