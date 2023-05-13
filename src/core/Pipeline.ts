@@ -170,18 +170,14 @@ class Pipeline {
       this.program.init();
 
       this.gpuPipeline = State.device.createRenderPipeline({
-        ...(this.bindGroupLayouts
-          ? {
-              layout: State.device.createPipelineLayout({
-                bindGroupLayouts:
-                  this.bindGroupLayouts.map(
-                    (bindGroupLayout) => bindGroupLayout.gpuBindGroupLayout
-                  ) || [],
-              }),
-            }
-          : {
-              layout: "auto",
-            }),
+        layout: this.bindGroupLayouts
+          ? State.device.createPipelineLayout({
+              bindGroupLayouts:
+                this.bindGroupLayouts.map(
+                  (bindGroupLayout) => bindGroupLayout.gpuBindGroupLayout
+                ) || [],
+            })
+          : "auto",
         vertex: {
           buffers: vertexBuffers,
           module: this.program.shaders.vertex.shaderModule,
