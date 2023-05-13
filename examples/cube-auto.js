@@ -57,100 +57,9 @@ const onResize = () => {
 };
 onResize();
 
-// Layouts
-const systemBindGroupLayout = new BindGroupLayout([
-  {
-    buffer: {},
-    visibility: GPUShaderStage.VERTEX,
-    name: "System",
-    uniforms: [
-      new Uniform("projectionMatrix", "mat4"),
-      new Uniform("viewMatrix", "mat4"),
-    ],
-  },
-]);
-
-const meshBindGroupLayout = new BindGroupLayout([
-  {
-    buffer: {},
-    visibility: GPUShaderStage.VERTEX,
-    name: "Mesh",
-    uniforms: [new Uniform("modelMatrix", "mat4")],
-  },
-  {
-    sampler: {},
-    visibility: GPUShaderStage.FRAGMENT,
-    name: "uSampler",
-  },
-  {
-    texture: {},
-    visibility: GPUShaderStage.FRAGMENT,
-    name: "uTexture",
-    dimension: "2d",
-  },
-]);
-
-// Buffers
-const systemUniformsBuffer = new Buffer();
-systemUniformsBuffer.uniformBuffer(systemBindGroupLayout.getBindGroupSize());
-
-const meshUniformsBuffer = new Buffer();
-meshUniformsBuffer.uniformBuffer(meshBindGroupLayout.getBindGroupSize());
-
-// Bindings
-const systemUniformBindGroup = new BindGroup({
-  layout: systemBindGroupLayout.gpuBindGroupLayout,
-  resources: [
-    {
-      buffer: systemUniformsBuffer.gpuBuffer,
-      offset: 0,
-      size: systemBindGroupLayout.getBindGroupSize(),
-    },
-  ],
-});
-
-const uvSampler = new Sampler();
-
-const uvImage = document.createElement("img");
-uvImage.src = "assets/uv.jpg";
-await uvImage.decode();
-
-const uvTexture = new Texture(null, uvImage);
-
-const meshUniformBindGroup = new BindGroup({
-  layout: meshBindGroupLayout.gpuBindGroupLayout,
-  resources: [
-    {
-      buffer: meshUniformsBuffer.gpuBuffer,
-      offset: 0,
-      size: meshBindGroupLayout.getBindGroupSize(),
-    },
-    uvSampler.gpuSampler,
-    uvTexture.gpuTexture.createView(),
-  ],
-});
-
-// Geometry
-const modelMatrix = mat4.create();
-
-const geometry = cube();
-const geometryVertexBuffer = new Buffer();
-const geometryIndicesBuffer = new Buffer();
-
-geometryVertexBuffer.vertexBuffer(
-  interleaveTypedArray(
-    Float32Array,
-    [3, 3, 2],
-    geometry.positions,
-    geometry.normals,
-    geometry.uvs
-  )
-);
-geometryIndicesBuffer.indexBuffer(new Uint16Array(geometry.cells));
-
 // Pipeline
 const pipeline = new Pipeline({
-  bindGroupLayouts: [systemBindGroupLayout, meshBindGroupLayout],
+  // bindGroupLayouts: [systemBindGroupLayout, meshBindGroupLayout],
   ins: [
     new Attribute("position", "vec3"),
     new Attribute("normal", "vec3"),
@@ -163,6 +72,20 @@ const pipeline = new Pipeline({
   ],
 
   // WGSL
+  vertexBody: /* wgsl */ `
+struct SystemUniform {
+  projectionMatrix: mat4x4<f32>,
+  viewMatrix: mat4x4<f32>,
+};
+
+@group(0) @binding(0) var<uniform> system: SystemUniform;
+
+struct MeshUniform {
+  modelMatrix: mat4x4<f32>,
+};
+
+@group(1) @binding(0) var<uniform> mesh: MeshUniform;
+`,
   vertex: /* wgsl */ `
   var output: Output;
   output.vNormal = normal;
@@ -171,6 +94,23 @@ const pipeline = new Pipeline({
   output.position = system.projectionMatrix * system.viewMatrix * mesh.modelMatrix * vec4<f32>(position, 1.0);
 
   return output;
+`,
+  fragmentBody: /* wgsl */ `
+struct SystemUniform {
+  projectionMatrix: mat4x4<f32>,
+  viewMatrix: mat4x4<f32>,
+};
+
+@group(0) @binding(0) var<uniform> system: SystemUniform;
+
+struct MeshUniform {
+  modelMatrix: mat4x4<f32>,
+};
+
+@group(1) @binding(0) var<uniform> mesh: MeshUniform;
+
+@group(1) @binding(1) var uSampler: sampler;
+@group(1) @binding(2) var uTexture: texture_2d<f32>;
 `,
   fragment: /* wgsl */ `
   // return vec4<f32>(vNormal * 0.5 + 0.5, 1.0);
@@ -194,6 +134,101 @@ outColor = texture(sampler2D(uTexture, uSampler), vUv);
 `,
   },
 });
+
+// Layouts
+// const systemBindGroupLayout = new BindGroupLayout([
+//   {
+//     buffer: {},
+//     visibility: GPUShaderStage.VERTEX,
+//     name: "System",
+//     uniforms: [
+//       new Uniform("projectionMatrix", "mat4"),
+//       new Uniform("viewMatrix", "mat4"),
+//     ],
+//   },
+// ]);
+
+// const meshBindGroupLayout = new BindGroupLayout([
+//   {
+//     buffer: {},
+//     visibility: GPUShaderStage.VERTEX,
+//     name: "Mesh",
+//     uniforms: [new Uniform("modelMatrix", "mat4")],
+//   },
+//   {
+//     sampler: {},
+//     visibility: GPUShaderStage.FRAGMENT,
+//     name: "uSampler",
+//   },
+//   {
+//     texture: {},
+//     visibility: GPUShaderStage.FRAGMENT,
+//     name: "uTexture",
+//     dimension: "2d",
+//   },
+// ]);
+
+// Buffers
+const systemUniformsBuffer = new Buffer();
+// systemUniformsBuffer.uniformBuffer(systemBindGroupLayout.getBindGroupSize());
+systemUniformsBuffer.uniformBuffer(128);
+
+const meshUniformsBuffer = new Buffer();
+// meshUniformsBuffer.uniformBuffer(meshBindGroupLayout.getBindGroupSize());
+meshUniformsBuffer.uniformBuffer(64);
+
+// Bindings
+const systemUniformBindGroup = new BindGroup({
+  // layout: systemBindGroupLayout.gpuBindGroupLayout,
+  layout: pipeline.gpuPipeline.getBindGroupLayout(0),
+  resources: [
+    {
+      buffer: systemUniformsBuffer.gpuBuffer,
+      offset: 0,
+      // size: systemBindGroupLayout.getBindGroupSize(),
+    },
+  ],
+});
+
+const uvSampler = new Sampler();
+
+const uvImage = document.createElement("img");
+uvImage.src = "assets/uv.jpg";
+await uvImage.decode();
+
+const uvTexture = new Texture(null, uvImage);
+
+const meshUniformBindGroup = new BindGroup({
+  // layout: meshBindGroupLayout.gpuBindGroupLayout,
+  layout: pipeline.gpuPipeline.getBindGroupLayout(1),
+  resources: [
+    {
+      buffer: meshUniformsBuffer.gpuBuffer,
+      offset: 0,
+      // size: meshBindGroupLayout.getBindGroupSize(),
+    },
+    uvSampler.gpuSampler,
+    uvTexture.gpuTexture.createView(),
+  ],
+});
+
+// Geometry
+const modelMatrix = mat4.create();
+
+const geometry = cube();
+const geometryVertexBuffer = new Buffer();
+const geometryIndicesBuffer = new Buffer();
+
+geometryVertexBuffer.vertexBuffer(
+  interleaveTypedArray(
+    Float32Array,
+    [3, 3, 2],
+    geometry.positions,
+    geometry.normals,
+    geometry.uvs
+  )
+);
+geometryIndicesBuffer.indexBuffer(new Uint16Array(geometry.cells));
 
 // Command
 const clearCommand = new Command({
