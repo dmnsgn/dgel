@@ -1,20 +1,16 @@
-import { f as fromValues, c as create, a as create$1, l as lookAt, b as copy, i as invert, d as frustum, p as perspective, o as ortho, e as create$2, z as zero, s as subtract, g as distance, h as set, j as copy$1, k as create$3, m as copy$2, n as subtract$1, q as length, r as sub, t as add, u as scale, v as transformQuat, w as rotationTo, x as invert$1, y as glMatrix } from './common/vec2-1f2e5e13.js';
-import './common/es.string.replace-65abc735.js';
-import './common/es.typed-array.float32-array-a1e53042.js';
-import './common/es.typed-array.sort-b0d7095a.js';
-import './common/function-bind-context-dcf83647.js';
+import { f as fromValues, c as create, a as create$1, l as lookAt, b as copy, i as invert, d as frustum, p as perspective, o as ortho, e as create$2, z as zero, s as subtract, g as distance, h as set, j as copy$1, k as create$3, m as copy$2, n as subtract$1, q as length, r as sub, t as add, u as scale, v as transformQuat, w as rotationTo, x as invert$1, y as glMatrix } from './common/vec2-b921fb25.js';
+import './common/es.typed-array.with-04c207c6.js';
+import './common/object-create-d35021d9.js';
+import './common/map-iterate-5ecdf21b.js';
 
 // Camera
 var CameraType;
-
 (function (CameraType) {
   CameraType[CameraType["Camera"] = 0] = "Camera";
   CameraType[CameraType["Perspective"] = 1] = "Perspective";
   CameraType[CameraType["Orthographic"] = 2] = "Orthographic";
 })(CameraType || (CameraType = {}));
-
 var ControlsActions;
-
 (function (ControlsActions) {
   ControlsActions["Rotate"] = "Rotate";
   ControlsActions["RotatePolar"] = "RotatePolar";
@@ -22,9 +18,7 @@ var ControlsActions;
   ControlsActions["Dolly"] = "Dolly";
   ControlsActions["Zoom"] = "Zoom";
 })(ControlsActions || (ControlsActions = {}));
-
 var PointerManagerState;
-
 (function (PointerManagerState) {
   PointerManagerState["Idle"] = "Idle";
   PointerManagerState["MouseWheel"] = "MouseWheel";
@@ -49,13 +43,11 @@ class Camera {
     this.inverseViewMatrix = create$1();
     Object.assign(this, options);
   }
-
   update() {
     lookAt(this.viewMatrix, this.position, this.target, this.up);
     copy(this.inverseViewMatrix, this.viewMatrix);
     invert(this.inverseViewMatrix, this.inverseViewMatrix);
   }
-
 }
 
 class PerspectiveCamera extends Camera {
@@ -67,7 +59,6 @@ class PerspectiveCamera extends Camera {
     Object.assign(this, options);
     this.updateProjectionMatrix();
   }
-
   updateProjectionMatrix() {
     if (this.view) {
       const aspectRatio = this.view.totalSize[0] / this.view.totalSize[1];
@@ -88,7 +79,6 @@ class PerspectiveCamera extends Camera {
       perspective(this.projectionMatrix, this.fov, this.aspect, this.near, this.far);
     }
   }
-
 }
 
 class OrthographicCamera extends Camera {
@@ -103,7 +93,6 @@ class OrthographicCamera extends Camera {
     Object.assign(this, options);
     this.updateProjectionMatrix();
   }
-
   updateProjectionMatrix() {
     const dx = (this.right - this.left) / (2 / this.zoom);
     const dy = (this.top - this.bottom) / (2 / this.zoom);
@@ -113,7 +102,6 @@ class OrthographicCamera extends Camera {
     let right = cx + dx;
     let top = cy + dy;
     let bottom = cy - dy;
-
     if (this.view) {
       const zoomW = 1 / this.zoom / (this.view.size[0] / this.view.totalSize[0]);
       const zoomH = 1 / this.zoom / (this.view.size[1] / this.view.totalSize[1]);
@@ -124,14 +112,11 @@ class OrthographicCamera extends Camera {
       top -= scaleH * (this.view.offset[1] / zoomH);
       bottom = top - scaleH * (this.view.size[1] / zoomH);
     }
-
     ortho(this.projectionMatrix, left, right, bottom, top, this.near, this.far);
   }
-
 }
 
 var clamp_1 = clamp;
-
 function clamp(value, min, max) {
   return min < max ? value < min ? min : value > max ? max : value : value < max ? max : value > min ? min : value;
 }
@@ -181,35 +166,35 @@ function clamp(value, min, max) {
  *  another copy of "event || window.event".
  *
  */
-var _populated = false; // Browsers
 
-var _ie, _firefox, _opera, _webkit, _chrome; // Actual IE browser for compatibility mode
+var _populated = false;
 
+// Browsers
+var _ie, _firefox, _opera, _webkit, _chrome;
 
-var _ie_real_version; // Platforms
+// Actual IE browser for compatibility mode
+var _ie_real_version;
 
+// Platforms
+var _osx, _windows, _linux, _android;
 
-var _osx, _windows, _linux, _android; // Architectures
+// Architectures
+var _win64;
 
-
-var _win64; // Devices
-
-
+// Devices
 var _iphone, _ipad, _native;
-
 var _mobile;
-
 function _populate() {
   if (_populated) {
     return;
   }
+  _populated = true;
 
-  _populated = true; // To work around buggy JS libraries that can't handle multi-digit
+  // To work around buggy JS libraries that can't handle multi-digit
   // version numbers, Opera 10's user agent string claims it's Opera
   // 9, then later includes a Version/X.Y field:
   //
   // Opera/9.80 (foo) Presto/2.2.15 Version/10.10
-
   var uas = navigator.userAgent;
   var agent = /(?:MSIE.(\d+\.\d+))|(?:(?:Firefox|GranParadiso|Iceweasel).(\d+\.\d+))|(?:Opera(?:.+Version.|.)(\d+\.\d+))|(?:AppleWebKit.(\d+(?:\.\d+)?))|(?:Trident\/\d+\.\d+.*rv:(\d+\.\d+))/.exec(uas);
   var os = /(Mac OS X)|(Windows)|(Linux)/.exec(uas);
@@ -217,28 +202,26 @@ function _populate() {
   _ipad = /\b(iP[ao]d)/.exec(uas);
   _android = /Android/i.exec(uas);
   _native = /FBAN\/\w+;/i.exec(uas);
-  _mobile = /Mobile/i.exec(uas); // Note that the IE team blog would have you believe you should be checking
+  _mobile = /Mobile/i.exec(uas);
+
+  // Note that the IE team blog would have you believe you should be checking
   // for 'Win64; x64'.  But MSDN then reveals that you can actually be coming
   // from either x64 or ia64;  so ultimately, you should just check for Win64
   // as in indicator of whether you're in 64-bit IE.  32-bit IE on 64-bit
   // Windows will send 'WOW64' instead.
-
   _win64 = !!/Win64/.exec(uas);
-
   if (agent) {
-    _ie = agent[1] ? parseFloat(agent[1]) : agent[5] ? parseFloat(agent[5]) : NaN; // IE compatibility mode
-
+    _ie = agent[1] ? parseFloat(agent[1]) : agent[5] ? parseFloat(agent[5]) : NaN;
+    // IE compatibility mode
     if (_ie && document && document.documentMode) {
       _ie = document.documentMode;
-    } // grab the "true" ie version from the trident token if available
-
-
+    }
+    // grab the "true" ie version from the trident token if available
     var trident = /(?:Trident\/(\d+.\d+))/.exec(uas);
     _ie_real_version = trident ? parseFloat(trident[1]) + 4 : _ie;
     _firefox = agent[2] ? parseFloat(agent[2]) : NaN;
     _opera = agent[3] ? parseFloat(agent[3]) : NaN;
     _webkit = agent[4] ? parseFloat(agent[4]) : NaN;
-
     if (_webkit) {
       // We do not add the regexp to the above test, because it will always
       // match 'safari' only since 'AppleWebKit' appears before 'Chrome' in
@@ -251,7 +234,6 @@ function _populate() {
   } else {
     _ie = _firefox = _opera = _chrome = _webkit = NaN;
   }
-
   if (os) {
     if (os[1]) {
       // Detect OS X version.  If no version number matches, set _osx to true.
@@ -264,14 +246,12 @@ function _populate() {
     } else {
       _osx = false;
     }
-
     _windows = !!os[2];
     _linux = !!os[3];
   } else {
     _osx = _windows = _linux = false;
   }
 }
-
 var UserAgent_DEPRECATED = {
   /**
    *  Check if the UA is Internet Explorer.
@@ -282,7 +262,6 @@ var UserAgent_DEPRECATED = {
   ie: function () {
     return _populate() || _ie;
   },
-
   /**
    * Check if we're in Internet Explorer compatibility mode.
    *
@@ -292,7 +271,6 @@ var UserAgent_DEPRECATED = {
   ieCompatibilityMode: function () {
     return _populate() || _ie_real_version > _ie;
   },
-
   /**
    * Whether the browser is 64-bit IE.  Really, this is kind of weak sauce;  we
    * only need this because Skype can't handle 64-bit IE yet.  We need to remove
@@ -301,7 +279,6 @@ var UserAgent_DEPRECATED = {
   ie64: function () {
     return UserAgent_DEPRECATED.ie() && _win64;
   },
-
   /**
    *  Check if the UA is Firefox.
    *
@@ -311,7 +288,6 @@ var UserAgent_DEPRECATED = {
   firefox: function () {
     return _populate() || _firefox;
   },
-
   /**
    *  Check if the UA is Opera.
    *
@@ -321,7 +297,6 @@ var UserAgent_DEPRECATED = {
   opera: function () {
     return _populate() || _opera;
   },
-
   /**
    *  Check if the UA is WebKit.
    *
@@ -331,7 +306,6 @@ var UserAgent_DEPRECATED = {
   webkit: function () {
     return _populate() || _webkit;
   },
-
   /**
    *  For Push
    *  WILL BE REMOVED VERY SOON. Use UserAgent_DEPRECATED.webkit
@@ -339,7 +313,6 @@ var UserAgent_DEPRECATED = {
   safari: function () {
     return UserAgent_DEPRECATED.webkit();
   },
-
   /**
    *  Check if the UA is a Chrome browser.
    *
@@ -349,7 +322,6 @@ var UserAgent_DEPRECATED = {
   chrome: function () {
     return _populate() || _chrome;
   },
-
   /**
    *  Check if the user is running Windows.
    *
@@ -358,7 +330,6 @@ var UserAgent_DEPRECATED = {
   windows: function () {
     return _populate() || _windows;
   },
-
   /**
    *  Check if the user is running Mac OS X.
    *
@@ -368,7 +339,6 @@ var UserAgent_DEPRECATED = {
   osx: function () {
     return _populate() || _osx;
   },
-
   /**
    * Check if the user is running Linux.
    *
@@ -377,7 +347,6 @@ var UserAgent_DEPRECATED = {
   linux: function () {
     return _populate() || _linux;
   },
-
   /**
    * Check if the user is running on an iPhone or iPod platform.
    *
@@ -415,30 +384,31 @@ var UserAgent_DEPRECATED_1 = UserAgent_DEPRECATED;
  */
 
 var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+
 /**
  * Simple, lightweight module assisting with the detection and context of
  * Worker. Helps avoid circular dependencies and allows code to reason about
  * whether or not they are in a Worker, even if they never include the main
  * `ReactWorker` dependency.
  */
-
 var ExecutionEnvironment = {
   canUseDOM: canUseDOM,
   canUseWorkers: typeof Worker !== 'undefined',
   canUseEventListeners: canUseDOM && !!(window.addEventListener || window.attachEvent),
   canUseViewport: canUseDOM && !!window.screen,
   isInWorker: !canUseDOM // For now, this is true - might change in the future.
-
 };
+
 var ExecutionEnvironment_1 = ExecutionEnvironment;
 
 var useHasFeature;
-
 if (ExecutionEnvironment_1.canUseDOM) {
-  useHasFeature = document.implementation && document.implementation.hasFeature && // always returns true in newer browsers as per the standard.
+  useHasFeature = document.implementation && document.implementation.hasFeature &&
+  // always returns true in newer browsers as per the standard.
   // @see http://dom.spec.whatwg.org/#dom-domimplementation-hasfeature
   document.implementation.hasFeature('', '') !== true;
 }
+
 /**
  * Checks if an event is supported in the current execution environment.
  *
@@ -453,35 +423,30 @@ if (ExecutionEnvironment_1.canUseDOM) {
  * @internal
  * @license Modernizr 3.0.0pre (Custom Build) | MIT
  */
-
-
 function isEventSupported(eventNameSuffix, capture) {
   if (!ExecutionEnvironment_1.canUseDOM || capture && !('addEventListener' in document)) {
     return false;
   }
-
   var eventName = 'on' + eventNameSuffix;
   var isSupported = (eventName in document);
-
   if (!isSupported) {
     var element = document.createElement('div');
     element.setAttribute(eventName, 'return;');
     isSupported = typeof element[eventName] === 'function';
   }
-
   if (!isSupported && useHasFeature && eventNameSuffix === 'wheel') {
     // This is the only way to test support for the `wheel` event in IE9+.
     isSupported = document.implementation.hasFeature('Events.wheel', '3.0');
   }
-
   return isSupported;
 }
-
 var isEventSupported_1 = isEventSupported;
 
+// Reasonable defaults
 var PIXEL_STEP = 10;
 var LINE_HEIGHT = 40;
 var PAGE_HEIGHT = 800;
+
 /**
  * Mouse wheel (and 2-finger trackpad) support on the web sucks.  It is
  * complicated, thus this doc is long and (hopefully) detailed enough to answer
@@ -582,52 +547,40 @@ var PAGE_HEIGHT = 800;
  *         Firefox v4/Win7  |     undefined    |       3
  *
  */
-
-function normalizeWheel(
-/*object*/
-event)
-/*object*/
-{
+function normalizeWheel( /*object*/event) /*object*/{
   var sX = 0,
-      sY = 0,
-      // spinX, spinY
-  pX = 0,
-      pY = 0; // pixelX, pixelY
-  // Legacy
+    sY = 0,
+    // spinX, spinY
+    pX = 0,
+    pY = 0; // pixelX, pixelY
 
+  // Legacy
   if ('detail' in event) {
     sY = event.detail;
   }
-
   if ('wheelDelta' in event) {
     sY = -event.wheelDelta / 120;
   }
-
   if ('wheelDeltaY' in event) {
     sY = -event.wheelDeltaY / 120;
   }
-
   if ('wheelDeltaX' in event) {
     sX = -event.wheelDeltaX / 120;
-  } // side scrolling on FF with DOMMouseScroll
+  }
 
-
+  // side scrolling on FF with DOMMouseScroll
   if ('axis' in event && event.axis === event.HORIZONTAL_AXIS) {
     sX = sY;
     sY = 0;
   }
-
   pX = sX * PIXEL_STEP;
   pY = sY * PIXEL_STEP;
-
   if ('deltaY' in event) {
     pY = event.deltaY;
   }
-
   if ('deltaX' in event) {
     pX = event.deltaX;
   }
-
   if ((pX || pY) && event.deltaMode) {
     if (event.deltaMode == 1) {
       // delta in LINE units
@@ -638,17 +591,15 @@ event)
       pX *= PAGE_HEIGHT;
       pY *= PAGE_HEIGHT;
     }
-  } // Fall-back if spin cannot be determined
+  }
 
-
+  // Fall-back if spin cannot be determined
   if (pX && !sX) {
     sX = pX < 1 ? -1 : 1;
   }
-
   if (pY && !sY) {
     sY = pY < 1 ? -1 : 1;
   }
-
   return {
     spinX: sX,
     spinY: sY,
@@ -656,19 +607,15 @@ event)
     pixelY: pY
   };
 }
+
 /**
  * The best combination if you prefer spinX + spinY normalization.  It favors
  * the older DOMMouseScroll for Firefox, as FF does not include wheelDelta with
  * 'wheel' event, making spin speed determination impossible.
  */
-
-
-normalizeWheel.getEventType = function ()
-/*string*/
-{
+normalizeWheel.getEventType = function () /*string*/{
   return UserAgent_DEPRECATED_1.firefox() ? 'DOMMouseScroll' : isEventSupported_1('wheel') ? 'wheel' : 'mousewheel';
 };
-
 var normalizeWheel_1 = normalizeWheel;
 
 var normalizeWheel$1 = normalizeWheel_1;
@@ -695,52 +642,42 @@ class PointerManager {
     this.handleDragging = this.handleDragging.bind(this);
     this.onPointerUp = this.onPointerUp.bind(this);
   }
-
   static isTouchEvent(event) {
     return HAS_TOUCH_EVENTS && event instanceof TouchEvent;
   }
-
   enable() {
     this.isElementRoot = this.element === document.body;
-
     if (this.config.wheel) {
       this.element.addEventListener(WHEEL_EVENT, this.onMouseWheel);
     }
-
     if (this.config.drag) {
       this.element.addEventListener("mousedown", this.onMouseDown);
       this.element.addEventListener("touchstart", this.onTouchStart);
     }
   }
-
   disable() {
     if (this.config.wheel) {
       this.element.removeEventListener(WHEEL_EVENT, this.onMouseWheel);
     }
-
     if (this.config.drag) {
       this.element.removeEventListener("mousedown", this.onMouseDown);
       this.element.removeEventListener("touchstart", this.onTouchStart);
     }
-  } // Compute position helpers
-
-
+  }
+  // Compute position helpers
   setClientSize(out) {
     const element = this.isElementRoot ? document.documentElement : this.element;
     out[0] = element.clientWidth;
     out[1] = element.clientHeight;
   }
-
   setTouchBaryCenter(out, event) {
     for (let i = 0; i < event.touches.length; i++) {
       out[0] += event.touches[i].clientX;
       out[1] += event.touches[i].clientY;
     }
-
     out[0] /= event.touches.length;
     out[1] /= event.touches.length;
   }
-
   getPointerPosition(event) {
     if (PointerManager.isTouchEvent(event)) {
       zero(tempPointer);
@@ -749,10 +686,8 @@ class PointerManager {
       tempPointer[0] = event.clientX;
       tempPointer[1] = event.clientY;
     }
-
     return tempPointer;
   }
-
   getElementPosition() {
     return this.isElementRoot ? VEC2_IDENTITY : (() => {
       const {
@@ -764,48 +699,41 @@ class PointerManager {
       return tempElement;
     })();
   }
-
   setRelativePosition(out, event) {
     subtract(out, this.getPointerPosition(event), this.getElementPosition());
-  } // Dragging
-
-
+  }
+  // Dragging
   initDragging(event) {
     this.setRelativePosition(this.initialPosition, event);
     this.setClientSize(this.clientSize);
-
     if (PointerManager.isTouchEvent(event) && event.touches.length >= 2) {
       const {
         clientX,
         clientY
-      } = event.touches[1]; // Get finger distance
-
-      this.initialTouchDistance = distance([clientX, clientY], this.initialPosition); // Set position to center
-
+      } = event.touches[1];
+      // Get finger distance
+      this.initialTouchDistance = distance([clientX, clientY], this.initialPosition);
+      // Set position to center
       set(this.lastPosition, (event.touches[0].clientX + clientX) * 0.5, (event.touches[0].clientY + clientY) * 0.5);
     } else {
       copy$1(this.lastPosition, this.initialPosition);
     }
-
     document.addEventListener("mousemove", this.handleDragging);
     document.addEventListener("touchmove", this.handleDragging, EVENT_LISTENER_OPTIONS);
     document.addEventListener("mouseup", this.onPointerUp);
     document.addEventListener("touchend", this.onPointerUp);
   }
-
   handleDragging(event) {
     event.preventDefault();
     this.setRelativePosition(this.movePosition, event);
     let dx = 0;
     let dy = 0;
-
     if (PointerManager.isTouchEvent(event) && event.touches.length >= 2) {
       dy = this.initialTouchDistance - distance([event.touches[1].clientX, event.touches[1].clientY], this.movePosition);
     } else {
       dx = (this.movePosition[0] - this.lastPosition[0]) / this.clientSize[1];
       dy = (this.movePosition[1] - this.lastPosition[1]) / this.clientSize[1];
     }
-
     copy$1(this.lastPosition, this.movePosition);
     this.onPointerUpdate({
       state: this.state,
@@ -813,9 +741,8 @@ class PointerManager {
       dy,
       originalEvent: event
     });
-  } // Event handlers
-
-
+  }
+  // Event handlers
   onMouseWheel(event) {
     this.state = PointerManagerState.MouseWheel;
     this.onPointerUpdate({
@@ -825,20 +752,17 @@ class PointerManager {
       dy: normalizeWheel$1(event).pixelY / 100
     });
   }
-
   onMouseDown(event) {
     const prevState = this.state;
     this.state = PointerManager.BUTTONS[event.button];
     if (prevState !== this.state) this.initDragging(event);
   }
-
   onTouchStart(event) {
     event.preventDefault();
     const prevState = this.state;
     this.state = PointerManager.TOUCHES[event.touches.length];
     if (prevState !== this.state) this.initDragging(event);
   }
-
   onPointerUp() {
     this.state = PointerManagerState.Idle;
     document.removeEventListener("mousemove", this.handleDragging);
@@ -846,7 +770,6 @@ class PointerManager {
     document.removeEventListener("mouseup", this.onPointerUp);
     document.removeEventListener("touchend", this.onPointerUp);
   }
-
 }
 PointerManager.BUTTONS = [PointerManagerState.MouseLeft, PointerManagerState.MouseMiddle, PointerManagerState.MouseRight];
 PointerManager.TOUCHES = [PointerManagerState.Idle, PointerManagerState.TouchOne, PointerManagerState.TouchTwo, PointerManagerState.TouchThree];
@@ -886,20 +809,20 @@ class Controls {
     this.targetTarget = create();
     this.upQuat = create$3();
     this.upQuatInverse = create$3();
-    Object.assign(this, options); // Set by spherical angle and optional distance
-
+    Object.assign(this, options);
+    // Set by spherical angle and optional distance
     if (options.theta || options.phi) {
       this.updatePosition();
-    } // Set by position and optional target
+    }
+    // Set by position and optional target
     else {
       if (!options.position) copy$2(this.position, options.camera.position);
       subtract$1(TEMP, this.position, this.target);
       this.distance = length(TEMP);
       this.theta = Math.atan2(this.position[0], this.position[2]);
       this.phi = Math.acos(clamp_1(this.position[1] / this.distance, -1, 1));
-    } // Init private targets
-
-
+    }
+    // Init private targets
     this.sphericalTarget[0] = this.theta;
     this.sphericalTarget[1] = this.phi;
     this.sphericalTarget[2] = this.distance;
@@ -916,16 +839,13 @@ class Controls {
     });
     this.pointerManager.enable();
   }
-
   static isNegligeable(number) {
     return Math.abs(number) < EPSILON;
-  } // Actions
-
-
+  }
+  // Actions
   handleDolly(event) {
     if (!this.dolly) return;
     let delta = event.dy;
-
     switch (event.state) {
       case PointerManagerState.MouseLeft:
       case PointerManagerState.MouseRight:
@@ -934,44 +854,36 @@ class Controls {
           delta *= 20;
           break;
         }
-
       case PointerManagerState.TouchTwo:
         {
           delta /= 20;
           break;
         }
     }
-
     this.sphericalTarget[2] += clamp_1(delta * this.dollySpeed, -this.dollyMaxDelta, this.dollyMaxDelta);
   }
-
   handleRotateAzimuth(event) {
     this.sphericalTarget[0] -= clamp_1(PI2 * event.dx * this.rotateSpeed, -this.rotateMaxThetaDelta, this.rotateMaxThetaDelta);
   }
-
   handleRotatePolar(event) {
     this.sphericalTarget[1] -= clamp_1(PI2 * event.dy * this.rotateSpeed, -this.rotateMaxPhiDelta, this.rotateMaxPhiDelta);
   }
-
   handleRotate(event) {
     if (!this.rotate) return;
     this.handleRotateAzimuth(event);
     this.handleRotatePolar(event);
-  } // Pointer Event handlers
-
-
+  }
+  // Pointer Event handlers
   onPointerUpdate(event) {
     this[`handle${this.config[event.state]}`](event);
-  } // Update
-
-
+  }
+  // Update
   updatePosition() {
     this.distance = Math.max(EPSILON, this.distance);
     this.position[0] = this.distance * Math.sin(this.phi) * Math.sin(this.theta);
     this.position[1] = this.distance * Math.cos(this.phi);
     this.position[2] = this.distance * Math.sin(this.phi) * Math.cos(this.theta);
   }
-
   update() {
     const dampRatio = 1 - this.damping;
     const deltaTheta = this.sphericalTarget[0] - this.theta;
@@ -979,7 +891,6 @@ class Controls {
     const deltaDistance = this.sphericalTarget[2] - this.distance;
     const deltaTarget = create();
     sub(deltaTarget, this.targetTarget, this.target);
-
     if (!Controls.isNegligeable(deltaTheta) || !Controls.isNegligeable(deltaPhi) || !Controls.isNegligeable(deltaDistance) || !Controls.isNegligeable(deltaTarget[0]) || !Controls.isNegligeable(deltaTarget[1]) || !Controls.isNegligeable(deltaTarget[2])) {
       this.theta = this.theta + deltaTheta * dampRatio;
       this.phi = this.phi + deltaPhi * dampRatio;
@@ -992,19 +903,17 @@ class Controls {
       copy$2(this.targetTarget, this.target);
       copy$2(this.target, deltaTarget);
     }
-
     subtract$1(this.position, this.position, this.target);
     transformQuat(this.position, this.position, this.upQuat);
     this.phi = clamp_1(this.phi, EPSILON, Math.PI - EPSILON);
     this.distance = clamp_1(this.distance, this.distanceBounds[0], this.distanceBounds[1]);
     rotationTo(this.upQuat, this.camera.up, Controls.Y_UP);
     invert$1(this.upQuatInverse, this.upQuat);
-    this.updatePosition(); // TODO: copy directly into camera as an option
-
+    this.updatePosition();
+    // TODO: copy directly into camera as an option
     transformQuat(this.position, this.position, this.upQuatInverse);
     add(this.position, this.target, this.position);
   }
-
 }
 Controls.Y_UP = fromValues(0, 1, 0);
 
