@@ -17,7 +17,7 @@ class Command {
   public count?: number;
   public instances?: number;
 
-  public dispatch?: number | [number, number?, number?];
+  public dispatchWorkgroups?: number | [number, number?, number?];
 
   constructor(options: Command) {
     Object.assign(this, options);

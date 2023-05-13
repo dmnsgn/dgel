@@ -1,6 +1,6 @@
 {
   "name": "dgel",
-  "version": "0.15.0",
+  "version": "0.16.0",
   "description": "A WebGPU engine.",
   "keywords": [
     "webgpu",
@@ -41,17 +41,17 @@
   "devDependencies": {
     "@types/gl-matrix": "^2.4.5",
     "@webgpu/glslang": "0.0.15",
-    "@webgpu/types": "0.1.27",
+    "@webgpu/types": "^0.1.31",
     "cameras": "^3.1.1",
     "concat-typed-array": "^2.1.0",
-    "core-js": "^3.28.0",
-    "es-module-shims": "^1.6.3",
+    "core-js": "^3.30.2",
+    "es-module-shims": "^1.7.2",
     "interleave-typed-array": "^1.1.0",
-    "prettier": "^2.8.4",
+    "prettier": "^2.8.8",
     "primitive-geometry": "^2.9.1",
     "seedrandom": "^3.0.5",
-    "tweakpane": "^3.1.4",
-    "typescript": "^4.9.5"
+    "tweakpane": "^3.1.9",
+    "typescript": "^5.0.4"
   },
   "engines": {
     "node": ">=15.0.0",

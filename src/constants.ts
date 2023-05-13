@@ -56,7 +56,7 @@ export const GPUIndexFormat: { [key: string]: GPUIndexFormat } = {
 };
 // https://gpuweb.github.io/gpuweb/#canvas-configuration
 export const GPUCanvasCompositingAlphaMode: {
-  [key: string]: GPUCanvasCompositingAlphaMode;
+  [key: string]: GPUCanvasAlphaMode;
 } = {
   Opaque: "opaque",
   Premultiplied: "premultiplied",

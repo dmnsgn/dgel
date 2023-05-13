@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# [0.16.0](https://github.com/dmnsgn/dgel/compare/v0.15.0...v0.16.0) (2023-05-13)
+
+
+### Features
+
+* rename dispatch to dispatchWorkgroups ([9676382](https://github.com/dmnsgn/dgel/commit/9676382421ae4db2e602f587860bed261c0a7021))
+
+
+
 # [0.15.0](https://github.com/dmnsgn/dgel/compare/v0.14.0...v0.15.0) (2023-02-19)
 
 

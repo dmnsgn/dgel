@@ -175,11 +175,11 @@ class Context {
         0,
         0
       );
-    } else if (command.dispatch) {
-      (this.passEncoder as GPUComputePassEncoder).dispatch(
-        ...((Array.isArray(command.dispatch)
-          ? command.dispatch
-          : [command.dispatch]) as [number, number?, number?])
+    } else if (command.dispatchWorkgroups) {
+      (this.passEncoder as GPUComputePassEncoder).dispatchWorkgroups(
+        ...((Array.isArray(command.dispatchWorkgroups)
+          ? command.dispatchWorkgroups
+          : [command.dispatchWorkgroups]) as [number, number?, number?])
       );
     }
 
