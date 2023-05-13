@@ -41,7 +41,7 @@
   "devDependencies": {
     "@types/gl-matrix": "^2.4.5",
     "@webgpu/glslang": "0.0.15",
-    "@webgpu/types": "0.1.32",
+    "@webgpu/types": "^0.1.31",
     "cameras": "^3.1.1",
     "concat-typed-array": "^2.1.0",
     "core-js": "^3.30.2",
