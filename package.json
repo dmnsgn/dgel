@@ -25,7 +25,12 @@
   "license": "MIT",
   "author": "Damien Seguin (https://github.com/dmnsgn)",
   "type": "module",
-  "exports": "./lib/index.js",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "default": "./lib/index.js"
+    }
+  },
   "main": "lib/index.js",
   "module": "lib/index.js",
   "types": "types/index.d.ts",
