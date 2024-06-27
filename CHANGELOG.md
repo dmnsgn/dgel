@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.17.1](https://github.com/dmnsgn/dgel/compare/v0.17.0...v0.17.1) (2024-06-27)
+
+
+### Bug Fixes
+
+* twgsl url ([aa9ad39](https://github.com/dmnsgn/dgel/commit/aa9ad39bb80e316e3570e5d5f49b5be75f7db09b))
+
+
+
 # [0.17.0](https://github.com/dmnsgn/dgel/compare/v0.16.0...v0.17.0) (2024-06-27)
 
 
