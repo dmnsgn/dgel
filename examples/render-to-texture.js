@@ -21,8 +21,8 @@ import {
 } from "../lib/index.js";
 
 import { mat4 } from "gl-matrix";
-import interleaveTypedArray from "interleave-typed-array";
-import concatTypedArray from "concat-typed-array";
+import interleaveTypedArray from "typed-array-interleave";
+import concatTypedArray from "typed-array-concat";
 import { PerspectiveCamera, Controls } from "cameras";
 import { cube } from "primitive-geometry";
 import { Pane } from "tweakpane";
@@ -347,10 +347,10 @@ window.addEventListener("resize", onResize);
 
 // GUI
 const pane = new Pane({ title: "Parameters" });
-pane.addInput(CONFIG, "debug").on("change", (event) => {
+pane.addBinding(CONFIG, "debug").on("change", (event) => {
   drawGeometryToTextureCommand.pipeline.fragmentTargets = !event.value
     ? [{ format: rttFormat }]
     : [{ format: "bgra8unorm" }];
   drawGeometryToTextureCommand.pipeline.init();
 });
-pane.addInput(CONFIG, "rotate");
+pane.addBinding(CONFIG, "rotate");

@@ -20,8 +20,8 @@ import {
 } from "../lib/index.js";
 
 import { mat4 } from "gl-matrix";
-import interleaveTypedArray from "interleave-typed-array";
-import concatTypedArray from "concat-typed-array";
+import interleaveTypedArray from "typed-array-interleave";
+import concatTypedArray from "typed-array-concat";
 import { PerspectiveCamera, Controls } from "cameras";
 import { torus } from "primitive-geometry";
 

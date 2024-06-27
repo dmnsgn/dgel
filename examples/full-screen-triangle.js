@@ -17,7 +17,7 @@ import {
   WGSLBuiltIn,
 } from "../lib/index.js";
 
-import interleaveTypedArray from "interleave-typed-array";
+import interleaveTypedArray from "typed-array-interleave";
 
 State.debug = true;
 
