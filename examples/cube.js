@@ -20,8 +20,8 @@ import {
 } from "../lib/index.js";
 
 import { mat4 } from "gl-matrix";
-import interleaveTypedArray from "typed-array-interleave";
-import concatTypedArray from "typed-array-concat";
+import typedArrayInterleave from "typed-array-interleave";
+import typedArrayConcat from "typed-array-concat";
 import { PerspectiveCamera, Controls } from "cameras";
 import { cube } from "primitive-geometry";
 import { Pane } from "tweakpane";
@@ -139,7 +139,7 @@ const geometryVertexBuffer = new Buffer();
 const geometryIndicesBuffer = new Buffer();
 
 geometryVertexBuffer.vertexBuffer(
-  interleaveTypedArray(
+  typedArrayInterleave(
     Float32Array,
     [3, 3, 2],
     geometry.positions,
@@ -229,7 +229,7 @@ requestAnimationFrame(function frame() {
 
   systemUniformsBuffer.setSubData(
     0,
-    concatTypedArray(Float32Array, camera.projectionMatrix, camera.viewMatrix)
+    typedArrayConcat(Float32Array, camera.projectionMatrix, camera.viewMatrix)
   );
   meshUniformsBuffer.setSubData(0, modelMatrix);
 

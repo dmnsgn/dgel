@@ -20,8 +20,8 @@ import {
 } from "../lib/index.js";
 
 import { mat4 } from "gl-matrix";
-import interleaveTypedArray from "typed-array-interleave";
-import concatTypedArray from "typed-array-concat";
+import typedArrayInterleave from "typed-array-interleave";
+import typedArrayConcat from "typed-array-concat";
 import { PerspectiveCamera, Controls } from "cameras";
 import { torus } from "primitive-geometry";
 import { Pane } from "tweakpane";
@@ -127,7 +127,7 @@ const geometryVertexBuffer = new Buffer();
 const geometryIndicesBuffer = new Buffer();
 
 geometryVertexBuffer.vertexBuffer(
-  interleaveTypedArray(
+  typedArrayInterleave(
     Float32Array,
     [3, 3, 2],
     geometry.positions,
@@ -434,7 +434,7 @@ requestAnimationFrame(function frame() {
 
   systemUniformsBuffer.setSubData(
     0,
-    concatTypedArray(
+    typedArrayConcat(
       Float32Array,
       camera.projectionMatrix,
       camera.viewMatrix,
@@ -452,7 +452,7 @@ requestAnimationFrame(function frame() {
 
   meshUniformsBuffer.setSubData(
     0,
-    concatTypedArray(Float32Array, modelMatrix, normalMatrix)
+    typedArrayConcat(Float32Array, modelMatrix, normalMatrix)
   );
 
   context.render(() => {
@@ -469,7 +469,7 @@ window.addEventListener("resize", onResize);
 
 // GUI
 const pane = new Pane({ title: "Parameters" });
-pane.addButton({ title: "GLSL" }).on("click", (event) => {
+pane.addButton({ title: "Use GLSL (see in console)" }).on("click", (event) => {
   Object.assign(pipeline, pipeline.glsl);
   pipeline.init();
 });
