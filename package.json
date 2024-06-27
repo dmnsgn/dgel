@@ -1,6 +1,6 @@
 {
   "name": "dgel",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "description": "A WebGPU engine.",
   "keywords": [
     "webgpu",
@@ -11,7 +11,10 @@
   ],
   "homepage": "https://github.com/dmnsgn/dgel",
   "bugs": "https://github.com/dmnsgn/dgel/issues",
-  "repository": "dmnsgn/dgel",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmnsgn/dgel.git"
+  },
   "funding": [
     {
       "type": "individual",
@@ -25,7 +28,12 @@
   "license": "MIT",
   "author": "Damien Seguin (https://github.com/dmnsgn)",
   "type": "module",
-  "exports": "./lib/index.js",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "default": "./lib/index.js"
+    }
+  },
   "main": "lib/index.js",
   "module": "lib/index.js",
   "types": "types/index.d.ts",
@@ -36,36 +44,37 @@
   },
   "dependencies": {
     "gl-matrix": "^3.4.3",
-    "tslib": "^2.5.0"
+    "tslib": "^2.6.3"
   },
   "devDependencies": {
     "@types/gl-matrix": "^2.4.5",
     "@webgpu/glslang": "0.0.15",
-    "@webgpu/types": "^0.1.31",
+    "@webgpu/types": "^0.1.43",
     "cameras": "^3.1.1",
-    "concat-typed-array": "^2.1.0",
-    "core-js": "^3.30.2",
-    "es-module-shims": "^1.7.2",
-    "interleave-typed-array": "^1.1.0",
-    "prettier": "^2.8.8",
-    "primitive-geometry": "^2.9.1",
+    "canvas-record": "^5.0.1",
+    "es-module-shims": "^1.10.0",
+    "primitive-geometry": "^2.10.1",
     "seedrandom": "^3.0.5",
-    "tweakpane": "^3.1.9",
-    "typescript": "^5.0.4"
+    "tweakpane": "^4.0.3",
+    "typed-array-concat": "^3.0.0",
+    "typed-array-interleave": "^2.0.0",
+    "typescript": "^5.5.2"
   },
   "engines": {
-    "node": ">=15.0.0",
-    "npm": ">=7.0.0"
+    "node": ">=22.0.0",
+    "npm": ">=10.5.1",
+    "snowdev": ">=2.1.x"
   },
   "snowdev": {
     "dependencies": [
       "@webgpu/glslang/dist/web-devel/glslang.js",
       "@webgpu/glslang/dist/web-devel/glslang.wasm",
       "es-module-shims",
-      "concat-typed-array",
+      "typed-array-concat",
+      "canvas-record",
       "cameras",
       "gl-matrix",
-      "interleave-typed-array",
+      "typed-array-interleave",
       "primitive-geometry",
       "seedrandom",
       "tweakpane"

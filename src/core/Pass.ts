@@ -6,7 +6,7 @@ class Pass {
     public type: PassType,
     public colorAttachments?: Attachment[],
     public depthAttachment?: Attachment,
-    public stencilAttachment?: Attachment
+    public stencilAttachment?: Attachment,
   ) {}
 
   public get descriptor(): GPURenderPassDescriptor | null {
@@ -21,7 +21,7 @@ class Pass {
                 clearValue: colorAttachment.value,
                 loadOp: colorAttachment.op,
                 storeOp: colorAttachment.storeOp,
-              } as GPURenderPassColorAttachment)
+              }) as GPURenderPassColorAttachment,
           ),
         }),
         ...((this.depthAttachment || this.stencilAttachment) && {

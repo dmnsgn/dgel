@@ -21,8 +21,8 @@ import {
 } from "../lib/index.js";
 
 import { mat4 } from "gl-matrix";
-import interleaveTypedArray from "interleave-typed-array";
-import concatTypedArray from "concat-typed-array";
+import typedArrayInterleave from "typed-array-interleave";
+import typedArrayConcat from "typed-array-concat";
 import { PerspectiveCamera, Controls } from "cameras";
 import { cube } from "primitive-geometry";
 import { Pane } from "tweakpane";
@@ -153,7 +153,7 @@ const geometryVertexBuffer = new Buffer();
 const geometryIndicesBuffer = new Buffer();
 
 geometryVertexBuffer.vertexBuffer(
-  interleaveTypedArray(
+  typedArrayInterleave(
     Float32Array,
     [3, 3, 2],
     geometry.positions,
@@ -318,7 +318,7 @@ requestAnimationFrame(function frame() {
 
   systemUniformsBuffer.setSubData(
     0,
-    concatTypedArray(Float32Array, camera.projectionMatrix, camera.viewMatrix)
+    typedArrayConcat(Float32Array, camera.projectionMatrix, camera.viewMatrix)
   );
   meshUniformsBuffer.setSubData(0, modelMatrix);
   meshUniformsBufferRTT.setSubData(0, modelMatrixRTT);
@@ -347,10 +347,10 @@ window.addEventListener("resize", onResize);
 
 // GUI
 const pane = new Pane({ title: "Parameters" });
-pane.addInput(CONFIG, "debug").on("change", (event) => {
+pane.addBinding(CONFIG, "debug").on("change", (event) => {
   drawGeometryToTextureCommand.pipeline.fragmentTargets = !event.value
     ? [{ format: rttFormat }]
     : [{ format: "bgra8unorm" }];
   drawGeometryToTextureCommand.pipeline.init();
 });
-pane.addInput(CONFIG, "rotate");
+pane.addBinding(CONFIG, "rotate");

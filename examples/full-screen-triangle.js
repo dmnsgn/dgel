@@ -17,7 +17,7 @@ import {
   WGSLBuiltIn,
 } from "../lib/index.js";
 
-import interleaveTypedArray from "interleave-typed-array";
+import typedArrayInterleave from "typed-array-interleave";
 
 State.debug = true;
 
@@ -62,7 +62,7 @@ const geometryVertexBuffer = new Buffer();
 const geometryIndicesBuffer = new Buffer();
 
 geometryVertexBuffer.vertexBuffer(
-  interleaveTypedArray(
+  typedArrayInterleave(
     Float32Array,
     [2, 2],
     new Float32Array([-1, -1, 3, -1, -1, 3]),

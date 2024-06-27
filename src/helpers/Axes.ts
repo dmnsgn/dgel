@@ -32,7 +32,7 @@ class Axes {
   constructor(
     systemBindGroupLayout: BindGroupLayout,
     systemUniformBindGroup: BindGroup,
-    pipelineOptions: PipelineOptions = {}
+    pipelineOptions: PipelineOptions = {},
   ) {
     // TODO: make generic draw line pipeline
     const pipeline = new Pipeline({
