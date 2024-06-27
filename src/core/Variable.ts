@@ -22,7 +22,7 @@ class Variable {
     public name: string,
     public type?: string,
     public visibility?: GPUShaderStageFlags,
-    public arrayCount?: number
+    public arrayCount?: number,
   ) {}
 
   // Type conversion
@@ -68,7 +68,7 @@ class Variable {
       // Scalars
       if (Object.values(GLSL_SCALARS_TO_WGSL).includes(this.type)) {
         return Object.keys(GLSL_SCALARS_TO_WGSL).find(
-          (key) => GLSL_SCALARS_TO_WGSL[key] === this.type
+          (key) => GLSL_SCALARS_TO_WGSL[key] === this.type,
         );
       }
       // Vectors
@@ -77,7 +77,7 @@ class Variable {
           WGSL_SCALARS_TO_GLSL_PREFIX[
             this.type.substring(
               this.type.indexOf("<") + 1,
-              this.type.lastIndexOf(">")
+              this.type.lastIndexOf(">"),
             )
           ];
 
@@ -140,7 +140,7 @@ class Variable {
   // https://www.khronos.org/registry/OpenGL/specs/gl/glspec45.core.pdf#page=159
   public static getAlignement(
     size: number,
-    qualifier?: GLSLLayoutQualifier
+    qualifier?: GLSLLayoutQualifier,
   ): number {
     // Shader storage blocks only
     if (!qualifier || qualifier === "std430") {

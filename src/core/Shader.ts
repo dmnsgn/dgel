@@ -61,7 +61,7 @@ void main() {${this.main}}`;
         ?.filter((struct) =>
           struct.visibility !== undefined
             ? struct.visibility === this.type
-            : true
+            : true,
         )
         .map((struct) => struct.getWGSLString())
         .join("\n") || "";
@@ -76,7 +76,7 @@ void main() {${this.main}}`;
             ...this.ins
               .filter((member) => member instanceof Attribute)
               .map((variable, index) =>
-                (variable as Attribute).getWGSLString(index)
+                (variable as Attribute).getWGSLString(index),
               ),
             ...this.ins
               .filter((member) => member instanceof Uniform)
@@ -107,7 +107,7 @@ void main() {${this.main}}`;
         ?.filter((struct) =>
           struct.visibility !== undefined
             ? struct.visibility === this.type
-            : true
+            : true,
         )
         .map((struct) => struct.getGLSLString())
         .join("\n") || "";
@@ -116,7 +116,7 @@ void main() {${this.main}}`;
         ?.filter((member) => !(member instanceof BuiltIn))
         .map(
           (attribute, index) =>
-            `layout(location = ${index}) in ${attribute.type} ${attribute.name};`
+            `layout(location = ${index}) in ${attribute.type} ${attribute.name};`,
         )
         .join("\n") || "";
     const outs =
@@ -124,7 +124,7 @@ void main() {${this.main}}`;
         ?.filter((member) => !(member instanceof BuiltIn))
         .map(
           (attribute, index) =>
-            `layout(location = ${index}) out ${attribute.type} ${attribute.name};`
+            `layout(location = ${index}) out ${attribute.type} ${attribute.name};`,
         )
         .join("\n") || "";
 

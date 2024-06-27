@@ -147,65 +147,65 @@ export const WGSLBuiltIn: { [key: string]: BuiltIn } = {
     "instance_index",
     "u32",
     GPUShaderStage.VERTEX,
-    "in"
+    "in",
   ),
   Position: new BuiltIn("position", "vec4<f32>", GPUShaderStage.VERTEX, "out"),
   PositionOut: new BuiltIn(
     "position",
     "vec4<f32>",
     GPUShaderStage.FRAGMENT,
-    "in"
+    "in",
   ),
   // Frag
   FrontFacing: new BuiltIn(
     "front_facing",
     "bool",
     GPUShaderStage.FRAGMENT,
-    "in"
+    "in",
   ),
   FragDepth: new BuiltIn("frag_depth", "f32", GPUShaderStage.FRAGMENT, "out"),
   SampleIndex: new BuiltIn(
     "sample_index",
     "u32",
     GPUShaderStage.FRAGMENT,
-    "in"
+    "in",
   ),
   SampleMask: new BuiltIn("sample_mask", "u32", GPUShaderStage.FRAGMENT, "in"),
   SampleMaskOut: new BuiltIn(
     "sample_mask",
     "u32",
     GPUShaderStage.FRAGMENT,
-    "out"
+    "out",
   ),
   // Compute
   LocalInvocationId: new BuiltIn(
     "local_invocation_id",
     "vec3<u32>",
     GPUShaderStage.COMPUTE,
-    "in"
+    "in",
   ),
   LocalInvocationIndex: new BuiltIn(
     "local_invocation_index",
     "u32",
     GPUShaderStage.COMPUTE,
-    "in"
+    "in",
   ),
   GlobalInvocationId: new BuiltIn(
     "global_invocation_id",
     "vec3<u32>",
     GPUShaderStage.COMPUTE,
-    "in"
+    "in",
   ),
   WorkgroupId: new BuiltIn(
     "workgroup_id",
     "vec3<u32>",
     GPUShaderStage.COMPUTE,
-    "in"
+    "in",
   ),
   NumWorkgroups: new BuiltIn(
     "num_workgroups",
     "vec3<u32>",
     GPUShaderStage.COMPUTE,
-    "in"
+    "in",
   ),
 };

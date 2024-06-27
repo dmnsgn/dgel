@@ -20,7 +20,7 @@ class Struct extends Variable {
     public name: string,
     public members: (Variable | Struct)[],
     public visibility?: GPUShaderStageFlags,
-    public arrayCount?: number
+    public arrayCount?: number,
   ) {
     super(name);
   }
@@ -70,7 +70,7 @@ class Struct extends Variable {
     const attributes = this.members
       .filter((member) => member instanceof Attribute)
       .map(
-        (variable, index) => (variable as Attribute).getWGSLString(index) + ","
+        (variable, index) => (variable as Attribute).getWGSLString(index) + ",",
       );
     const uniforms = this.members
       .filter((member) => member instanceof Uniform)

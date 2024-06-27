@@ -9,7 +9,7 @@ class Attachment {
 
   constructor(
     public value: GPUColorDict | GPUColor | number,
-    options: AttachmentOptions
+    options: AttachmentOptions,
   ) {
     Object.assign(this, options);
   }

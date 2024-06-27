@@ -5,7 +5,7 @@ class BuiltIn extends Variable {
     public name: string,
     public type: string,
     public visibility?: GPUShaderStageFlags,
-    public io?: string
+    public io?: string,
   ) {
     super(name, type);
   }

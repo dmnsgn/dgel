@@ -7,7 +7,7 @@ class Buffer {
   public create(
     usage: GPUBufferUsageFlags,
     data: ArrayBufferView | null,
-    size?: number
+    size?: number,
   ): Buffer {
     this.gpuBuffer = State.device.createBuffer({
       size: size || data.byteLength,
@@ -30,7 +30,7 @@ class Buffer {
     return this.create(
       GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST,
       null,
-      size
+      size,
     );
   }
 
@@ -56,7 +56,7 @@ class Buffer {
   public copyToBuffer(
     srcBuffer: GPUBuffer,
     offset: number,
-    byteCount: number
+    byteCount: number,
   ): void {
     const commandEncoder = State.device.createCommandEncoder();
     commandEncoder.copyBufferToBuffer(
@@ -64,7 +64,7 @@ class Buffer {
       0,
       this.gpuBuffer,
       offset,
-      byteCount
+      byteCount,
     );
     State.device.queue.submit([commandEncoder.finish()]);
   }
@@ -73,7 +73,7 @@ class Buffer {
     bytesPerRow: number,
     rowsPerImage: number,
     destination: GPUImageCopyTexture,
-    extent: GPUExtent3D
+    extent: GPUExtent3D,
   ): void {
     const commandEncoder = State.device.createCommandEncoder();
     commandEncoder.copyBufferToTexture(
@@ -83,7 +83,7 @@ class Buffer {
         rowsPerImage,
       },
       destination,
-      extent
+      extent,
     );
     State.device.queue.submit([commandEncoder.finish()]);
   }

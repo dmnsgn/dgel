@@ -11,7 +11,7 @@ class BindGroupLayout {
       entries: entries.map(
         (
           { visibility, buffer, sampler, texture, storageTexture },
-          binding
+          binding,
         ) => ({
           binding,
           visibility,
@@ -19,7 +19,7 @@ class BindGroupLayout {
           sampler,
           texture,
           storageTexture,
-        })
+        }),
       ),
     });
   }
@@ -52,7 +52,7 @@ class BindGroupLayout {
         .map(
           (uniform) =>
             uniform.getSize(entry.qualifiers?.layout) *
-            (uniform.arrayCount || 1)
+            (uniform.arrayCount || 1),
         )
         .reduce((a, b) => a + b, 0);
     }

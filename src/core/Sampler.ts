@@ -8,7 +8,7 @@ class Sampler {
       magFilter: "linear",
       minFilter: "linear",
       mipmapFilter: "linear",
-    }
+    },
   ) {
     this.gpuSampler = State.device.createSampler(descriptor);
   }

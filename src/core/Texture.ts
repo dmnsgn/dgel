@@ -14,7 +14,7 @@ class Texture {
 
   constructor(
     public descriptor: GPUTextureDescriptor,
-    public image: HTMLImageElement
+    public image: HTMLImageElement,
   ) {
     this.mipLevelCount = image
       ? Math.floor(Math.log2(Math.max(image.width, image.height))) + 1
@@ -55,7 +55,7 @@ class Texture {
     width: number,
     height: number,
     mipLevel: number,
-    face = -1
+    face = -1,
   ): void {
     imageCanvas.width = width;
     imageCanvas.height = height;
@@ -88,7 +88,7 @@ class Texture {
     const textureDataBuffer = new Buffer();
     textureDataBuffer.create(
       GPUBufferUsage.COPY_DST | GPUBufferUsage.COPY_SRC,
-      data
+      data,
     );
     textureDataBuffer.copyToTexture(
       bytesPerRow,
@@ -101,7 +101,7 @@ class Texture {
       {
         width,
         height,
-      }
+      },
     );
     textureDataBuffer.destroy();
   }

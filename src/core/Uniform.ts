@@ -5,7 +5,7 @@ class Uniform extends Variable {
     public name: string,
     public type: string,
     public visibility?: GPUShaderStageFlags,
-    public arrayCount?: number
+    public arrayCount?: number,
   ) {
     super(name, type);
   }

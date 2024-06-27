@@ -20,7 +20,7 @@ import {
 
 const isBindingVisible = (
   uniformOrBinding: Uniform | BindGroupLayoutEntry,
-  stage: GPUShaderStageFlags
+  stage: GPUShaderStageFlags,
 ): boolean =>
   !uniformOrBinding.visibility || uniformOrBinding.visibility === stage;
 
@@ -28,20 +28,20 @@ class Program {
   constructor(
     public bindGroupLayouts: BindGroupLayout[],
     public shaders: { [key in ShaderStageName]?: Shader },
-    public language: Language
+    public language: Language,
   ) {}
 
   public init(): void {
     const headers = this.bindGroupLayouts?.map((bindGroupLayout, index) =>
       this[`get${this.language.toUpperCase()}Headers`](
         index,
-        bindGroupLayout.entries
-      )
+        bindGroupLayout.entries,
+      ),
     );
 
     for (const [key, shader] of Object.entries(this.shaders)) {
       shader.init(
-        headers?.map((header) => header[key as ShaderStageName]).join("\n")
+        headers?.map((header) => header[key as ShaderStageName]).join("\n"),
       );
     }
   }
@@ -52,21 +52,21 @@ class Program {
     uniforms: Uniform[],
     set: number,
     storageClass: StorageClass,
-    accesMode?: AccessMode
+    accesMode?: AccessMode,
   ): string {
     const structName = `${binding.name}${formatUpperFirst(storageClass)}`;
     const params = new Struct(structName, uniforms).getWGSLString();
     const referenceType = [storageClass, accesMode].filter(Boolean).join(",");
     return /* wgsl */ `${params}
 @group(${set}) @binding(${bindingIndex}) var<${referenceType}> ${formatLowerFirst(
-      binding.name
+      binding.name,
     )}: ${structName};
 `;
   }
 
   public getWGSLHeaders(
     set: number,
-    entries: BindGroupLayoutEntry[]
+    entries: BindGroupLayoutEntry[],
   ): { [key in ShaderStageName]?: string } {
     let vertex = "";
     let fragment = "";
@@ -85,22 +85,22 @@ class Program {
           if (
             isBindingVisible(
               binding,
-              GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT
+              GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT,
             )
           ) {
             vertexUniforms = binding.uniforms;
             fragmentUniforms = binding.uniforms;
           } else {
             vertexUniforms = binding.uniforms.filter(() =>
-              isBindingVisible(binding, GPUShaderStage.VERTEX)
+              isBindingVisible(binding, GPUShaderStage.VERTEX),
             );
             fragmentUniforms = binding.uniforms.filter(() =>
-              isBindingVisible(binding, GPUShaderStage.FRAGMENT)
+              isBindingVisible(binding, GPUShaderStage.FRAGMENT),
             );
           }
 
           const computeUniforms = binding.uniforms.filter(() =>
-            isBindingVisible(binding, GPUShaderStage.COMPUTE)
+            isBindingVisible(binding, GPUShaderStage.COMPUTE),
           );
 
           if (vertexUniforms.length) {
@@ -109,7 +109,7 @@ class Program {
               i,
               vertexUniforms,
               set,
-              StorageClass.Uniform
+              StorageClass.Uniform,
             );
           }
 
@@ -119,7 +119,7 @@ class Program {
               i,
               fragmentUniforms,
               set,
-              StorageClass.Uniform
+              StorageClass.Uniform,
             );
           }
 
@@ -129,7 +129,7 @@ class Program {
               i,
               computeUniforms,
               set,
-              StorageClass.Uniform
+              StorageClass.Uniform,
             );
           }
         } else if (
@@ -141,7 +141,7 @@ class Program {
           ).includes(binding.buffer.type)
         ) {
           const computeVariables = binding.members.filter(() =>
-            isBindingVisible(binding, GPUShaderStage.COMPUTE)
+            isBindingVisible(binding, GPUShaderStage.COMPUTE),
           ) as Uniform[];
 
           compute += this.getWGSLBufferString(
@@ -152,7 +152,7 @@ class Program {
             StorageClass.Storage,
             binding.buffer.type === BindingType.ReadonlyStorage
               ? AccessMode.Read
-              : AccessMode.Write
+              : AccessMode.Write,
           );
         }
       } else if (binding.sampler) {
@@ -202,7 +202,7 @@ class Program {
     uniforms: Uniform[],
     set: number,
     bindingType: GLSLStorageQualifier,
-    layoutQualifierString: string
+    layoutQualifierString: string,
   ): string {
     const structName = `${binding.name}${formatUpperFirst(bindingType)}`;
 
@@ -212,7 +212,7 @@ class Program {
       (uniform) =>
         `${uniform.glslType} ${formatLowerFirst(uniform.name)}${
           uniform.arrayCount ? `[${uniform.arrayCount}]` : ""
-        };`
+        };`,
     )
     .join("\n  ")}
 } ${formatLowerFirst(binding.name)};\n\n`;
@@ -220,7 +220,7 @@ class Program {
 
   public getGLSLHeaders(
     set: number,
-    entries: BindGroupLayoutEntry[]
+    entries: BindGroupLayoutEntry[],
   ): { [key in ShaderStageName]?: string } {
     let vertex = "";
     let fragment = "";
@@ -245,22 +245,22 @@ class Program {
           if (
             isBindingVisible(
               binding,
-              GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT
+              GPUShaderStage.VERTEX | GPUShaderStage.FRAGMENT,
             )
           ) {
             vertexUniforms = binding.uniforms;
             fragmentUniforms = binding.uniforms;
           } else {
             vertexUniforms = binding.uniforms.filter(() =>
-              isBindingVisible(binding, GPUShaderStage.VERTEX)
+              isBindingVisible(binding, GPUShaderStage.VERTEX),
             );
             fragmentUniforms = binding.uniforms.filter(() =>
-              isBindingVisible(binding, GPUShaderStage.FRAGMENT)
+              isBindingVisible(binding, GPUShaderStage.FRAGMENT),
             );
           }
 
           const computeUniforms = binding.uniforms.filter(() =>
-            isBindingVisible(binding, GPUShaderStage.COMPUTE)
+            isBindingVisible(binding, GPUShaderStage.COMPUTE),
           );
 
           // Vertex
@@ -271,7 +271,7 @@ class Program {
               vertexUniforms,
               set,
               "uniform",
-              layoutQualifierString
+              layoutQualifierString,
             );
           }
 
@@ -283,7 +283,7 @@ class Program {
               fragmentUniforms,
               set,
               "uniform",
-              layoutQualifierString
+              layoutQualifierString,
             );
           }
 
@@ -294,12 +294,12 @@ class Program {
               computeUniforms,
               set,
               "uniform",
-              layoutQualifierString
+              layoutQualifierString,
             );
           }
         } else if (binding.buffer.type === StorageClass.Storage) {
           const computeVariables = binding.members.filter(() =>
-            isBindingVisible(binding, GPUShaderStage.COMPUTE)
+            isBindingVisible(binding, GPUShaderStage.COMPUTE),
           ) as Uniform[];
 
           compute += this.getGLSLBufferString(
@@ -308,7 +308,7 @@ class Program {
             computeVariables,
             set,
             "buffer",
-            layoutQualifierString
+            layoutQualifierString,
           );
         }
       } else if (binding.sampler) {
