@@ -12,7 +12,7 @@ import {
 
 const mapAttributes = (
   attributes: Attribute[],
-  locationOffset = 0
+  locationOffset = 0,
 ): GPUVertexBufferLayout[] => {
   let prevAttributeSize: number;
 
@@ -32,13 +32,14 @@ const mapAttributes = (
   }, []);
 };
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type, @typescript-eslint/no-unsafe-declaration-merging
 interface Pipeline extends PipelineOptions {}
 
 const DEFAULT_GLSL_FRAGMENT_OUT_COLOR: Attribute[] = [
   new Attribute("outColor", "vec4"),
 ];
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 class Pipeline {
   public gpuPipeline: GPUPipelineBase;
   public program: Program;
@@ -72,7 +73,7 @@ class Pipeline {
     let hasArrayOfAttributes = false;
     if (this.ins?.length > 0) {
       hasArrayOfAttributes = this.ins.some(
-        (variable) => variable instanceof Attribute
+        (variable) => variable instanceof Attribute,
       );
       insAttributes = hasArrayOfAttributes
         ? (this.ins as Attribute[])
@@ -95,14 +96,14 @@ class Pipeline {
             language: this.language,
           }),
         },
-        this.language
+        this.language,
       );
       this.program.init();
 
       this.gpuPipeline = State.device.createComputePipeline({
         layout: State.device.createPipelineLayout({
           bindGroupLayouts: this.bindGroupLayouts?.map(
-            (bindGroupLayout) => bindGroupLayout.gpuBindGroupLayout
+            (bindGroupLayout) => bindGroupLayout.gpuBindGroupLayout,
           ),
         }),
         compute: {
@@ -121,8 +122,8 @@ class Pipeline {
                 .reduce((a, b) => a + b, 0),
               attributes: mapAttributes(
                 (this.ins as Attribute[]).filter(
-                  (variable) => variable instanceof Attribute
-                )
+                  (variable) => variable instanceof Attribute,
+                ),
               ),
             },
           ] as GPUVertexBufferLayout[])
@@ -136,9 +137,9 @@ class Pipeline {
               attributes: mapAttributes(
                 attributes,
                 (this.ins as PipelineVertexBufferIns[])[index - 1]?.attributes
-                  .length || 0
+                  .length || 0,
               ),
-            })
+            }),
           ) as GPUVertexBufferLayout[]);
 
       this.program = new Program(
@@ -165,7 +166,7 @@ class Pipeline {
             language: this.language,
           }),
         },
-        this.language
+        this.language,
       );
       this.program.init();
 
@@ -174,7 +175,7 @@ class Pipeline {
           ? State.device.createPipelineLayout({
               bindGroupLayouts:
                 this.bindGroupLayouts.map(
-                  (bindGroupLayout) => bindGroupLayout.gpuBindGroupLayout
+                  (bindGroupLayout) => bindGroupLayout.gpuBindGroupLayout,
                 ) || [],
             })
           : "auto",

@@ -30,7 +30,7 @@ class Context {
     requestAdapter = {},
     deviceDescriptor = {},
     presentationContextDescriptor = {},
-    { glslangPath, twgslPath } = {},
+    { glslangPath = "", twgslPath = "" } = {},
   ): Promise<boolean> {
     try {
       if (!this.context) {
@@ -67,6 +67,7 @@ class Context {
         twgslPath ||
         new URL("/assets/twgsl.js", window.location.href).toString();
       await import(/* webpackIgnore: true */ twgslUrl);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       State.twgsl = await (window as any).twgsl(
         twgslUrl.replace(".js", ".wasm"),
       );
@@ -81,7 +82,7 @@ class Context {
   public resize(
     width: number,
     height: number,
-    presentationContextDescriptor = {}
+    presentationContextDescriptor = {},
   ): void {
     const w = width * this.pixelRatio;
     const h = height * this.pixelRatio;
@@ -143,7 +144,7 @@ class Context {
 
     if (command.pipeline) {
       this.passEncoder.setPipeline(
-        command.pipeline.gpuPipeline as GPURenderPipeline & GPUComputePipeline
+        command.pipeline.gpuPipeline as GPURenderPipeline & GPUComputePipeline,
       );
     }
 
@@ -151,7 +152,7 @@ class Context {
       for (let i = 0; i < command.vertexBuffers.length; i++) {
         (this.passEncoder as GPURenderPassEncoder).setVertexBuffer(
           i,
-          command.vertexBuffers[i].gpuBuffer
+          command.vertexBuffers[i].gpuBuffer,
         );
       }
     }
@@ -159,7 +160,7 @@ class Context {
     if (command.indexBuffer) {
       (this.passEncoder as GPURenderPassEncoder).setIndexBuffer(
         command.indexBuffer.gpuBuffer,
-        command.indexFormat
+        command.indexFormat,
       );
     }
 
@@ -175,20 +176,20 @@ class Context {
         command.instances || 1,
         0,
         0,
-        0
+        0,
       );
     } else if (command.count) {
       (this.passEncoder as GPURenderPassEncoder).draw(
         command.count,
         command.instances || 1,
         0,
-        0
+        0,
       );
     } else if (command.dispatchWorkgroups) {
       (this.passEncoder as GPUComputePassEncoder).dispatchWorkgroups(
         ...((Array.isArray(command.dispatchWorkgroups)
           ? command.dispatchWorkgroups
-          : [command.dispatchWorkgroups]) as [number, number?, number?])
+          : [command.dispatchWorkgroups]) as [number, number?, number?]),
       );
     }
 

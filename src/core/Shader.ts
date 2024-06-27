@@ -9,9 +9,10 @@ import { addLineNumbers, TAB } from "../utils.js";
 import { GPUShaderStageName } from "../constants.js";
 import { ShaderOptions } from "../types.js";
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type, @typescript-eslint/no-unsafe-declaration-merging
 interface Shader extends ShaderOptions {}
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-declaration-merging
 class Shader {
   public shaderModule: GPUShaderModule;
 
