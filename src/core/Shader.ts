@@ -48,7 +48,9 @@ void main() {${this.main}}`;
     this.shaderModule = State.device.createShaderModule({
       code: isWGSL
         ? this.source
-        : State.glslang.compileGLSL(this.source, stage),
+        : State.twgsl.convertSpirV2WGSL(
+            State.glslang.compileGLSL(this.source, stage),
+          ),
     });
   }
 

@@ -24,6 +24,7 @@ import interleaveTypedArray from "typed-array-interleave";
 import concatTypedArray from "typed-array-concat";
 import { PerspectiveCamera, Controls } from "cameras";
 import { torus } from "primitive-geometry";
+import { Pane } from "tweakpane";
 
 State.debug = true;
 
@@ -465,3 +466,10 @@ requestAnimationFrame(function frame() {
 clock.start();
 
 window.addEventListener("resize", onResize);
+
+// GUI
+const pane = new Pane({ title: "Parameters" });
+pane.addButton({ title: "GLSL" }).on("click", (event) => {
+  Object.assign(pipeline, pipeline.glsl);
+  pipeline.init();
+});

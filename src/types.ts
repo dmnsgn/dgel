@@ -56,6 +56,9 @@ export interface ContextState {
   glslang: {
     compileGLSL: (source: string, type: string) => string;
   };
+  twgsl: {
+    convertSpirV2WGSL: (source: string) => string;
+  };
   debug: boolean;
   error: boolean;
 }
