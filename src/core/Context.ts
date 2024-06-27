@@ -65,7 +65,7 @@ class Context {
       // https://github.com/BabylonJS/Babylon.js/tree/fe4df00abcd88585dc3249acb01633e67c2e7969/packages/tools/babylonServer/public/twgsl
       const twgslUrl =
         twgslPath ||
-        new URL("/assets/twgsl.js", window.location.href).toString();
+        new URL("assets/twgsl.js", window.location.href).toString();
       await import(/* webpackIgnore: true */ twgslUrl);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       State.twgsl = await (window as any).twgsl(
