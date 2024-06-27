@@ -3,12 +3,15 @@
     "@webgpu/glslang/dist/web-devel/glslang.js": "./@webgpu/glslang/dist/web-devel/glslang.js",
     "@webgpu/glslang/dist/web-devel/glslang.wasm": "./@webgpu/glslang/dist/web-devel/glslang.wasm",
     "cameras": "./cameras.js",
-    "concat-typed-array": "./concat-typed-array.js",
+    "canvas-record": "./canvas-record.js",
     "es-module-shims": "./es-module-shims.js",
+    "es-module-shims/debug": "./es-module-shims/debug.js",
+    "es-module-shims/wasm": "./es-module-shims/wasm.js",
     "gl-matrix": "./gl-matrix.js",
-    "interleave-typed-array": "./interleave-typed-array.js",
     "primitive-geometry": "./primitive-geometry.js",
     "seedrandom": "./seedrandom.js",
-    "tweakpane": "./tweakpane.js"
+    "tweakpane": "./tweakpane.js",
+    "typed-array-concat": "./typed-array-concat.js",
+    "typed-array-interleave": "./typed-array-interleave.js"
   }
 }
